@@ -1,0 +1,8 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}/auth/callback",
+    "http://localhost:8085/auth/callback"
+  ],
+  "tokenGroupFormat": "Name"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "midnight",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Midnight"
+  },
+  "description": {
+    "en": "A dark sign-in page with a soft glow in your accent color behind a frosted card. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "Buttons, links and the glow behind the card."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#8b5cf6"
+    }
+  ]
+}

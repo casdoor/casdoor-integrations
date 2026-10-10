@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/casdoor/casdoor-integrations/schema/app/application.schema.json",
+  "title": "Casdoor application template (application.json) for an app integration",
+  "description": "Fields are named as in Casdoor's Application object; the installer copies them into the new application after replacing {{variables}}.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["redirectUris"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "redirectUris": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "grantTypes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "tokenFormat": { "enum": ["JWT", "JWT-Empty", "JWT-Custom", "JWT-Standard"] },
+    "tokenGroupFormat": {
+      "description": "Name when the app matches group names, e.g. grafana-admins rather than <organization>/grafana-admins.",
+      "enum": ["ID", "Path", "Name"]
+    }
+  }
+}

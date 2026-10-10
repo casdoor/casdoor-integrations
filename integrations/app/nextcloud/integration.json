@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "nextcloud",
+  "type": "app",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Nextcloud"
+  },
+  "description": {
+    "en": "Set up Nextcloud single sign-on with Casdoor using the OpenID Connect user backend (user_oidc): provider command, user ID and group mapping."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://nextcloud.com",
+  "categories": [
+    "Productivity"
+  ],
+  "variables": [
+    {
+      "name": "appUrl",
+      "label": {
+        "en": "Nextcloud URL"
+      },
+      "description": {
+        "en": "The address people open Nextcloud at, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://cloud.example.com"
+    }
+  ]
+}

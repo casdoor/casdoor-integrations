@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../schema/provider/provider.schema.json",
+  "category": "OAuth",
+  "type": "OIDC",
+  "displayName": "Authelia",
+  "domain": "{{autheliaUrl}}",
+  "customAuthUrl": "{{autheliaUrl}}/api/oidc/authorization",
+  "customTokenUrl": "{{autheliaUrl}}/api/oidc/token",
+  "customUserInfoUrl": "{{autheliaUrl}}/api/oidc/userinfo",
+  "scopes": "openid profile email",
+  "enablePkce": true
+}

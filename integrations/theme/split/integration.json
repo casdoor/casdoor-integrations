@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "split",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Split"
+  },
+  "description": {
+    "en": "A brand panel in your color with your own headline next to the sign-in form. It sets the side panel HTML, so only a global admin can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "brandColor",
+      "label": {
+        "en": "Brand color"
+      },
+      "description": {
+        "en": "The panel and the buttons."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#2563eb"
+    },
+    {
+      "name": "headline",
+      "label": {
+        "en": "Headline"
+      },
+      "type": "string",
+      "required": true,
+      "example": "Welcome back"
+    },
+    {
+      "name": "tagline",
+      "label": {
+        "en": "Tagline"
+      },
+      "type": "string",
+      "required": false,
+      "example": "Sign in to continue to Acme."
+    }
+  ]
+}

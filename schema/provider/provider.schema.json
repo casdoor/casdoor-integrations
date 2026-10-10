@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/casdoor/casdoor-integrations/schema/provider/provider.schema.json",
+  "title": "Casdoor provider template (provider.json)",
+  "description": "Fields are named as in Casdoor's Provider object; the installer copies them into a new provider after replacing {{variables}}. The client ID and secret the other identity provider issued are not part of the template: the installer asks for them ({{clientId}} and {{clientSecret}} in guide text).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["category", "type", "displayName"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "category": { "const": "OAuth" },
+    "type": {
+      "description": "OIDC reads the endpoints from the issuer; Custom is plain OAuth 2.0 with a userinfo endpoint.",
+      "enum": ["OIDC", "Custom"]
+    },
+    "displayName": { "description": "Shown on the sign-in button.", "type": "string", "minLength": 1 },
+    "domain": { "description": "OIDC only: the issuer URL, exactly as the iss claim of the ID token.", "type": "string", "minLength": 1 },
+    "customAuthUrl": { "type": "string", "minLength": 1 },
+    "customTokenUrl": { "type": "string", "minLength": 1 },
+    "customUserInfoUrl": { "type": "string", "minLength": 1 },
+    "customLogoutUrl": { "type": "string", "minLength": 1 },
+    "scopes": { "description": "Space-separated.", "type": "string", "minLength": 1 },
+    "enablePkce": { "type": "boolean" },
+    "userMapping": {
+      "description": "Claim (dot path for nested values) for each user field. Fields left out fall back to the standard OIDC claims: id to sub, username to preferred_username, displayName to name, email to email, emailVerified to email_verified, phone to phone_number, avatarUrl to picture.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "username": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "email": { "type": "string", "minLength": 1 },
+        "emailVerified": { "type": "string", "minLength": 1 },
+        "phone": { "type": "string", "minLength": 1 },
+        "phoneVerified": { "type": "string", "minLength": 1 },
+        "avatarUrl": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "description": "Casdoor's sign-in page builds the authorization request from customAuthUrl for both types, so it is always required.",
+      "required": ["customAuthUrl", "customTokenUrl", "scopes"]
+    },
+    {
+      "if": { "properties": { "type": { "const": "OIDC" } } },
+      "then": { "required": ["domain"] },
+      "else": { "required": ["customUserInfoUrl"], "not": { "required": ["domain"] } }
+    }
+  ]
+}

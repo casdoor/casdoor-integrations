@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../schema/theme/theme.schema.json",
+  "themeData": {
+    "themeType": "dark",
+    "colorPrimary": "{{accentColor}}",
+    "borderRadius": 12,
+    "isCompact": false,
+    "isEnabled": true
+  },
+  "formOffset": 2,
+  "formCss": "<style>\n.login-background {\n  background: radial-gradient(1100px 560px at 50% -12%, color-mix(in srgb, {{accentColor}} 38%, transparent), transparent 70%), #09090f;\n}\n.login-panel {\n  background: rgba(22, 22, 34, 0.82);\n  border-color: rgba(255, 255, 255, 0.08);\n  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);\n  backdrop-filter: blur(12px);\n}\n</style>",
+  "formCssMobile": "<style>\n.login-background {\n  background: radial-gradient(600px 360px at 50% -10%, color-mix(in srgb, {{accentColor}} 34%, transparent), transparent 70%), #09090f;\n}\n</style>"
+}

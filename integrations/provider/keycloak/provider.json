@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../schema/provider/provider.schema.json",
+  "category": "OAuth",
+  "type": "OIDC",
+  "displayName": "Keycloak",
+  "domain": "{{keycloakUrl}}/realms/{{realm}}",
+  "customAuthUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/auth",
+  "customTokenUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/token",
+  "customUserInfoUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/userinfo",
+  "customLogoutUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/logout",
+  "scopes": "openid profile email",
+  "enablePkce": true
+}

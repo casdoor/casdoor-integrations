@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "authentik",
+  "type": "provider",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "authentik"
+  },
+  "description": {
+    "en": "Let people sign in to Casdoor with their authentik accounts over OpenID Connect: the provider settings, and the application and OAuth2 provider to create in authentik."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://goauthentik.io",
+  "categories": [
+    "Identity providers"
+  ],
+  "variables": [
+    {
+      "name": "authentikUrl",
+      "label": {
+        "en": "authentik URL"
+      },
+      "description": {
+        "en": "The address of your authentik server, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://authentik.example.com"
+    },
+    {
+      "name": "appSlug",
+      "label": {
+        "en": "Application slug"
+      },
+      "description": {
+        "en": "The slug of the authentik application you create for Casdoor."
+      },
+      "type": "string",
+      "required": true,
+      "example": "casdoor"
+    }
+  ]
+}

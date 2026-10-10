@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}/oauth/oidc/callback"
+  ],
+  "tokenGroupFormat": "Name"
+}

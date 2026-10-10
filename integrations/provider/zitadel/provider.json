@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../schema/provider/provider.schema.json",
+  "category": "OAuth",
+  "type": "OIDC",
+  "displayName": "ZITADEL",
+  "domain": "{{zitadelUrl}}",
+  "customAuthUrl": "{{zitadelUrl}}/oauth/v2/authorize",
+  "customTokenUrl": "{{zitadelUrl}}/oauth/v2/token",
+  "customUserInfoUrl": "{{zitadelUrl}}/oidc/v1/userinfo",
+  "customLogoutUrl": "{{zitadelUrl}}/oidc/v1/end_session",
+  "scopes": "openid profile email",
+  "enablePkce": true
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "zitadel",
+  "type": "provider",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "ZITADEL"
+  },
+  "description": {
+    "en": "Let people sign in to Casdoor with their ZITADEL accounts over OpenID Connect: the provider settings, and the web application to create in the ZITADEL Console."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "homepage": "https://zitadel.com",
+  "categories": [
+    "Identity providers"
+  ],
+  "variables": [
+    {
+      "name": "zitadelUrl",
+      "label": {
+        "en": "ZITADEL URL"
+      },
+      "description": {
+        "en": "The domain of your ZITADEL instance, such as https://acme.zitadel.cloud, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://zitadel.example.com"
+    }
+  ]
+}

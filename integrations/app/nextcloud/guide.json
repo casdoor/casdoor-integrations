@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Nextcloud SSO with Casdoor: OpenID Connect Setup",
+  "headline": "Single sign-on for Nextcloud",
+  "summary": "Nextcloud's OpenID Connect user backend app (user_oidc) creates Nextcloud accounts from an OpenID Connect provider. With Casdoor as the provider, people sign in to Nextcloud with their Casdoor account, and their Casdoor groups become Nextcloud groups.",
+  "redirectNote": "If your Nextcloud URLs include `/index.php`, use `{{appUrl}}/index.php/apps/user_oidc/code` instead.",
+  "groupExample": "`family` or `finance`",
+  "steps": [
+    {
+      "title": "Install the OpenID Connect app",
+      "text": "Install **OpenID Connect user backend** from the Nextcloud app store, or with occ:",
+      "code": {
+        "lang": "bash",
+        "content": "sudo -u www-data php occ app:install user_oidc"
+      }
+    },
+    {
+      "title": "Add Casdoor as a provider",
+      "text": "Run this from the Nextcloud directory. It names the provider Casdoor, maps Nextcloud user IDs to Casdoor usernames instead of hashes, and creates Nextcloud groups from the `groups` claim.",
+      "code": {
+        "lang": "bash",
+        "content": "sudo -u www-data php occ user_oidc:provider Casdoor \\\n  --clientid=\"{{clientId}}\" \\\n  --clientsecret=\"{{clientSecret}}\" \\\n  --discoveryuri=\"{{casdoorUrl}}/.well-known/openid-configuration\" \\\n  --scope=\"openid email profile\" \\\n  --unique-uid=0 \\\n  --mapping-uid=name \\\n  --mapping-display-name=displayName \\\n  --mapping-email=email \\\n  --mapping-groups=groups \\\n  --group-provisioning=1"
+      }
+    },
+    {
+      "title": "Sign in",
+      "text": "The Nextcloud login page now has a **Log in with Casdoor** button. To send everyone straight to Casdoor, turn off the other login methods; administrators can still reach the normal login form by adding `?direct=1` to the login URL.",
+      "code": {
+        "lang": "bash",
+        "content": "sudo -u www-data php occ config:app:set --type=string --value=0 user_oidc allow_multiple_user_backends"
+      }
+    }
+  ],
+  "tips": [
+    "The mappings above read Casdoor's default ID token, where `name` is the username and `displayName` the display name. If you switch the application's **Token format** to JWT-Standard, map the user ID to `preferred_username` and the display name to `name` instead; that format doesn't include groups.",
+    "Without `--unique-uid=0`, Nextcloud stores each user under a hash of the provider and user ID, which is safe with several providers but hard to read."
+  ],
+  "faqs": [
+    {
+      "question": "Does it work with the Nextcloud desktop and mobile apps?",
+      "answer": "Yes. The apps sign in through the browser using Nextcloud's login flow, which shows the same Log in with Casdoor button."
+    },
+    {
+      "question": "Can I use LDAP instead?",
+      "answer": "Casdoor also runs an LDAP server that Nextcloud's LDAP app can use. OpenID Connect is simpler to set up, and it keeps Casdoor's MFA, passkeys and social logins in the sign-in."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Nextcloud user_oidc",
+      "href": "https://github.com/nextcloud/user_oidc"
+    }
+  ],
+  "docsUrl": "https://casdoor.ai/docs/integration/php/nextcloud"
+}

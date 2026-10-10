@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "vaultwarden",
+  "type": "app",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Vaultwarden"
+  },
+  "description": {
+    "en": "Turn on Vaultwarden single sign-on with Casdoor over OpenID Connect: the SSO_* settings, the redirect URI, and the email verification check."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://github.com/dani-garcia/vaultwarden",
+  "categories": [
+    "Productivity"
+  ],
+  "variables": [
+    {
+      "name": "appUrl",
+      "label": {
+        "en": "Vaultwarden URL"
+      },
+      "description": {
+        "en": "The address people open Vaultwarden at, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://vault.example.com"
+    }
+  ]
+}

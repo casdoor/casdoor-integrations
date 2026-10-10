@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "keycloak",
+  "type": "provider",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Keycloak"
+  },
+  "description": {
+    "en": "Let people sign in to Casdoor with their Keycloak accounts over OpenID Connect: the provider settings for a Keycloak realm, and the client to create on the Keycloak side."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://www.keycloak.org",
+  "categories": [
+    "Identity providers"
+  ],
+  "variables": [
+    {
+      "name": "keycloakUrl",
+      "label": {
+        "en": "Keycloak URL"
+      },
+      "description": {
+        "en": "The address of your Keycloak server, without a trailing slash. Keycloak 16 and older need /auth at the end."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://keycloak.example.com"
+    },
+    {
+      "name": "realm",
+      "label": {
+        "en": "Realm"
+      },
+      "description": {
+        "en": "The realm your users are in."
+      },
+      "type": "string",
+      "required": true,
+      "example": "myrealm"
+    }
+  ]
+}

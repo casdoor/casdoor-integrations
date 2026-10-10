@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Self-Managed GitLab as a Sign-in Provider for Casdoor",
+  "headline": "Sign in to Casdoor with your own GitLab",
+  "summary": "GitLab is also an OpenID Connect provider. Casdoor's built-in GitLab provider only talks to gitlab.com; this template points Casdoor at your own GitLab, so developers sign in with the account they already use every day.",
+  "steps": [
+    {
+      "title": "Create an OAuth application in GitLab",
+      "text": "As an administrator, open **Admin → Applications** and click **Add new application**. (A group's **Settings → Applications** or your own **Edit profile → Applications** work too, without the Trusted option.) Fill in:",
+      "fields": [
+        {
+          "label": "Name",
+          "value": "Casdoor"
+        },
+        {
+          "label": "Redirect URI",
+          "value": "{{casdoorUrl}}/callback"
+        },
+        {
+          "label": "Trusted",
+          "value": "On, to skip the consent screen"
+        },
+        {
+          "label": "Confidential",
+          "value": "On"
+        },
+        {
+          "label": "Scopes",
+          "value": "openid, profile, email"
+        }
+      ]
+    },
+    {
+      "title": "Copy the credentials",
+      "text": "Save the application and copy the **Application ID** (the client ID) and the **Secret**. GitLab stores the secret hashed, so this is the only time you can see it."
+    }
+  ],
+  "tips": [
+    "GitLab only sends `email` for users who have a public email address. Others arrive in Casdoor without an email.",
+    "Renewing the secret in GitLab breaks sign-in until you put the new one in Casdoor."
+  ],
+  "faqs": [
+    {
+      "question": "Does this work with gitlab.com?",
+      "answer": "Yes, with `https://gitlab.com` as the GitLab URL, but Casdoor's built-in GitLab provider already covers gitlab.com."
+    },
+    {
+      "question": "Do GitLab groups come over?",
+      "answer": "No. GitLab returns the user's groups from its userinfo endpoint, but Casdoor only fills in the standard profile from it, not Casdoor groups."
+    }
+  ],
+  "sources": [
+    {
+      "label": "GitLab as an OpenID Connect provider",
+      "href": "https://docs.gitlab.com/integration/openid_connect_provider/"
+    },
+    {
+      "label": "GitLab as an OAuth 2.0 provider",
+      "href": "https://docs.gitlab.com/integration/oauth_provider/"
+    },
+    {
+      "label": "GitLab OAuth 2.0 API",
+      "href": "https://docs.gitlab.com/api/oauth2/"
+    }
+  ]
+}

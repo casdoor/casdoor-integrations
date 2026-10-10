@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../schema/provider/provider.schema.json",
+  "category": "OAuth",
+  "type": "OIDC",
+  "displayName": "authentik",
+  "domain": "{{authentikUrl}}/application/o/{{appSlug}}/",
+  "customAuthUrl": "{{authentikUrl}}/application/o/authorize/",
+  "customTokenUrl": "{{authentikUrl}}/application/o/token/",
+  "customUserInfoUrl": "{{authentikUrl}}/application/o/userinfo/",
+  "customLogoutUrl": "{{authentikUrl}}/application/o/{{appSlug}}/end-session/",
+  "scopes": "openid profile email",
+  "enablePkce": true
+}

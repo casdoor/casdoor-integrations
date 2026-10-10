@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "gitlab-self-managed",
+  "type": "provider",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "GitLab Self-Managed"
+  },
+  "description": {
+    "en": "Let people sign in to Casdoor with accounts on your own GitLab over OpenID Connect: the provider settings, and the OAuth application to create in GitLab."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://about.gitlab.com",
+  "categories": [
+    "Identity providers"
+  ],
+  "variables": [
+    {
+      "name": "gitlabUrl",
+      "label": {
+        "en": "GitLab URL"
+      },
+      "description": {
+        "en": "The address of your GitLab instance, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://gitlab.example.com"
+    }
+  ]
+}

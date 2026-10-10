@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Portainer SSO with Casdoor: OAuth Setup Guide",
+  "headline": "Single sign-on for Portainer",
+  "summary": "Portainer's custom OAuth provider works with Casdoor's OAuth 2.0 endpoints, so people manage containers with their Casdoor account instead of a separate Portainer password.",
+  "steps": [
+    {
+      "title": "Configure OAuth in Portainer",
+      "text": "In Portainer, open **Settings → Authentication**, choose **OAuth**, turn on **Use SSO** and **Automatic user provisioning**, pick the **Custom** provider and fill in:",
+      "fields": [
+        {
+          "label": "Client ID",
+          "value": "{{clientId}}"
+        },
+        {
+          "label": "Client secret",
+          "value": "{{clientSecret}}"
+        },
+        {
+          "label": "Authorization URL",
+          "value": "{{casdoorUrl}}/login/oauth/authorize"
+        },
+        {
+          "label": "Access token URL",
+          "value": "{{casdoorUrl}}/api/login/oauth/access_token"
+        },
+        {
+          "label": "Resource URL",
+          "value": "{{casdoorUrl}}/api/userinfo"
+        },
+        {
+          "label": "Redirect URL",
+          "value": "{{appUrl}}"
+        },
+        {
+          "label": "User identifier",
+          "value": "preferred_username"
+        },
+        {
+          "label": "Scopes",
+          "value": "openid profile email"
+        }
+      ]
+    },
+    {
+      "title": "Sign in",
+      "text": "Save and log out. The Portainer login page now has a **Login with OAuth** button that sends users to Casdoor."
+    }
+  ],
+  "tips": [
+    "New users created by automatic provisioning have no access until you add them to a team or give them access to an environment.",
+    "The Redirect URL in Portainer and in Casdoor must be the address people open Portainer at, exactly."
+  ],
+  "faqs": [
+    {
+      "question": "Can Casdoor groups become Portainer teams?",
+      "answer": "Mapping OAuth groups to Portainer teams is a Portainer Business Edition feature. In the Community Edition, assign users to teams in Portainer."
+    },
+    {
+      "question": "Why preferred_username as the user identifier?",
+      "answer": "It is the Casdoor username in the userinfo response, so Portainer usernames match Casdoor's. You can use `email` instead if you prefer."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Portainer OAuth",
+      "href": "https://docs.portainer.io/admin/settings/authentication/oauth"
+    }
+  ],
+  "docsUrl": "https://casdoor.ai/docs/integration/go/portainer"
+}

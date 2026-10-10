@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Open WebUI SSO with Casdoor: OIDC Setup Guide",
+  "headline": "Single sign-on for Open WebUI",
+  "summary": "Open WebUI, the self-hosted chat interface for local and hosted models, can sign users in through any OpenID Connect provider. With Casdoor, your team signs in with their company account, and Casdoor groups decide which models and tools they see.",
+  "groupExample": "`engineering` or `support`",
+  "steps": [
+    {
+      "title": "Set the OAuth environment variables",
+      "text": "Add these to the Open WebUI container and restart it. `OPENID_PROVIDER_URL` is Casdoor's discovery document.",
+      "code": {
+        "lang": "bash",
+        "content": "WEBUI_URL={{appUrl}}\nENABLE_OAUTH_SIGNUP=true\nDEFAULT_USER_ROLE=user\nOAUTH_PROVIDER_NAME=Casdoor\nOAUTH_CLIENT_ID={{clientId}}\nOAUTH_CLIENT_SECRET={{clientSecret}}\nOPENID_PROVIDER_URL={{casdoorUrl}}/.well-known/openid-configuration\nOAUTH_SCOPES=openid email profile\nENABLE_OAUTH_GROUP_MANAGEMENT=true\nOAUTH_GROUP_CLAIM=groups"
+      }
+    },
+    {
+      "title": "Sign in",
+      "text": "The login page now has a **Continue with Casdoor** button. With group management on, each sign-in syncs the user's Open WebUI groups with their Casdoor groups."
+    }
+  ],
+  "tips": [
+    "Open WebUI only adds users to groups that already exist in Open WebUI. Create them first, or set `ENABLE_OAUTH_GROUP_CREATION=true` to create them on sign-in.",
+    "By default, these environment variables are the source of truth and the OAuth section of the admin panel is read-only.",
+    "Set `OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true` if existing local users should keep their chats when they switch to Casdoor."
+  ],
+  "faqs": [
+    {
+      "question": "Who becomes an admin?",
+      "answer": "Users signing up through Casdoor get the role in `DEFAULT_USER_ROLE`. Left at its default, `pending`, an admin has to approve each new user; `user` lets them in straight away. Promote admins in the Open WebUI admin panel."
+    },
+    {
+      "question": "Can I restrict models by Casdoor group?",
+      "answer": "Yes. Once groups sync from Casdoor, give each Open WebUI group access to the models, knowledge bases and tools it should see."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Open WebUI SSO",
+      "href": "https://docs.openwebui.com/features/authentication-access/auth/sso/"
+    },
+    {
+      "label": "Open WebUI SSO troubleshooting",
+      "href": "https://docs.openwebui.com/troubleshooting/sso/"
+    }
+  ],
+  "docsUrl": "https://casdoor.ai/docs/integration/python/open-webui"
+}

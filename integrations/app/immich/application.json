@@ -1,0 +1,8 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}/auth/login",
+    "{{appUrl}}/user-settings",
+    "app.immich:///oauth-callback"
+  ]
+}

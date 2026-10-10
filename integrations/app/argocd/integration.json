@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "argocd",
+  "type": "app",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Argo CD"
+  },
+  "description": {
+    "en": "Connect Argo CD to Casdoor over OpenID Connect: oidc.config in argocd-cm, the client secret, PKCE, CLI login and RBAC from Casdoor groups."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://argo-cd.readthedocs.io",
+  "categories": [
+    "DevOps & infrastructure"
+  ],
+  "variables": [
+    {
+      "name": "appUrl",
+      "label": {
+        "en": "Argo CD URL"
+      },
+      "description": {
+        "en": "The address people open Argo CD at, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://argocd.example.com"
+    }
+  ]
+}

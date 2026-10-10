@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "gitea",
+  "type": "app",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Gitea"
+  },
+  "description": {
+    "en": "Add Casdoor to Gitea as an OpenID Connect authentication source: the add-oauth command, callback URL, and admins from a Casdoor group."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://about.gitea.com",
+  "categories": [
+    "DevOps & infrastructure"
+  ],
+  "variables": [
+    {
+      "name": "appUrl",
+      "label": {
+        "en": "Gitea URL"
+      },
+      "description": {
+        "en": "The address people open Gitea at, without a trailing slash."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://git.example.com"
+    }
+  ]
+}

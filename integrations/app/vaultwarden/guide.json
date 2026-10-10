@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Vaultwarden SSO with Casdoor: OpenID Connect Setup",
+  "headline": "Single sign-on for Vaultwarden",
+  "summary": "Since version 1.35.0, Vaultwarden can sign users in through an OpenID Connect provider. With Casdoor, your team signs in to the password manager with the same account and MFA they use everywhere else.",
+  "steps": [
+    {
+      "title": "Configure Vaultwarden",
+      "text": "Set these environment variables on Vaultwarden 1.35.0 or later, for example in Docker Compose, and restart it. Vaultwarden builds the redirect URI from `DOMAIN`.",
+      "code": {
+        "lang": "yaml",
+        "content": "services:\n  vaultwarden:\n    image: vaultwarden/server:latest\n    environment:\n      DOMAIN: \"{{appUrl}}\"\n      SSO_ENABLED: \"true\"\n      SSO_AUTHORITY: \"{{casdoorUrl}}\"\n      SSO_CLIENT_ID: \"{{clientId}}\"\n      SSO_CLIENT_SECRET: \"{{clientSecret}}\"\n      SSO_SCOPES: \"email profile\"\n      SSO_PKCE: \"true\""
+      }
+    },
+    {
+      "title": "Sign in",
+      "text": "Users can now choose single sign-on on the Vaultwarden login page, sign in at Casdoor, and then unlock their vault. Add `SSO_ONLY: \"true\"` once everyone has switched, to turn off email-and-password login."
+    }
+  ],
+  "tips": [
+    "`SSO_AUTHORITY` must equal the `issuer` in `{{casdoorUrl}}/.well-known/openid-configuration` exactly, without a trailing slash.",
+    "Vaultwarden refuses to sign up a user whose ID token says `email_verified: false`. Casdoor marks an email as verified once the user confirms it with a code or a magic link, for example at sign-up.",
+    "The Bitwarden mobile apps support Vaultwarden SSO from version 2026.1.0."
+  ],
+  "faqs": [
+    {
+      "question": "Do users still need a master password?",
+      "answer": "Yes. Single sign-on replaces the email-and-password login, but the vault is still encrypted with the user's master password, which they enter after signing in with Casdoor."
+    },
+    {
+      "question": "I don't see the single sign-on option. Why?",
+      "answer": "Check that the server runs Vaultwarden 1.35.0 or later and that `SSO_ENABLED` is true, then restart it. If sign-in fails afterwards, compare `SSO_AUTHORITY` with Casdoor's issuer and check the redirect URI in the Casdoor application."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Vaultwarden SSO wiki",
+      "href": "https://github.com/dani-garcia/vaultwarden/wiki/Enabling-SSO-support-using-OpenId-Connect"
+    },
+    {
+      "label": "Vaultwarden releases",
+      "href": "https://github.com/dani-garcia/vaultwarden/releases"
+    }
+  ],
+  "docsUrl": "https://casdoor.ai/docs/integration/rust/vaultwarden"
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "Proxmox VE SSO with Casdoor: OpenID Connect Realm",
+  "headline": "Single sign-on for Proxmox VE",
+  "summary": "Proxmox VE can authenticate users against an OpenID Connect realm. With Casdoor as the realm, admins sign in to the Proxmox web interface with their Casdoor account and MFA, and Proxmox permissions follow Casdoor groups.",
+  "redirectNote": "Proxmox VE sends the address of its web interface as the redirect URL, so add every address you open it at, with the port.",
+  "groupExample": "`pve-admins`",
+  "steps": [
+    {
+      "title": "Add an OpenID Connect realm",
+      "text": "Run this on a Proxmox VE node, or add the realm under **Datacenter → Permissions → Realms → Add → OpenID Connect Server**. `username` takes the `preferred_username` claim, so users appear as `alice@casdoor`.",
+      "code": {
+        "lang": "bash",
+        "content": "pveum realm add casdoor --type openid \\\n  --issuer-url {{casdoorUrl}} \\\n  --client-id \"{{clientId}}\" \\\n  --client-key \"{{clientSecret}}\" \\\n  --username-claim username \\\n  --autocreate 1 \\\n  --groups-claim groups \\\n  --groups-autocreate 1"
+      }
+    },
+    {
+      "title": "Give the group permissions",
+      "text": "Proxmox VE appends the realm name to groups from the claim, so `pve-admins` becomes `pve-admins-casdoor`. Grant it a role, for example administrator rights on the whole datacenter:",
+      "code": {
+        "lang": "bash",
+        "content": "pveum acl modify / --groups pve-admins-casdoor --roles Administrator"
+      }
+    },
+    {
+      "title": "Sign in",
+      "text": "On the Proxmox VE login screen, choose the **casdoor** realm and click **Login (OpenID redirect)**; Proxmox sends you to Casdoor and back."
+    }
+  ],
+  "tips": [
+    "Users created by `--autocreate` have no permissions until a group or user ACL grants them some.",
+    "The group options are in recent Proxmox VE releases; on older versions, leave out the `--groups-*` lines and grant permissions to users instead."
+  ],
+  "faqs": [
+    {
+      "question": "Can I still use root@pam?",
+      "answer": "Yes. Adding a realm doesn't change the existing PAM and Proxmox VE realms, so keep root@pam as a fallback."
+    },
+    {
+      "question": "Why username and not the default subject claim?",
+      "answer": "The default `sub` claim is Casdoor's user ID, a random string. `username` gives readable names such as alice@casdoor; Casdoor usernames are unique within an organization."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Proxmox VE user management",
+      "href": "https://pve.proxmox.com/wiki/User_Management"
+    },
+    {
+      "label": "pveum manual",
+      "href": "https://pve.proxmox.com/pve-docs/pveum.1.html"
+    }
+  ],
+  "docsUrl": "https://casdoor.ai/docs/integration/perl/proxmox"
+}

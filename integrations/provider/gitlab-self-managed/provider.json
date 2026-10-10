@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../schema/provider/provider.schema.json",
+  "category": "OAuth",
+  "type": "OIDC",
+  "displayName": "GitLab",
+  "domain": "{{gitlabUrl}}",
+  "customAuthUrl": "{{gitlabUrl}}/oauth/authorize",
+  "customTokenUrl": "{{gitlabUrl}}/oauth/token",
+  "customUserInfoUrl": "{{gitlabUrl}}/oauth/userinfo",
+  "scopes": "openid profile email",
+  "enablePkce": true
+}

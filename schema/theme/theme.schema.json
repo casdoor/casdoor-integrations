@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/casdoor/casdoor-integrations/schema/theme/theme.schema.json",
+  "title": "Casdoor sign-in theme (theme.json)",
+  "description": "Fields are named and shaped as in Casdoor's Application object, the same as the UI Customization tab's Export JSON, so the file can also be applied by hand with Import JSON. Form CSS must pass Casdoor's own check for organization admins (no url(), @import, @font-face, image functions, backslashes or HTML); the build enforces it. Side panel and footer HTML can only be set by a global admin.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["themeData", "formOffset"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "themeData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["themeType", "colorPrimary", "borderRadius", "isCompact", "isEnabled"],
+      "properties": {
+        "themeType": { "description": "dark forces the dark palette whatever the visitor prefers.", "enum": ["default", "dark", "lark", "comic"] },
+        "colorPrimary": { "type": "string", "pattern": "^(#[0-9a-fA-F]{6}|\\{\\{[a-zA-Z][a-zA-Z0-9]*\\}\\})$" },
+        "borderRadius": { "description": "In pixels.", "type": "integer", "minimum": 0, "maximum": 32 },
+        "isCompact": { "type": "boolean" },
+        "isEnabled": { "const": true }
+      }
+    },
+    "formOffset": {
+      "description": "Form position: 1 left, 2 center, 3 right, 4 center with the side panel (formSideHtml). Phones always get 2.",
+      "enum": [1, 2, 3, 4]
+    },
+    "formCss": { "description": "Stylesheet for the sign-in pages. Hooks: .login-background, .login-content, .login-panel, .login-form, .login-logo-box, .side-image.", "type": "string" },
+    "formCssMobile": { "description": "Used instead of formCss on narrow screens.", "type": "string" },
+    "formSideHtml": { "description": "Global admin only. Shown left of the form when formOffset is 4, on wide screens.", "type": "string", "minLength": 1 },
+    "footerHtml": { "description": "Global admin only. Replaces the Powered by Casdoor footer.", "type": "string", "minLength": 1 }
+  },
+  "if": { "properties": { "formOffset": { "const": 4 } } },
+  "then": { "required": ["formSideHtml"] }
+}

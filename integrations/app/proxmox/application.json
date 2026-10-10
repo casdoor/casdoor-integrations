@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}"
+  ],
+  "tokenGroupFormat": "Name"
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "../../../schema/theme/theme.schema.json",
+  "themeData": {
+    "themeType": "default",
+    "colorPrimary": "{{brandColor}}",
+    "borderRadius": 10,
+    "isCompact": false,
+    "isEnabled": true
+  },
+  "formOffset": 4,
+  "formSideHtml": "<div style=\"box-sizing: border-box; height: 100%; min-height: 480px; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; color: #ffffff; background: linear-gradient(160deg, {{brandColor}} 0%, #0f172a 100%);\"><p style=\"margin: 0; font-size: 28px; line-height: 1.25; font-weight: 600;\">{{headline}}</p><p style=\"margin: 12px 0 0; font-size: 15px; line-height: 1.5; opacity: 0.8;\">{{tagline}}</p></div>"
+}

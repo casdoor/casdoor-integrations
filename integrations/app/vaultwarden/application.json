@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}/identity/connect/oidc-signin"
+  ]
+}

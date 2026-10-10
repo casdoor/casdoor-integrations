@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/casdoor/casdoor-integrations/schema/integration.schema.json",
+  "title": "Casdoor integration manifest (integration.json)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "version", "casdoorVersion", "name", "description", "author", "license", "categories"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "description": "Unique across all types; also the page path /integrations/<id>. Must match the directory name.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "type": {
+      "description": "Must match the parent directory: integrations/<type>/<id>.",
+      "enum": ["app", "provider", "theme", "action"]
+    },
+    "version": {
+      "description": "Semantic version of this integration. Bump it on every change; a published version is never changed.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
+    "casdoorVersion": {
+      "description": "Casdoor versions this integration can be installed on, as a semver range.",
+      "type": "string",
+      "minLength": 1
+    },
+    "name": { "$ref": "#/$defs/localizedText" },
+    "description": {
+      "description": "One or two sentences; used as the meta description and on catalog cards.",
+      "$ref": "#/$defs/localizedText"
+    },
+    "author": { "type": "string", "minLength": 1 },
+    "license": { "description": "SPDX identifier.", "type": "string", "minLength": 1 },
+    "logo": {
+      "description": "Path of an SVG or PNG file next to integration.json.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9._-]+\\.(svg|png)$"
+    },
+    "homepage": { "type": "string", "format": "uri" },
+    "screenshots": {
+      "description": "PNG or JPEG files next to integration.json, shown on the page; a theme needs at least one.",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-zA-Z0-9._-]+\\.(png|jpg|jpeg)$" },
+      "uniqueItems": true
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "variables": {
+      "description": "Values the installer asks the Casdoor admin for. Content files refer to them as {{name}}; the built-in variables casdoorUrl, clientId and clientSecret need no declaration.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/variable" }
+    },
+    "permissions": {
+      "description": "Required for actions: the hosts the action may call.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hosts": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    }
+  },
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en"],
+      "properties": {
+        "en": { "type": "string", "minLength": 1 },
+        "zh": { "type": "string", "minLength": 1 }
+      }
+    },
+    "variable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "label", "type", "example"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9]*$",
+          "not": { "enum": ["casdoorUrl", "clientId", "clientSecret"] }
+        },
+        "label": { "$ref": "#/$defs/localizedText" },
+        "description": { "$ref": "#/$defs/localizedText" },
+        "type": { "enum": ["string", "url", "color"] },
+        "required": { "type": "boolean" },
+        "example": {
+          "description": "Shown in place of the variable on the public page, e.g. https://grafana.example.com. A url has no trailing slash; a color is #rrggbb.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

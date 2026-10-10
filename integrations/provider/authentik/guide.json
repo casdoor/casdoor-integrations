@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-10",
+  "title": "authentik as an OpenID Connect Provider for Casdoor",
+  "headline": "Sign in to Casdoor with authentik",
+  "summary": "Add authentik to Casdoor as an OpenID Connect provider, and people sign in to your Casdoor applications with the accounts, MFA and policies they already have in authentik.",
+  "steps": [
+    {
+      "title": "Create the application",
+      "text": "In the authentik admin interface, open **Applications → Applications** and click **New Application**. Name it, set the slug to `{{appSlug}}`, and choose **OAuth2/OpenID Connect** as the provider type."
+    },
+    {
+      "title": "Configure the provider",
+      "text": "In the provider step, keep the client type confidential, add a strict redirect URI, and pick a signing key:",
+      "fields": [
+        {
+          "label": "Client type",
+          "value": "Confidential"
+        },
+        {
+          "label": "Redirect URIs",
+          "value": "Strict: {{casdoorUrl}}/callback"
+        },
+        {
+          "label": "Signing Key",
+          "value": "authentik Self-signed Certificate (or your own)"
+        }
+      ]
+    },
+    {
+      "title": "Copy the credentials",
+      "text": "Finish the wizard, open the provider and copy its **Client ID** and **Client Secret**."
+    }
+  ],
+  "tips": [
+    "The issuer of an authentik provider contains the application slug and ends with a slash, for example `{{authentikUrl}}/application/o/{{appSlug}}/`. Casdoor compares it with the token's issuer, so the slug must match.",
+    "Always pick a signing key. Without one, authentik signs tokens with the client secret and publishes no keys.",
+    "Since authentik 2025.10, `email_verified` is false unless you change the email scope mapping, so Casdoor receives the email as unverified."
+  ],
+  "faqs": [
+    {
+      "question": "Casdoor says the issuer doesn't match. Why?",
+      "answer": "Check the slug and the trailing slash. If you set the provider's issuer mode to global, the issuer is `{{authentikUrl}}/` instead; put that in the provider's Issuer URL in Casdoor."
+    },
+    {
+      "question": "Do I need Include claims in id_token?",
+      "answer": "No. Casdoor also calls authentik's userinfo endpoint, which returns the profile and email claims."
+    }
+  ],
+  "sources": [
+    {
+      "label": "authentik OAuth2 provider",
+      "href": "https://docs.goauthentik.io/add-secure-apps/providers/oauth2/"
+    }
+  ]
+}

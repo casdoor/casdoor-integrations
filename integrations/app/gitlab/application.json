@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../schema/app/application.schema.json",
+  "redirectUris": [
+    "{{appUrl}}/users/auth/openid_connect/callback"
+  ]
+}
