@@ -14,6 +14,11 @@
   "license": "Apache-2.0",
   "logo": "logo.svg",
   "homepage": "https://www.keycloak.org",
+  "tags": [
+    "OIDC",
+    "PKCE",
+    "Self-hosted"
+  ],
   "categories": [
     "Identity providers"
   ],

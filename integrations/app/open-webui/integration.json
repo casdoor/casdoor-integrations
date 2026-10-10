@@ -13,6 +13,10 @@
   "author": "casdoor",
   "license": "Apache-2.0",
   "homepage": "https://openwebui.com",
+  "tags": [
+    "OIDC",
+    "Group sync"
+  ],
   "categories": [
     "AI"
   ],

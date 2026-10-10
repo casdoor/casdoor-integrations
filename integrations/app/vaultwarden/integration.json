@@ -14,6 +14,10 @@
   "license": "Apache-2.0",
   "logo": "logo.svg",
   "homepage": "https://github.com/dani-garcia/vaultwarden",
+  "tags": [
+    "OIDC",
+    "PKCE"
+  ],
   "categories": [
     "Productivity"
   ],

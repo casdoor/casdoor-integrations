@@ -14,6 +14,10 @@
   "license": "Apache-2.0",
   "logo": "logo.svg",
   "homepage": "https://about.gitea.com",
+  "tags": [
+    "OIDC",
+    "Admin by group"
+  ],
   "categories": [
     "DevOps & infrastructure"
   ],

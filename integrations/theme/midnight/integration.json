@@ -12,6 +12,10 @@
   },
   "author": "casdoor",
   "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "CSS only"
+  ],
   "categories": [
     "Sign-in themes"
   ],

@@ -12,6 +12,10 @@
   },
   "author": "casdoor",
   "license": "Apache-2.0",
+  "tags": [
+    "Side panel",
+    "Global admin"
+  ],
   "categories": [
     "Sign-in themes"
   ],

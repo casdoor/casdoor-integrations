@@ -14,6 +14,12 @@
   "license": "Apache-2.0",
   "logo": "logo.svg",
   "homepage": "https://argo-cd.readthedocs.io",
+  "tags": [
+    "OIDC",
+    "PKCE",
+    "RBAC by group",
+    "CLI login"
+  ],
   "categories": [
     "DevOps & infrastructure"
   ],

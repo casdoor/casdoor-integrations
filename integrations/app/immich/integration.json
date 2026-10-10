@@ -14,6 +14,10 @@
   "license": "Apache-2.0",
   "logo": "logo.svg",
   "homepage": "https://immich.app",
+  "tags": [
+    "OIDC",
+    "Mobile apps"
+  ],
   "categories": [
     "Productivity"
   ],
