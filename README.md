@@ -1,6 +1,47 @@
-# casdoor-integrations
+<div align="center">
+  <a href="https://marketplace.casdoor.com">
+    <img src="https://cdn.casbin.org/img/casdoor-logo_1185x256.png" alt="Casdoor" width="400">
+  </a>
 
-Official integrations for the [Casdoor Marketplace](https://www.casdoor.com/integrations): app integrations, provider templates, themes and actions that Casdoor admins can install from the Marketplace page of the Casdoor admin console.
+  <h3>Casdoor Integrations</h3>
+
+  <p>
+    The official content of the <a href="https://marketplace.casdoor.com">Casdoor Marketplace</a>: app integrations, identity provider templates,<br>
+    sign-in themes and actions that Casdoor admins can install from the Marketplace page of the Casdoor admin console.
+  </p>
+
+  <p>
+    <a href="https://marketplace.casdoor.com"><strong>Marketplace</strong></a> &middot;
+    <a href="https://github.com/casdoor/casdoor-marketplace"><strong>Marketplace website</strong></a> &middot;
+    <a href="https://github.com/casdoor/casdoor"><strong>Casdoor</strong></a> &middot;
+    <a href="https://casdoor.ai/docs/overview"><strong>Casdoor docs</strong></a> &middot;
+    <a href="https://discord.gg/5rPsrAzK7S"><strong>Discord</strong></a>
+  </p>
+
+  <p>
+    <a href="https://github.com/casdoor/casdoor-integrations/actions/workflows/build.yml">
+      <img src="https://img.shields.io/github/actions/workflow/status/casdoor/casdoor-integrations/build.yml?branch=master&style=flat-square&label=build" alt="Build Status">
+    </a>
+    <a href="https://marketplace.casdoor.com">
+      <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fcasdoor%2Fcasdoor-integrations%2Fdist%2Findex.json&query=%24.integrations.length&label=integrations&style=flat-square&color=blue" alt="Integrations">
+    </a>
+    <a href="https://github.com/casdoor/casdoor-integrations/commits/master">
+      <img src="https://img.shields.io/github/last-commit/casdoor/casdoor-integrations?style=flat-square" alt="Last commit">
+    </a>
+    <a href="LICENSE">
+      <img src="https://img.shields.io/github/license/casdoor/casdoor-integrations?style=flat-square" alt="License">
+    </a>
+    <a href="https://discord.gg/5rPsrAzK7S">
+      <img src="https://img.shields.io/discord/1022748306096537660?style=flat-square&logo=discord&label=Discord&color=5865F2" alt="Discord">
+    </a>
+  </p>
+</div>
+
+## Contributing
+
+- **Add an integration**: copy a similar one under `integrations/<type>/`, follow the sections below, run `npm run check`, and open a pull request. CI validates every manifest against the schemas in `schema/`.
+- **Request an integration**: [open an issue](https://github.com/casdoor/casdoor-integrations/issues/new) with the app or identity provider you need.
+- Once merged, an integration shows up on the [Marketplace](https://marketplace.casdoor.com) at its next build, and on Casdoor's Marketplace page once jsDelivr refreshes its cache of the `dist` branch (up to 12 hours).
 
 ## Layout
 
@@ -57,7 +98,7 @@ A look for the sign-in pages of a Casdoor application.
 - CSS hooks: `.login-background`, `.login-content`, `.login-panel`, `.login-form`, `.login-logo-box`, `.side-image`. Without `formCssMobile`, phones get no custom CSS at all.
 - Casdoor drops form CSS containing `url(`, `@import`, `@font-face`, image functions, backslashes or HTML when an organization admin saves it; the build rejects those. Use gradients instead of background images.
 - `formSideHtml` and `footerHtml` can only be saved by a global admin, so a theme that sets them is marked `requiresGlobalAdmin` in the index and on its page.
-- The public page builds the JSON for Casdoor's **Import JSON** button, so a theme can be applied by hand before the Marketplace installer exists.
+- The public page builds the JSON for Casdoor's **Import JSON** button, so a theme can also be applied by hand, without the Marketplace installer.
 
 ## Variables
 
@@ -94,5 +135,7 @@ npm run build   # validate and write dist/
 ```
 
 `dist/index.json` lists every integration; each version is in `dist/integrations/<id>/<version>/bundle.json` (manifest plus content files) with its logo and screenshots. Paths in `index.json` are relative to it.
+
+On every push to master, CI publishes `dist/` to the `dist` branch. Casdoor instances read it from `https://cdn.jsdelivr.net/gh/casdoor/casdoor-integrations@dist` by default (`marketplaceUrl` in Casdoor's `conf/app.conf` points them to a mirror), and [casdoor-marketplace](https://github.com/casdoor/casdoor-marketplace) builds the public pages from it.
 
 Logos are from [Simple Icons](https://simpleicons.org) (CC0); the names and marks belong to their owners.
