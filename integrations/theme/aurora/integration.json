@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "aurora",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Aurora"
+  },
+  "description": {
+    "en": "A pastel mesh of color tinted by your accent behind a frosted glass card, with soft rounded fields and a gradient button. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Glass",
+    "Gradient",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The glow at the top, the button, links and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#7c3aed"
+    }
+  ]
+}

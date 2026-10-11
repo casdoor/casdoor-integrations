@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "material",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Material"
+  },
+  "description": {
+    "en": "A big rounded white sheet on a soft grey page, outlined 56px fields and a pill-shaped button on the right, in the spirit of Material Design. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Material",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "Buttons, links, the selected tab and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#0b57d0"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "paper",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Paper"
+  },
+  "description": {
+    "en": "An editorial look: a cream page, a serif face, small-caps labels over underlined fields and an ink-colored button. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Serif",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, links and focused fields. A dark ink color suits the paper best."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#1f1d1a"
+    }
+  ]
+}

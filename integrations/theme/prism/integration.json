@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "prism",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Prism"
+  },
+  "description": {
+    "en": "A slanted band of color from your accent to cyan and mint across the top of a light page, with a white card on a deep, soft shadow. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Gradient",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The start of the color band, the button, links and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#635bff"
+    }
+  ]
+}

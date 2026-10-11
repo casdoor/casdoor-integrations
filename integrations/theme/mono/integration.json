@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "mono",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Mono"
+  },
+  "description": {
+    "en": "Pure black and white: a hairline-bordered card over a fading grid, with a white button and nothing else competing for attention. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Monochrome",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ]
+}

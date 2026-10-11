@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "cupertino",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Cupertino"
+  },
+  "description": {
+    "en": "An airy grey page with a soft white card, large rounded fields, a segmented control for the sign-in methods and a tall button, with the system font of the visitor's device. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Minimal",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "Buttons, links and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#0071e3"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "fluent",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Fluent"
+  },
+  "description": {
+    "en": "A square white card with a soft shadow over a pastel wash, underlined fields and a compact square button on the right, in the spirit of Fluent Design. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Square",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "Buttons, links, the selected tab and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#0067b8"
+    }
+  ]
+}
