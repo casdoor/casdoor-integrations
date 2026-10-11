@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "bare",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Bare"
+  },
+  "description": {
+    "en": "Nothing but the form: no card, no background, a small left-aligned logo, quiet text tabs, hairline fields and a round button, with plenty of white space. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Minimal",
+    "No card",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, checkboxes and the line under a focused field."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#111111"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "backdrop",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.20.0",
+  "name": {
+    "en": "Backdrop"
+  },
+  "description": {
+    "en": "Your own picture behind the whole page, dimmed a little, with a frosted glass card on top. It comes with a dusk mountain scene; give it any image address to use yours. Organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Background image",
+    "Glass"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "backgroundUrl",
+      "label": {
+        "en": "Background image"
+      },
+      "description": {
+        "en": "Address of the picture behind the page, 1920 pixels wide or more. You can upload one under Resources in Casdoor and paste its address here."
+      },
+      "type": "url",
+      "required": true,
+      "example": "https://cdn.jsdelivr.net/gh/casdoor/casdoor-integrations@master/integrations/theme/backdrop/background.jpg"
+    },
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button and checkboxes. Pick a color from your picture."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#f97316"
+    }
+  ]
+}

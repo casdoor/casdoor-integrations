@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "brutal",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Brutal"
+  },
+  "description": {
+    "en": "Neo-brutalism: thick black outlines, hard offset shadows and a loud accent on a dotted page; the button presses in when you hover it. Pick a bright accent, the text on it stays black. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Bold",
+    "Playful",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, the selected tab, checkboxes and the focus shadow. Use a bright color: the text on it is black."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#ffd23f"
+    }
+  ]
+}

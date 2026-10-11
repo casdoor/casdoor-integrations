@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "catppuccin",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Catppuccin"
+  },
+  "description": {
+    "en": "The Catppuccin Mocha palette: soft pastel colors on a warm dark base, rounded and cozy, with a mauve accent by default. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Color scheme",
+    "Pastel",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, links and focused fields. Mocha's accents include mauve #cba6f7, pink #f5c2e7, peach #fab387, green #a6e3a1, sky #89dceb and lavender #b4befe."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#cba6f7"
+    }
+  ]
+}

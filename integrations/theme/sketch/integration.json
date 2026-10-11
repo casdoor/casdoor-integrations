@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "sketch",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.20.0",
+  "name": {
+    "en": "Sketch"
+  },
+  "description": {
+    "en": "Drawn by hand on ruled notebook paper: wobbly ink outlines, a handwritten typeface, wavy underlines and a marker-colored button, all slightly tilted. It loads the Patrick Hand font from Google Fonts. Organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Hand-drawn",
+    "Playful",
+    "Web font"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The marker color of the button, the selected tab and checkboxes. Use a light color: the text on it is ink black."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#ffe066"
+    }
+  ]
+}

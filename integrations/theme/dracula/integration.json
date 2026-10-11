@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "dracula",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Dracula"
+  },
+  "description": {
+    "en": "The Dracula palette: a deep purple-grey night with pink and purple highlights, a gradient button and a cyan link color. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Color scheme",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "Focused fields, the selected tab and the start of the button gradient, which ends in Dracula pink."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#bd93f9"
+    }
+  ]
+}

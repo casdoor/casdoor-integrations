@@ -92,12 +92,13 @@ A look for the sign-in pages of a Casdoor application.
 | File | Contents |
 |---|---|
 | `integration.json` | Name, description, at least one screenshot, and variables such as an accent color |
-| `theme.json` | Application fields in the shape of Casdoor's **Export JSON**: `themeData`, `formOffset`, `formCss`, `formCssMobile`, `formSideHtml`, `footerHtml` ([schema](schema/theme/theme.schema.json)) |
+| `theme.json` | Application fields in the shape of Casdoor's **Export JSON**: `themeData`, `formOffset`, `formCss`, `formCssMobile`, `formSideHtml`, `footerHtml`, `formBackgroundUrl`, `formBackgroundUrlMobile` ([schema](schema/theme/theme.schema.json)) |
 | `screenshot.png` | 1280×800 screenshot of the sign-in page, taken from a real Casdoor with the variables at their examples |
 
-- CSS hooks: `.login-background`, `.login-content`, `.login-panel`, `.login-form`, `.login-logo-box`, `.side-image`. Without `formCssMobile`, phones get no custom CSS at all.
-- Casdoor drops form CSS containing `url(`, `@import`, `@font-face`, image functions, backslashes or HTML when an organization admin saves it; the build rejects those. Use gradients instead of background images.
-- `formSideHtml` and `footerHtml` can only be saved by a global admin, so a theme that sets them is marked `requiresGlobalAdmin` in the index and on its page.
+- CSS hooks: `.login-background`, `.login-topbar` (Casdoor 4.20.0 and later; `.login-background > div:first-of-type` before that), `.login-content`, `.login-panel`, `.login-form`, `.login-logo-box`, `.side-image`, `#footer`. Without `formCssMobile`, phones get no custom CSS at all.
+- Form CSS may load fonts and images, with `url()`, `@font-face` and `@import`, from places an organization admin cannot read the access logs of: relative URLs on the Casdoor itself, `data:` URIs, Google Fonts, Fontsource on jsDelivr, `cdn.jsdelivr.net/gh/casdoor/` and Casdoor's own CDNs. `@import` is limited to Google Fonts and Fontsource stylesheets. Anything else, image functions other than `url()`, backslashes and HTML make Casdoor keep the old CSS when an organization admin saves it, and the build rejects them. A theme that loads files needs `casdoorVersion` `>=4.20.0`: earlier versions reject every `url()`.
+- A picture behind the whole page goes in `formBackgroundUrl` and `formBackgroundUrlMobile`, usually as a variable of type `url`; any address works there. Keep a default picture next to `theme.json` and point the variable's example at it on jsDelivr (`https://cdn.jsdelivr.net/gh/casdoor/casdoor-integrations@master/integrations/theme/<id>/<file>`).
+- `formSideHtml` and `footerHtml` are for layout and branding. From Casdoor 4.20.0 an organization admin can save them as long as they hold only text, links, pictures, inline SVG and styles: no scripts, event handlers, forms, fields, buttons, frames or comments, and pictures and styles follow the same rule as form CSS about where files come from. Before 4.20.0 only a global admin can save them, so a theme that sets them is still marked `requiresGlobalAdmin` in the index, which those versions go by.
 - The public page builds the JSON for Casdoor's **Import JSON** button, so a theme can also be applied by hand, without the Marketplace installer.
 
 ## Variables

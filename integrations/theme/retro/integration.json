@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "retro",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Retro"
+  },
+  "description": {
+    "en": "A 90s desktop: a grey bevelled window with a title bar on a teal background, sunken fields, tabbed dialogs and a taskbar along the bottom. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Retro",
+    "Playful",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The title bar. It fades to a lighter blue on the right, like the original."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#000080"
+    }
+  ]
+}

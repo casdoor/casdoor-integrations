@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "halves",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Halves"
+  },
+  "description": {
+    "en": "A split screen without any HTML: the form sits on white in the left half, the right half is your color with rings and a dot grid. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Split screen",
+    "Pattern",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The right half of the page, the button, links and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#4f46e5"
+    }
+  ]
+}

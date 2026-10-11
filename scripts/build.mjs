@@ -22,9 +22,74 @@ const contentFiles = {
 };
 const builtInVariables = ["casdoorUrl", "clientId", "clientSecret"];
 
-// Casdoor drops form CSS containing any of these when an organization admin saves it (object/application_util.go).
-const unsafeCssTokens = ["\\", "<", "url(", "@import", "@font-face", "image(", "image-set(", "cross-fade(", "element(", "src("];
-const isCssSafe = (css) => !unsafeCssTokens.some((t) => css.replace(/<\/?style[^>]*>/gi, "").toLowerCase().includes(t));
+// Casdoor keeps the old form CSS when an organization admin saves one that could send out what users type
+// (object/application_util.go): no backslashes, HTML or image functions, and url() and @import only from places
+// whose access logs nobody else can read. An operator can allow more places, but a theme can only count on these.
+const unsafeCssTokens = ["\\", "<", "image(", "image-set(", "cross-fade(", "element(", "src("];
+const cssUrlPrefixes = [
+  "https://fonts.googleapis.com/",
+  "https://fonts.gstatic.com/",
+  "https://cdn.jsdelivr.net/gh/casdoor/",
+  "https://cdn.jsdelivr.net/npm/@fontsource/",
+  "https://cdn.jsdelivr.net/npm/@fontsource-variable/",
+  "https://cdn.casbin.org/",
+  "https://cdn.casdoor.com/",
+  "https://cdn.casvisor.com/",
+];
+const cssImportPrefixes = ["https://fonts.googleapis.com/css", "https://cdn.jsdelivr.net/npm/@fontsource/", "https://cdn.jsdelivr.net/npm/@fontsource-variable/"];
+const cssUrlPattern = /url\(\s*(?:"([^"]*)"|'([^']*)'|([^"'()\s]*))\s*\)/g;
+const cssImportPattern = /@import\s*(?:url\(\s*)?(?:"([^"]*)"|'([^']*)'|([^"'()\s;]+))/g;
+// Casdoor versions before this one reject any url(), @import and @font-face
+const cssUrlCasdoorVersion = "4.20.0";
+
+function isCssUrlAllowed(url, prefixes, allowLocal) {
+  if (url.startsWith("data:") || url.startsWith("#")) {
+    return allowLocal;
+  }
+  if (/[\x00-\x20\x7f]/.test(url) || ["..", "%2e", "%2f", "%5c"].some((t) => url.includes(t))) {
+    return false;
+  }
+  if (!/^[a-z][a-z0-9+.-]*:/.test(url) && !url.startsWith("//")) {
+    return allowLocal;
+  }
+  return prefixes.some((p) => url.startsWith(p));
+}
+
+function checkCss(css) {
+  const lower = css.replace(/<\/?style[^>]*>/gi, "").toLowerCase();
+  const token = unsafeCssTokens.find((t) => lower.includes(t));
+  if (token) {
+    return `uses ${token}, which Casdoor rejects in form CSS`;
+  }
+  const count = (t) => lower.split(t).length - 1;
+  const urls = [...lower.matchAll(cssUrlPattern)];
+  const imports = [...lower.matchAll(cssImportPattern)];
+  if (urls.length !== count("url(") || imports.length !== count("@import")) {
+    return "has a url() or @import Casdoor cannot read";
+  }
+  const urlOf = (m) => (m[1] ?? m[2] ?? m[3] ?? "").trim();
+  const badUrl = urls.map(urlOf).find((u) => !isCssUrlAllowed(u, cssUrlPrefixes, true));
+  if (badUrl !== undefined) {
+    return `loads ${badUrl}, allowed are relative URLs, data: and ${cssUrlPrefixes.join(" ")}`;
+  }
+  const badImport = imports.map(urlOf).find((u) => !isCssUrlAllowed(u, cssImportPrefixes, false));
+  if (badImport !== undefined) {
+    return `imports ${badImport}, allowed are ${cssImportPrefixes.join(" ")}`;
+  }
+  return null;
+}
+
+const usesCssUrls = (css) => /url\(|@import|@font-face/i.test(css);
+const versionAtLeast = (range, min) => {
+  const v = (range.match(/>=\s*(\d+)\.(\d+)\.(\d+)/) ?? []).slice(1).map(Number);
+  const m = min.split(".").map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((v[i] ?? 0) !== m[i]) {
+      return (v[i] ?? 0) > m[i];
+    }
+  }
+  return true;
+};
 // Only a global admin can set these application fields; Casdoor keeps the old value for anyone else.
 const globalAdminFields = ["formSideHtml", "footerHtml"];
 
@@ -122,8 +187,12 @@ for (const type of fs.readdirSync(path.join(root, "integrations")).sort()) {
 
     const theme = files["theme.json"];
     for (const field of ["formCss", "formCssMobile"]) {
-      if (theme?.[field] && !isCssSafe(theme[field])) {
-        fail(`${where}/theme.json`, `${field} uses something Casdoor rejects in form CSS (${unsafeCssTokens.join(" ")})`);
+      const problem = theme?.[field] ? checkCss(theme[field]) : null;
+      if (problem) {
+        fail(`${where}/theme.json`, `${field} ${problem}`);
+      }
+      if (theme?.[field] && usesCssUrls(theme[field]) && !versionAtLeast(manifest.casdoorVersion ?? "", cssUrlCasdoorVersion)) {
+        fail(where, `${field} loads files, which needs casdoorVersion >=${cssUrlCasdoorVersion}`);
       }
     }
 

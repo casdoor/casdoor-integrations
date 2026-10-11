@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "solarized",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Solarized"
+  },
+  "description": {
+    "en": "The Solarized Light palette: warm cream base tones and precise, muted colors, made for long reading, with a blue accent by default. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Color scheme",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, links and focused fields. Solarized's accents are yellow #b58900, orange #cb4b16, red #dc322f, magenta #d33682, violet #6c71c4, blue #268bd2, cyan #2aa198 and green #859900."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#268bd2"
+    }
+  ]
+}

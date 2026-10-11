@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/casdoor/casdoor-integrations/schema/theme/theme.schema.json",
   "title": "Casdoor sign-in theme (theme.json)",
-  "description": "Fields are named and shaped as in Casdoor's Application object, the same as the UI Customization tab's Export JSON, so the file can also be applied by hand with Import JSON. Form CSS must pass Casdoor's own check for organization admins (no url(), @import, @font-face, image functions, backslashes or HTML); the build enforces it. Side panel and footer HTML can only be set by a global admin.",
+  "description": "Fields are named and shaped as in Casdoor's Application object, the same as the UI Customization tab's Export JSON, so the file can also be applied by hand with Import JSON. Form CSS must pass Casdoor's own check for organization admins: no image functions, backslashes or HTML, and url() and @import only for relative URLs, data: and the CDNs listed in scripts/build.mjs (Casdoor 4.20.0 and later; earlier versions reject any url(), @import and @font-face). The build enforces it. Side panel and footer HTML are for layout and branding (no scripts, forms or fields); before Casdoor 4.20.0 only a global admin can set them.",
   "type": "object",
   "additionalProperties": false,
   "required": ["themeData", "formOffset"],
@@ -24,10 +24,12 @@
       "description": "Form position: 1 left, 2 center, 3 right, 4 center with the side panel (formSideHtml). Phones always get 2.",
       "enum": [1, 2, 3, 4]
     },
-    "formCss": { "description": "Stylesheet for the sign-in pages. Hooks: .login-background, .login-content, .login-panel, .login-form, .login-logo-box, .side-image.", "type": "string" },
+    "formCss": { "description": "Stylesheet for the sign-in pages. Hooks: .login-background, .login-topbar (Casdoor 4.20.0 and later; before that .login-background > div:first-of-type), .login-content, .login-panel, .login-form, .login-logo-box, .side-image, #footer.", "type": "string" },
     "formCssMobile": { "description": "Used instead of formCss on narrow screens.", "type": "string" },
-    "formSideHtml": { "description": "Global admin only. Shown left of the form when formOffset is 4, on wide screens.", "type": "string", "minLength": 1 },
-    "footerHtml": { "description": "Global admin only. Replaces the Powered by Casdoor footer.", "type": "string", "minLength": 1 }
+    "formSideHtml": { "description": "Shown left of the form when formOffset is 4, on wide screens.", "type": "string", "minLength": 1 },
+    "footerHtml": { "description": "Replaces the Powered by Casdoor footer.", "type": "string", "minLength": 1 },
+    "formBackgroundUrl": { "description": "Image behind the whole sign-in page on wide screens. Any http(s) URL, organization admins included; usually a {{variable}} of type url.", "type": "string", "pattern": "^(https?://\\S+|\\{\\{[a-zA-Z][a-zA-Z0-9]*\\}\\})$" },
+    "formBackgroundUrlMobile": { "description": "Image behind the sign-in page on narrow screens; without it phones get no image.", "type": "string", "pattern": "^(https?://\\S+|\\{\\{[a-zA-Z][a-zA-Z0-9]*\\}\\})$" }
   },
   "if": { "properties": { "formOffset": { "const": 4 } } },
   "then": { "required": ["formSideHtml"] }

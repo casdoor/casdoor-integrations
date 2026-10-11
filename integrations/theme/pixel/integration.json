@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "pixel",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.20.0",
+  "name": {
+    "en": "Pixel"
+  },
+  "description": {
+    "en": "An 8-bit game menu: a pixel font, stepped borders, a starry night sky, a blinking PRESS START and a chunky button that presses in. It loads the Press Start 2P font from Google Fonts. Organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Retro",
+    "Playful",
+    "Web font"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, the selected tab, links and the blinking line. Use a bright color: the text on it is dark."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#ffcd75"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "blueprint",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.20.0",
+  "name": {
+    "en": "Blueprint"
+  },
+  "description": {
+    "en": "A technical drawing: white lines on blueprint-blue grid paper, a framed form labelled like a figure, dashed fields and a drafting typeface. It loads the Share Tech Mono font from Google Fonts. Organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Technical",
+    "Monospace",
+    "Web font"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The paper. Keep it dark: the lines and text are white."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#0f4c81"
+    }
+  ]
+}

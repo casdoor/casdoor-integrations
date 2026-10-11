@@ -1,0 +1,40 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "nord",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Nord"
+  },
+  "description": {
+    "en": "The Nord palette: arctic slate greys with a frost-blue accent and a cool aurora glow, calm and low in contrast. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Color scheme",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The button, links and focused fields. Nord's frost colors are #8fbcbb, #88c0d0, #81a1c1 and #5e81ac."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#88c0d0"
+    }
+  ]
+}

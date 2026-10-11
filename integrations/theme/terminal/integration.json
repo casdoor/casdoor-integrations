@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "terminal",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Terminal"
+  },
+  "description": {
+    "en": "An old phosphor screen: glowing monospace text, scanlines with a faint flicker, a blinking prompt and fields that read like a shell. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Dark",
+    "Retro",
+    "Monospace",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The phosphor color of all the text, the frame and the button. Green or amber look the most like a real terminal."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#33ff66"
+    }
+  ]
+}

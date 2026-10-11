@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "waves",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.20.0",
+  "name": {
+    "en": "Waves"
+  },
+  "description": {
+    "en": "Friendly and round: three layers of waves in your color roll along the bottom of a light page, under a soft white card with pill-shaped fields and a rounded typeface. The waves are drawn in the CSS itself; the Nunito font comes from Google Fonts. Organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Friendly",
+    "Illustration",
+    "Web font"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The waves, the button, links and focused fields."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#0ea5e9"
+    }
+  ]
+}

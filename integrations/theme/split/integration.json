@@ -2,19 +2,19 @@
   "$schema": "../../../schema/integration.schema.json",
   "id": "split",
   "type": "theme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "casdoorVersion": ">=4.18.0",
   "name": {
     "en": "Split"
   },
   "description": {
-    "en": "A brand panel in your color with your own headline next to the sign-in form. It sets the side panel HTML, so only a global admin can install it."
+    "en": "A brand panel in your color with your own headline next to the sign-in form. It sets the side panel HTML, which organization admins can install on Casdoor 4.20.0 and later; before that only a global admin can."
   },
   "author": "casdoor",
   "license": "Apache-2.0",
   "tags": [
-    "Side panel",
-    "Global admin"
+    "Light",
+    "Side panel"
   ],
   "categories": [
     "Sign-in themes"

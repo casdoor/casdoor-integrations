@@ -1,0 +1,41 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "civic",
+  "type": "theme",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.18.0",
+  "name": {
+    "en": "Civic"
+  },
+  "description": {
+    "en": "Plain and accessible, like a public service site: a black header with a blue stripe, no card, large bold labels, thick-bordered fields, a yellow focus ring and a solid button. CSS only, so organization admins can install it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "tags": [
+    "Light",
+    "Accessible",
+    "Government",
+    "CSS only"
+  ],
+  "categories": [
+    "Sign-in themes"
+  ],
+  "screenshots": [
+    "screenshot.png"
+  ],
+  "variables": [
+    {
+      "name": "accentColor",
+      "label": {
+        "en": "Accent color"
+      },
+      "description": {
+        "en": "The sign-in button. A dark color keeps the white text readable."
+      },
+      "type": "color",
+      "required": true,
+      "example": "#00703c"
+    }
+  ]
+}
