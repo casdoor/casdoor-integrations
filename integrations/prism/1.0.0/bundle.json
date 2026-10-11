@@ -1,0 +1,55 @@
+{
+  "manifest": {
+    "id": "prism",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Prism"
+    },
+    "description": {
+      "en": "A slanted band of color from your accent to cyan and mint across the top of a light page, with a white card on a deep, soft shadow. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Light",
+      "Gradient",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "The start of the color band, the button, links and focused fields."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#635bff"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "default",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 6,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: light;\n  overflow: hidden;\n  --background: 210 50% 98%;\n  --foreground: 235 9% 21%;\n  --card: 0 0% 100%;\n  --card-foreground: 235 9% 21%;\n  --muted: 210 40% 96%;\n  --muted-foreground: 218 10% 46%;\n  --accent: 210 40% 95%;\n  --accent-foreground: 235 9% 21%;\n  --border: 212 26% 91%;\n  --input: 212 26% 88%;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;\n  background-color: #f6f9fc;\n}\n.login-background > div:first-child,\n.login-content,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background > div:first-child button {\n  color: rgba(255, 255, 255, 0.9);\n}\n.login-background::before {\n  content: '';\n  position: absolute;\n  left: -10%;\n  right: -10%;\n  top: -42%;\n  height: 78%;\n  transform: skewY(-9deg);\n  background: linear-gradient(150deg, {{accentColor}} 12%, #05d5ff 62%, #a6ffcb 96%);\n}\n.login-background::after {\n  content: '';\n  position: absolute;\n  left: -10%;\n  right: -10%;\n  top: 30%;\n  height: 48px;\n  transform: skewY(-9deg);\n  background: linear-gradient(90deg, transparent 8%, color-mix(in srgb, {{accentColor}} 30%, transparent) 30%, transparent 55%);\n}\n.login-content > div {\n  max-width: 460px;\n}\n.login-panel {\n  padding: 40px 48px 12px;\n  border: none;\n  border-radius: 8px;\n  background: #ffffff;\n  box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3);\n}\n.signin-methods > div {\n  background: #f6f9fc;\n  border: 1px solid #e3e8ee;\n}\n.login-form label {\n  color: #414552;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 44px;\n  border: 1px solid #e3e8ee;\n  border-radius: 6px;\n  background: #ffffff;\n  font-size: 15px;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 3px color-mix(in srgb, {{accentColor}} 25%, transparent);\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-form .login-button {\n  height: 44px;\n  border-radius: 6px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-size: 15px;\n  font-weight: 600;\n  box-shadow: 0 2px 5px rgba(50, 50, 93, 0.12), 0 1px 1px rgba(0, 0, 0, 0.07);\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08);\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: light;\n  overflow: hidden;\n  --background: 210 50% 98%;\n  --foreground: 235 9% 21%;\n  --card: 0 0% 100%;\n  --card-foreground: 235 9% 21%;\n  --muted: 210 40% 96%;\n  --muted-foreground: 218 10% 46%;\n  --accent: 210 40% 95%;\n  --accent-foreground: 235 9% 21%;\n  --border: 212 26% 91%;\n  --input: 212 26% 88%;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;\n  background-color: #f6f9fc;\n}\n.login-background > div:first-child,\n.login-content,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background > div:first-child button {\n  color: rgba(255, 255, 255, 0.9);\n}\n.login-background::before {\n  content: '';\n  position: absolute;\n  left: -20%;\n  right: -20%;\n  top: -16%;\n  height: 31%;\n  transform: skewY(-9deg);\n  background: linear-gradient(150deg, {{accentColor}} 12%, #05d5ff 62%, #a6ffcb 96%);\n}\n.login-panel {\n  border: none;\n  border-radius: 8px;\n  background: #ffffff;\n  box-shadow: 0 30px 60px -20px rgba(50, 50, 93, 0.25);\n}\n.signin-methods > div {\n  background: #f6f9fc;\n  border: 1px solid #e3e8ee;\n}\n.login-form label {\n  color: #414552;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 44px;\n  border: 1px solid #e3e8ee;\n  border-radius: 6px;\n  background: #ffffff;\n  font-size: 15px;\n  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 3px color-mix(in srgb, {{accentColor}} 25%, transparent);\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-form .login-button {\n  height: 44px;\n  border-radius: 6px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-size: 15px;\n  font-weight: 600;\n  box-shadow: 0 2px 5px rgba(50, 50, 93, 0.12), 0 1px 1px rgba(0, 0, 0, 0.07);\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08);\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}

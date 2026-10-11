@@ -1,0 +1,116 @@
+{
+  "manifest": {
+    "id": "immich",
+    "type": "app",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Immich"
+    },
+    "description": {
+      "en": "Let people sign in to Immich with Casdoor: OAuth settings in the Immich admin, the web and mobile redirect URIs, and storage label mapping."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://immich.app",
+    "tags": [
+      "OIDC",
+      "Mobile apps"
+    ],
+    "categories": [
+      "Productivity"
+    ],
+    "variables": [
+      {
+        "name": "appUrl",
+        "label": {
+          "en": "Immich URL"
+        },
+        "description": {
+          "en": "The address people open Immich at, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://photos.example.com"
+      }
+    ]
+  },
+  "files": {
+    "application.json": {
+      "redirectUris": [
+        "{{appUrl}}/auth/login",
+        "{{appUrl}}/user-settings",
+        "app.immich:///oauth-callback"
+      ]
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Immich SSO with Casdoor: OAuth Login Setup",
+      "headline": "Single sign-on for Immich",
+      "summary": "Immich supports OAuth sign-in with any OpenID Connect provider, in the browser and in its mobile apps. With Casdoor, family members or colleagues sign in to your photo library with the account they already have.",
+      "redirectNote": "Add the first two for every address you open Immich at; the last one is for the iOS and Android apps.",
+      "steps": [
+        {
+          "title": "Configure OAuth in Immich",
+          "text": "In Immich, open **Administration → Settings → OAuth**, enable OAuth and fill in:",
+          "fields": [
+            {
+              "label": "Issuer URL",
+              "value": "{{casdoorUrl}}"
+            },
+            {
+              "label": "Client ID",
+              "value": "{{clientId}}"
+            },
+            {
+              "label": "Client Secret",
+              "value": "{{clientSecret}}"
+            },
+            {
+              "label": "Scope",
+              "value": "openid email profile"
+            },
+            {
+              "label": "Storage Label Claim",
+              "value": "preferred_username"
+            },
+            {
+              "label": "Button Text",
+              "value": "Login with Casdoor"
+            },
+            {
+              "label": "Auto Register",
+              "value": "On"
+            }
+          ]
+        },
+        {
+          "title": "Sign in",
+          "text": "Save, then open Immich in a private window: the login page has a **Login with Casdoor** button. Existing users can link their account under **Account Settings → OAuth**."
+        }
+      ],
+      "tips": [
+        "Immich matches OAuth users to existing accounts by email, so give Casdoor users the same email they use in Immich.",
+        "**Auto Launch** skips the Immich login page and goes straight to Casdoor."
+      ],
+      "faqs": [
+        {
+          "question": "Does it work in the Immich mobile app?",
+          "answer": "Yes, as long as `app.immich:///oauth-callback` is one of the application's redirect URLs in Casdoor. The app then shows the same OAuth button."
+        },
+        {
+          "question": "Can Casdoor decide who is an Immich admin?",
+          "answer": "Immich reads the role from a claim named `immich_role` by default. Without it, users sign in as regular users and you promote admins in Immich itself."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Immich OAuth",
+          "href": "https://docs.immich.app/administration/oauth"
+        }
+      ],
+      "docsUrl": "https://casdoor.ai/docs/integration/javascript/immich"
+    }
+  }
+}

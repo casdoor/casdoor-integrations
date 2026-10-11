@@ -1,0 +1,56 @@
+{
+  "manifest": {
+    "id": "waves",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.20.0",
+    "name": {
+      "en": "Waves"
+    },
+    "description": {
+      "en": "Friendly and round: three layers of waves in your color roll along the bottom of a light page, under a soft white card with pill-shaped fields and a rounded typeface. The waves are drawn in the CSS itself; the Nunito font comes from Google Fonts. Organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Light",
+      "Friendly",
+      "Illustration",
+      "Web font"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "The waves, the button, links and focused fields."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#0ea5e9"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "default",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 16,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');\n.login-background {\n  color-scheme: light;\n  --background: 210 60% 98%;\n  --foreground: 222 47% 15%;\n  --card: 0 0% 100%;\n  --card-foreground: 222 47% 15%;\n  --popover: 0 0% 100%;\n  --popover-foreground: 222 47% 15%;\n  --muted: 210 50% 96%;\n  --muted-foreground: 215 20% 45%;\n  --accent: 210 50% 95%;\n  --accent-foreground: 222 47% 15%;\n  --border: 214 40% 90%;\n  --input: 214 40% 86%;\n  font-family: Nunito, ui-rounded, 'Segoe UI', system-ui, sans-serif;\n  background: linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, {{accentColor}} 12%, #ffffff) 100%);\n  overflow: hidden;\n}\n.login-topbar,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background::before,\n.login-background::after,\n.login-content::before {\n  content: '';\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 0;\n  height: 46%;\n  background: {{accentColor}};\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  -webkit-mask-size: 100% 100%;\n  mask-size: 100% 100%;\n}\n.login-background::before {\n  opacity: 0.25;\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,180 C220,260 420,80 720,150 C1000,215 1220,90 1440,170 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,180 C220,260 420,80 720,150 C1000,215 1220,90 1440,170 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-background::after {\n  opacity: 0.5;\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,230 C260,150 460,290 760,215 C1040,145 1260,270 1440,200 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,230 C260,150 460,290 760,215 C1040,145 1260,270 1440,200 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-content::before {\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,270 C300,220 560,310 860,262 C1100,224 1300,300 1440,255 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,270 C300,220 560,310 860,262 C1100,224 1300,300 1440,255 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-content > div {\n  position: relative;\n  z-index: 1;\n}\n.login-content > div {\n  max-width: 430px;\n}\n.login-panel {\n  border: none;\n  border-radius: 28px;\n  background: #ffffff;\n  box-shadow: 0 30px 70px -24px color-mix(in srgb, {{accentColor}} 45%, rgba(15, 23, 42, 0.4));\n}\n.signin-methods > div {\n  border-radius: 999px;\n  background: color-mix(in srgb, {{accentColor}} 8%, #f1f5f9);\n}\n.signin-methods [role='tab'] {\n  border-radius: 999px;\n  font-family: inherit;\n  font-weight: 700;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: {{accentColor}};\n}\n.login-form label {\n  color: #334155;\n  font-weight: 700;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 48px;\n  padding: 0 18px;\n  border: 1.5px solid #dbe4ee;\n  border-radius: 999px;\n  background: #f8fafc;\n  font-family: inherit;\n  font-size: 15px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  background: #ffffff;\n  box-shadow: 0 0 0 4px color-mix(in srgb, {{accentColor}} 18%, transparent);\n}\n.login-password button {\n  right: 8px;\n}\n.login-form [role='checkbox'] {\n  border-radius: 6px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 700;\n}\n.login-form .login-button {\n  height: 50px;\n  border-radius: 999px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 800;\n  box-shadow: 0 12px 24px -10px {{accentColor}};\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  filter: brightness(1.08);\n}\n#footer {\n  color: #ffffff;\n  font-weight: 600;\n}\n#footer img {\n  filter: brightness(0) invert(1);\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');\n.login-background {\n  color-scheme: light;\n  --background: 210 60% 98%;\n  --foreground: 222 47% 15%;\n  --card: 0 0% 100%;\n  --card-foreground: 222 47% 15%;\n  --popover: 0 0% 100%;\n  --popover-foreground: 222 47% 15%;\n  --muted: 210 50% 96%;\n  --muted-foreground: 215 20% 45%;\n  --accent: 210 50% 95%;\n  --accent-foreground: 222 47% 15%;\n  --border: 214 40% 90%;\n  --input: 214 40% 86%;\n  font-family: Nunito, ui-rounded, 'Segoe UI', system-ui, sans-serif;\n  background: linear-gradient(180deg, #ffffff 0%, color-mix(in srgb, {{accentColor}} 12%, #ffffff) 100%);\n  overflow: hidden;\n}\n.login-topbar,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background::before,\n.login-background::after,\n.login-content::before {\n  content: '';\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 0;\n  height: 30%;\n  background: {{accentColor}};\n  -webkit-mask-repeat: no-repeat;\n  mask-repeat: no-repeat;\n  -webkit-mask-size: 100% 100%;\n  mask-size: 100% 100%;\n}\n.login-background::before {\n  opacity: 0.25;\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,180 C220,260 420,80 720,150 C1000,215 1220,90 1440,170 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,180 C220,260 420,80 720,150 C1000,215 1220,90 1440,170 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-background::after {\n  opacity: 0.5;\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,230 C260,150 460,290 760,215 C1040,145 1260,270 1440,200 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,230 C260,150 460,290 760,215 C1040,145 1260,270 1440,200 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-content::before {\n  -webkit-mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,270 C300,220 560,310 860,262 C1100,224 1300,300 1440,255 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n  mask-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0,270 C300,220 560,310 860,262 C1100,224 1300,300 1440,255 L1440,320 L0,320 Z'/%3E%3C/svg%3E\");\n}\n.login-content > div {\n  position: relative;\n  z-index: 1;\n}\n.login-content {\n  padding-bottom: 120px;\n}\n.signin-methods > div {\n  border-radius: 999px;\n  background: color-mix(in srgb, {{accentColor}} 8%, #f1f5f9);\n}\n.signin-methods [role='tab'] {\n  border-radius: 999px;\n  font-family: inherit;\n  font-weight: 700;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: {{accentColor}};\n}\n.login-form label {\n  color: #334155;\n  font-weight: 700;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 48px;\n  padding: 0 18px;\n  border: 1.5px solid #dbe4ee;\n  border-radius: 999px;\n  background: #f8fafc;\n  font-family: inherit;\n  font-size: 15px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  background: #ffffff;\n  box-shadow: 0 0 0 4px color-mix(in srgb, {{accentColor}} 18%, transparent);\n}\n.login-password button {\n  right: 8px;\n}\n.login-form [role='checkbox'] {\n  border-radius: 6px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 700;\n}\n.login-form .login-button {\n  height: 50px;\n  border-radius: 999px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 800;\n  box-shadow: 0 12px 24px -10px {{accentColor}};\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  filter: brightness(1.08);\n}\n#footer {\n  color: #ffffff;\n  font-weight: 600;\n}\n#footer img {\n  filter: brightness(0) invert(1);\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}

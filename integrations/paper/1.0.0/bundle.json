@@ -1,0 +1,55 @@
+{
+  "manifest": {
+    "id": "paper",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Paper"
+    },
+    "description": {
+      "en": "An editorial look: a cream page, a serif face, small-caps labels over underlined fields and an ink-colored button. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Light",
+      "Serif",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "The button, links and focused fields. A dark ink color suits the paper best."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#1f1d1a"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "default",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 2,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 43 33% 94%;\n  --foreground: 36 9% 11%;\n  --card: 43 100% 99%;\n  --card-foreground: 36 9% 11%;\n  --muted: 42 30% 91%;\n  --muted-foreground: 33 6% 38%;\n  --accent: 42 30% 90%;\n  --accent-foreground: 36 9% 11%;\n  --border: 41 27% 84%;\n  --input: 40 20% 74%;\n  font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Noto Serif', 'Songti SC', serif;\n}\n.login-background {\n  background: radial-gradient(1200px 700px at 50% 30%, #faf7f0 0%, transparent 70%), #f1ece1;\n}\n.login-content > div {\n  max-width: 430px;\n}\n.login-panel {\n  padding: 44px 44px 16px;\n  border: 1px solid #e4dccb;\n  border-radius: 3px;\n  background: #fffdf8;\n  box-shadow: 0 1px 0 #e4dccb, 0 18px 40px -18px rgba(70, 50, 20, 0.25);\n}\n.login-logo-box {\n  margin-bottom: 28px;\n  padding-bottom: 24px;\n  border-bottom: 1px solid #ece5d6;\n}\n.signin-methods > div {\n  background: transparent;\n  border-radius: 0;\n  padding: 0;\n}\n.signin-methods [role='tablist'] {\n  gap: 22px;\n}\n.signin-methods [role='tab'] {\n  flex: none !important;\n  padding: 0 !important;\n  border-radius: 0;\n  background: transparent !important;\n  box-shadow: none !important;\n  color: #7a7468;\n  font-size: 15px !important;\n  font-style: italic;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: #1f1d1a;\n  box-shadow: inset 0 -1px 0 #1f1d1a !important;\n}\n.login-form label {\n  color: #6b655a;\n  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 42px;\n  padding: 0 2px;\n  border: none;\n  border-bottom: 1px solid #cdc4b1;\n  border-radius: 0;\n  background: transparent;\n  font-family: inherit;\n  font-size: 17px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-bottom: 1px solid {{accentColor}};\n  box-shadow: inset 0 -1px 0 {{accentColor}};\n}\n.login-form [role='checkbox'] {\n  border-color: #6b655a;\n  border-radius: 0;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #fffdf8;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-style: italic;\n  text-decoration: underline;\n  text-underline-offset: 3px;\n}\n.login-form .login-button {\n  height: 46px;\n  border-radius: 2px;\n  background: {{accentColor}};\n  color: #fffdf8;\n  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  font-size: 13px;\n  font-weight: 600;\n  letter-spacing: 0.1em;\n  text-transform: uppercase;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  opacity: 0.86;\n}\n#footer {\n  color: #8a8376;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 43 33% 94%;\n  --foreground: 36 9% 11%;\n  --card: 43 100% 99%;\n  --card-foreground: 36 9% 11%;\n  --muted: 42 30% 91%;\n  --muted-foreground: 33 6% 38%;\n  --accent: 42 30% 90%;\n  --accent-foreground: 36 9% 11%;\n  --border: 41 27% 84%;\n  --input: 40 20% 74%;\n  font-family: Charter, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Noto Serif', 'Songti SC', serif;\n}\n.login-background {\n  background: #fffdf8;\n}\n.login-panel {\n  border: none;\n  background: #fffdf8;\n  box-shadow: none;\n}\n.login-logo-box {\n  padding-bottom: 20px;\n  border-bottom: 1px solid #ece5d6;\n}\n.signin-methods > div {\n  background: transparent;\n  border-radius: 0;\n  padding: 0;\n}\n.signin-methods [role='tablist'] {\n  gap: 22px;\n}\n.signin-methods [role='tab'] {\n  flex: none !important;\n  padding: 0 !important;\n  border-radius: 0;\n  background: transparent !important;\n  box-shadow: none !important;\n  color: #7a7468;\n  font-size: 15px !important;\n  font-style: italic;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: #1f1d1a;\n  box-shadow: inset 0 -1px 0 #1f1d1a !important;\n}\n.login-form label {\n  color: #6b655a;\n  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  font-size: 11px;\n  font-weight: 600;\n  letter-spacing: 0.12em;\n  text-transform: uppercase;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 42px;\n  padding: 0 2px;\n  border: none;\n  border-bottom: 1px solid #cdc4b1;\n  border-radius: 0;\n  background: transparent;\n  font-family: inherit;\n  font-size: 17px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-bottom: 1px solid {{accentColor}};\n  box-shadow: inset 0 -1px 0 {{accentColor}};\n}\n.login-form [role='checkbox'] {\n  border-color: #6b655a;\n  border-radius: 0;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #fffdf8;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-style: italic;\n  text-decoration: underline;\n  text-underline-offset: 3px;\n}\n.login-form .login-button {\n  height: 46px;\n  border-radius: 2px;\n  background: {{accentColor}};\n  color: #fffdf8;\n  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  font-size: 13px;\n  font-weight: 600;\n  letter-spacing: 0.1em;\n  text-transform: uppercase;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  opacity: 0.86;\n}\n#footer {\n  color: #8a8376;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}

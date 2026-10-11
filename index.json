@@ -1,0 +1,1321 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-11T04:27:49.739Z",
+  "integrations": [
+    {
+      "id": "argocd",
+      "type": "app",
+      "name": {
+        "en": "Argo CD"
+      },
+      "description": {
+        "en": "Connect Argo CD to Casdoor over OpenID Connect: oidc.config in argocd-cm, the client secret, PKCE, CLI login and RBAC from Casdoor groups."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://argo-cd.readthedocs.io",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "RBAC by group",
+        "CLI login"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/argocd/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/argocd/1.0.0/bundle.json",
+          "sha256": "e8050874e4b71419835caebe0b671db2c64037330a28b4189834626426c15f6f",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "gitea",
+      "type": "app",
+      "name": {
+        "en": "Gitea"
+      },
+      "description": {
+        "en": "Add Casdoor to Gitea as an OpenID Connect authentication source: the add-oauth command, callback URL, and admins from a Casdoor group."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://about.gitea.com",
+      "tags": [
+        "OIDC",
+        "Admin by group"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/gitea/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/gitea/1.0.0/bundle.json",
+          "sha256": "290458d17532430a5c0e70f30b408897a2cea5f23d0dd149f55dc54ef3b1f4a0",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "gitlab",
+      "type": "app",
+      "name": {
+        "en": "GitLab"
+      },
+      "description": {
+        "en": "Configure self-managed GitLab to sign users in with Casdoor over OpenID Connect: gitlab.rb provider settings, account creation and group-based admins."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://about.gitlab.com",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Group mapping"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/gitlab/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/gitlab/1.0.0/bundle.json",
+          "sha256": "ea1be82b72c71dcb260c068a347c5694cde05d118afd3702d9c31b0ec1927cc1",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "grafana",
+      "type": "app",
+      "name": {
+        "en": "Grafana"
+      },
+      "description": {
+        "en": "Set up Grafana single sign-on with Casdoor over OpenID Connect: Generic OAuth settings, PKCE, and Grafana roles mapped from Casdoor groups."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://grafana.com",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Role mapping"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/grafana/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/grafana/1.0.0/bundle.json",
+          "sha256": "af1b9946d54df840a5bc03891e292100d40b27a412410ee33d1fc36805a3ac11",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "immich",
+      "type": "app",
+      "name": {
+        "en": "Immich"
+      },
+      "description": {
+        "en": "Let people sign in to Immich with Casdoor: OAuth settings in the Immich admin, the web and mobile redirect URIs, and storage label mapping."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://immich.app",
+      "tags": [
+        "OIDC",
+        "Mobile apps"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "logo": "integrations/immich/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/immich/1.0.0/bundle.json",
+          "sha256": "a888ba9c47c915613d567f2019f75deb02d1a452fe1633cf9ea36f73bf88fcce",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "nextcloud",
+      "type": "app",
+      "name": {
+        "en": "Nextcloud"
+      },
+      "description": {
+        "en": "Set up Nextcloud single sign-on with Casdoor using the OpenID Connect user backend (user_oidc): provider command, user ID and group mapping."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://nextcloud.com",
+      "tags": [
+        "OIDC",
+        "Group sync"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "logo": "integrations/nextcloud/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/nextcloud/1.0.0/bundle.json",
+          "sha256": "b76d63c918534f0c5387174df13e010ceeade5cfe7773a69227bd3bdb0e6b569",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "open-webui",
+      "type": "app",
+      "name": {
+        "en": "Open WebUI"
+      },
+      "description": {
+        "en": "Set up Open WebUI single sign-on with Casdoor over OpenID Connect: OAuth environment variables, sign-up, and group sync from Casdoor groups."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://openwebui.com",
+      "tags": [
+        "OIDC",
+        "Group sync"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/open-webui/1.0.0/bundle.json",
+          "sha256": "bb84c6266c957257439f83d04cbd82b73f4afbef35dd87e085b4619a19a2adc7",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "portainer",
+      "type": "app",
+      "name": {
+        "en": "Portainer"
+      },
+      "description": {
+        "en": "Set up Portainer single sign-on with Casdoor using Portainer's custom OAuth provider: endpoints, user identifier, scopes and automatic user creation."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://www.portainer.io",
+      "tags": [
+        "OAuth 2.0",
+        "Auto provisioning"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/portainer/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/portainer/1.0.0/bundle.json",
+          "sha256": "701fb6852fa3295b1ae27e9b06859310c70429e96d233a34c0e4175f4e82b7db",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "proxmox",
+      "type": "app",
+      "name": {
+        "en": "Proxmox VE"
+      },
+      "description": {
+        "en": "Add Casdoor to Proxmox VE as an OpenID Connect realm: the pveum command, redirect URL, usernames, groups and permissions."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://www.proxmox.com",
+      "tags": [
+        "OIDC",
+        "Group sync"
+      ],
+      "categories": [
+        "DevOps & infrastructure"
+      ],
+      "logo": "integrations/proxmox/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/proxmox/1.0.0/bundle.json",
+          "sha256": "174e1401462cf83658eb54c04ff4a8a2f67ea50c48de6c0cbfeae0fd38c7174b",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "vaultwarden",
+      "type": "app",
+      "name": {
+        "en": "Vaultwarden"
+      },
+      "description": {
+        "en": "Turn on Vaultwarden single sign-on with Casdoor over OpenID Connect: the SSO_* settings, the redirect URI, and the email verification check."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/dani-garcia/vaultwarden",
+      "tags": [
+        "OIDC",
+        "PKCE"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "logo": "integrations/vaultwarden/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/vaultwarden/1.0.0/bundle.json",
+          "sha256": "b42f36e5e2edc7c913679d8713b79418ff6c1b4aff45de485719e860554dcec9",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "authelia",
+      "type": "provider",
+      "name": {
+        "en": "Authelia"
+      },
+      "description": {
+        "en": "Let people sign in to Casdoor through Authelia over OpenID Connect: the provider settings, and the client to add to Authelia's configuration."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://www.authelia.com",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Self-hosted"
+      ],
+      "categories": [
+        "Identity providers"
+      ],
+      "logo": "integrations/authelia/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/authelia/1.0.0/bundle.json",
+          "sha256": "995162f3e6634d91ecf4ad80d10184f7ccb404b1df228570ba1a2de6b684cec1",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "authentik",
+      "type": "provider",
+      "name": {
+        "en": "authentik"
+      },
+      "description": {
+        "en": "Let people sign in to Casdoor with their authentik accounts over OpenID Connect: the provider settings, and the application and OAuth2 provider to create in authentik."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://goauthentik.io",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Self-hosted"
+      ],
+      "categories": [
+        "Identity providers"
+      ],
+      "logo": "integrations/authentik/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/authentik/1.0.0/bundle.json",
+          "sha256": "1477ba633a7c6fa65dd318c3d7b2a1a690e9295b49197557ca418d54e2ffe706",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "gitlab-self-managed",
+      "type": "provider",
+      "name": {
+        "en": "GitLab Self-Managed"
+      },
+      "description": {
+        "en": "Let people sign in to Casdoor with accounts on your own GitLab over OpenID Connect: the provider settings, and the OAuth application to create in GitLab."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://about.gitlab.com",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Self-hosted"
+      ],
+      "categories": [
+        "Identity providers"
+      ],
+      "logo": "integrations/gitlab-self-managed/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/gitlab-self-managed/1.0.0/bundle.json",
+          "sha256": "c2c32f1c6c1746e4197e5a77ea71e81fd3d722cdfd10841ca22c6b695824ce6e",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "keycloak",
+      "type": "provider",
+      "name": {
+        "en": "Keycloak"
+      },
+      "description": {
+        "en": "Let people sign in to Casdoor with their Keycloak accounts over OpenID Connect: the provider settings for a Keycloak realm, and the client to create on the Keycloak side."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://www.keycloak.org",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Self-hosted"
+      ],
+      "categories": [
+        "Identity providers"
+      ],
+      "logo": "integrations/keycloak/1.0.0/logo.svg",
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/keycloak/1.0.0/bundle.json",
+          "sha256": "899043777b6dcf41948e02463307b47e6b35628705acf2344d75dcb291c89fbe",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "zitadel",
+      "type": "provider",
+      "name": {
+        "en": "ZITADEL"
+      },
+      "description": {
+        "en": "Let people sign in to Casdoor with their ZITADEL accounts over OpenID Connect: the provider settings, and the web application to create in the ZITADEL Console."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "homepage": "https://zitadel.com",
+      "tags": [
+        "OIDC",
+        "PKCE",
+        "Cloud or self-hosted"
+      ],
+      "categories": [
+        "Identity providers"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/zitadel/1.0.0/bundle.json",
+          "sha256": "e892e4923871d933cea90fcf7a51df227c361cc5dcf55d599f026c376c760ac4",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "aurora",
+      "type": "theme",
+      "name": {
+        "en": "Aurora"
+      },
+      "description": {
+        "en": "A pastel mesh of color tinted by your accent behind a frosted glass card, with soft rounded fields and a gradient button. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Glass",
+        "Gradient",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/aurora/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/aurora/1.0.0/bundle.json",
+          "sha256": "646ac1fb02054d400fb02d0904f4979d6385d94324f09e7cf2eb80f798c35952",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "backdrop",
+      "type": "theme",
+      "name": {
+        "en": "Backdrop"
+      },
+      "description": {
+        "en": "Your own picture behind the whole page, dimmed a little, with a frosted glass card on top. It comes with a dusk mountain scene; give it any image address to use yours. Organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Background image",
+        "Glass"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/backdrop/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.20.0",
+          "url": "integrations/backdrop/1.0.0/bundle.json",
+          "sha256": "ffe310d4065f0b1d3d54be4ac81ef3127ae0fa7279e9b489b65d3add4deba214",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "bare",
+      "type": "theme",
+      "name": {
+        "en": "Bare"
+      },
+      "description": {
+        "en": "Nothing but the form: no card, no background, a small left-aligned logo, quiet text tabs, hairline fields and a round button, with plenty of white space. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Minimal",
+        "No card",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/bare/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/bare/1.0.0/bundle.json",
+          "sha256": "7a19a4e1b2ff8a68a402e8389d7c331c28ab414b9ec65d192d0d87cd9893fabf",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "blueprint",
+      "type": "theme",
+      "name": {
+        "en": "Blueprint"
+      },
+      "description": {
+        "en": "A technical drawing: white lines on blueprint-blue grid paper, a framed form labelled like a figure, dashed fields and a drafting typeface. It loads the Share Tech Mono font from Google Fonts. Organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Technical",
+        "Monospace",
+        "Web font"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/blueprint/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.20.0",
+          "url": "integrations/blueprint/1.0.0/bundle.json",
+          "sha256": "e8b9bb28d65dca46425b31030952da61384f7dc872245087cd8c78ac2d96cfd0",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "brutal",
+      "type": "theme",
+      "name": {
+        "en": "Brutal"
+      },
+      "description": {
+        "en": "Neo-brutalism: thick black outlines, hard offset shadows and a loud accent on a dotted page; the button presses in when you hover it. Pick a bright accent, the text on it stays black. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Bold",
+        "Playful",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/brutal/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/brutal/1.0.0/bundle.json",
+          "sha256": "19b518fc73cbaeb207349a2bcc75b9ff82d6834f0c25b9890c1041cda3788b23",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "catppuccin",
+      "type": "theme",
+      "name": {
+        "en": "Catppuccin"
+      },
+      "description": {
+        "en": "The Catppuccin Mocha palette: soft pastel colors on a warm dark base, rounded and cozy, with a mauve accent by default. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Color scheme",
+        "Pastel",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/catppuccin/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/catppuccin/1.0.0/bundle.json",
+          "sha256": "2913023cfc8d5c69aa4e69aaef0eb11fd4b18555026c0776c60a660e83f1d748",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "civic",
+      "type": "theme",
+      "name": {
+        "en": "Civic"
+      },
+      "description": {
+        "en": "Plain and accessible, like a public service site: a black header with a blue stripe, no card, large bold labels, thick-bordered fields, a yellow focus ring and a solid button. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Accessible",
+        "Government",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/civic/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/civic/1.0.0/bundle.json",
+          "sha256": "6a7cc0fbb8aa186e6917d542ea361d0d7a533f20e6ac0964c722872bba1b8374",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "cupertino",
+      "type": "theme",
+      "name": {
+        "en": "Cupertino"
+      },
+      "description": {
+        "en": "An airy grey page with a soft white card, large rounded fields, a segmented control for the sign-in methods and a tall button, with the system font of the visitor's device. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Minimal",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/cupertino/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/cupertino/1.0.0/bundle.json",
+          "sha256": "cd077b19477ac53a706882de6bc1db52577a1301d0d005043e7042a84f1ae050",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "dracula",
+      "type": "theme",
+      "name": {
+        "en": "Dracula"
+      },
+      "description": {
+        "en": "The Dracula palette: a deep purple-grey night with pink and purple highlights, a gradient button and a cyan link color. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Color scheme",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/dracula/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/dracula/1.0.0/bundle.json",
+          "sha256": "fa037ecc3cccbda1f3ef04e2b2575ae789bfb0f70abccde32e27602dc690817b",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "fluent",
+      "type": "theme",
+      "name": {
+        "en": "Fluent"
+      },
+      "description": {
+        "en": "A square white card with a soft shadow over a pastel wash, underlined fields and a compact square button on the right, in the spirit of Fluent Design. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Square",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/fluent/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/fluent/1.0.0/bundle.json",
+          "sha256": "f04dfb3a690c667846394c4043f272e801f2f65dc9b164936774f46f8dc25dbb",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "halves",
+      "type": "theme",
+      "name": {
+        "en": "Halves"
+      },
+      "description": {
+        "en": "A split screen without any HTML: the form sits on white in the left half, the right half is your color with rings and a dot grid. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Split screen",
+        "Pattern",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/halves/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/halves/1.0.0/bundle.json",
+          "sha256": "78d603000e6267ba8ce6d6ca744c6274ab80ccffa0132e1515299c34a71ed538",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "material",
+      "type": "theme",
+      "name": {
+        "en": "Material"
+      },
+      "description": {
+        "en": "A big rounded white sheet on a soft grey page, outlined 56px fields and a pill-shaped button on the right, in the spirit of Material Design. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Material",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/material/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/material/1.0.0/bundle.json",
+          "sha256": "e708293da8c50c7dba29fa326f36bc5224d3a178708d4b191c60841f6da95bd9",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "midnight",
+      "type": "theme",
+      "name": {
+        "en": "Midnight"
+      },
+      "description": {
+        "en": "A dark sign-in page with a soft glow in your accent color behind a frosted card. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/midnight/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/midnight/1.0.0/bundle.json",
+          "sha256": "47c1ffecf0e244517eae838e8f696e84d6018d44fce1465063d54b6e3b90db9c",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "mono",
+      "type": "theme",
+      "name": {
+        "en": "Mono"
+      },
+      "description": {
+        "en": "Pure black and white: a hairline-bordered card over a fading grid, with a white button and nothing else competing for attention. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Monochrome",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/mono/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/mono/1.0.0/bundle.json",
+          "sha256": "41ffb6ec1ce9ddc763fd7ffdac06cd457f4c383703e80221f8d513cc56025ead",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "nord",
+      "type": "theme",
+      "name": {
+        "en": "Nord"
+      },
+      "description": {
+        "en": "The Nord palette: arctic slate greys with a frost-blue accent and a cool aurora glow, calm and low in contrast. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Color scheme",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/nord/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/nord/1.0.0/bundle.json",
+          "sha256": "ebb9b9062a87adacb06677070c97f8ccda9e701ae7f626841e686f8f91d673e9",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "paper",
+      "type": "theme",
+      "name": {
+        "en": "Paper"
+      },
+      "description": {
+        "en": "An editorial look: a cream page, a serif face, small-caps labels over underlined fields and an ink-colored button. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Serif",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/paper/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/paper/1.0.0/bundle.json",
+          "sha256": "7064fc39bebc5368088f7f51f18829a0c37b3715087575c2d19ecac108f6b62c",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "pixel",
+      "type": "theme",
+      "name": {
+        "en": "Pixel"
+      },
+      "description": {
+        "en": "An 8-bit game menu: a pixel font, stepped borders, a starry night sky, a blinking PRESS START and a chunky button that presses in. It loads the Press Start 2P font from Google Fonts. Organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Retro",
+        "Playful",
+        "Web font"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/pixel/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.20.0",
+          "url": "integrations/pixel/1.0.0/bundle.json",
+          "sha256": "fb61afd456728871c07756bc66c7f1658cafb515628f6b6f57ad43fb04e47b35",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "prism",
+      "type": "theme",
+      "name": {
+        "en": "Prism"
+      },
+      "description": {
+        "en": "A slanted band of color from your accent to cyan and mint across the top of a light page, with a white card on a deep, soft shadow. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Gradient",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/prism/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/prism/1.0.0/bundle.json",
+          "sha256": "ba8ed6b7f85d423ab82254c0e0de7cddbf8f7884005e368d255bb130adf0a44c",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "retro",
+      "type": "theme",
+      "name": {
+        "en": "Retro"
+      },
+      "description": {
+        "en": "A 90s desktop: a grey bevelled window with a title bar on a teal background, sunken fields, tabbed dialogs and a taskbar along the bottom. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Retro",
+        "Playful",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/retro/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/retro/1.0.0/bundle.json",
+          "sha256": "70ceb7a704b361accbe25d9bbfc30049cfb582984d99b9a7f05cfa414637299b",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "sketch",
+      "type": "theme",
+      "name": {
+        "en": "Sketch"
+      },
+      "description": {
+        "en": "Drawn by hand on ruled notebook paper: wobbly ink outlines, a handwritten typeface, wavy underlines and a marker-colored button, all slightly tilted. It loads the Patrick Hand font from Google Fonts. Organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Hand-drawn",
+        "Playful",
+        "Web font"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/sketch/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.20.0",
+          "url": "integrations/sketch/1.0.0/bundle.json",
+          "sha256": "2b2efc645a490aa7cd0ebae34c31618b7b33122ec706c60e63931215354a2abe",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "solarized",
+      "type": "theme",
+      "name": {
+        "en": "Solarized"
+      },
+      "description": {
+        "en": "The Solarized Light palette: warm cream base tones and precise, muted colors, made for long reading, with a blue accent by default. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Color scheme",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/solarized/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/solarized/1.0.0/bundle.json",
+          "sha256": "af064e1dc12f698eec365547ccbfc07d4cea5c7aa75d4aad544e490de6310232",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "split",
+      "type": "theme",
+      "name": {
+        "en": "Split"
+      },
+      "description": {
+        "en": "A brand panel in your color with your own headline next to the sign-in form. It sets the side panel HTML, which organization admins can install on Casdoor 4.20.0 and later; before that only a global admin can."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Side panel"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/split/1.0.1/screenshot.png"
+      ],
+      "requiresGlobalAdmin": true,
+      "verified": true,
+      "latest": "1.0.1",
+      "versions": [
+        {
+          "version": "1.0.1",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/split/1.0.1/bundle.json",
+          "sha256": "7978f60bb3ed76911d7dbca5b362ff44427bf7e8677c65fed79b66946be24eef",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "terminal",
+      "type": "theme",
+      "name": {
+        "en": "Terminal"
+      },
+      "description": {
+        "en": "An old phosphor screen: glowing monospace text, scanlines with a faint flicker, a blinking prompt and fields that read like a shell. CSS only, so organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Dark",
+        "Retro",
+        "Monospace",
+        "CSS only"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/terminal/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.18.0",
+          "url": "integrations/terminal/1.0.0/bundle.json",
+          "sha256": "ab81bb912764a9a89147f403725bba938d7b0aba5d51b839e0149e9d8b07ed71",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    },
+    {
+      "id": "waves",
+      "type": "theme",
+      "name": {
+        "en": "Waves"
+      },
+      "description": {
+        "en": "Friendly and round: three layers of waves in your color roll along the bottom of a light page, under a soft white card with pill-shaped fields and a rounded typeface. The waves are drawn in the CSS itself; the Nunito font comes from Google Fonts. Organization admins can install it."
+      },
+      "author": "casdoor",
+      "license": "Apache-2.0",
+      "tags": [
+        "Light",
+        "Friendly",
+        "Illustration",
+        "Web font"
+      ],
+      "categories": [
+        "Sign-in themes"
+      ],
+      "screenshots": [
+        "integrations/waves/1.0.0/screenshot.png"
+      ],
+      "verified": true,
+      "latest": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "casdoorVersion": ">=4.20.0",
+          "url": "integrations/waves/1.0.0/bundle.json",
+          "sha256": "94b9a03868a1e49ce3360e43ec0fbda01924364e6396d9b293b072c619c78c16",
+          "publishedAt": "2026-10-11T04:27:49.739Z"
+        }
+      ]
+    }
+  ],
+  "revoked": []
+}

@@ -1,0 +1,90 @@
+{
+  "manifest": {
+    "id": "grafana",
+    "type": "app",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Grafana"
+    },
+    "description": {
+      "en": "Set up Grafana single sign-on with Casdoor over OpenID Connect: Generic OAuth settings, PKCE, and Grafana roles mapped from Casdoor groups."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://grafana.com",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "Role mapping"
+    ],
+    "categories": [
+      "DevOps & infrastructure"
+    ],
+    "variables": [
+      {
+        "name": "appUrl",
+        "label": {
+          "en": "Grafana URL"
+        },
+        "description": {
+          "en": "The address people open Grafana at, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://grafana.example.com"
+      }
+    ]
+  },
+  "files": {
+    "application.json": {
+      "redirectUris": [
+        "{{appUrl}}/login/generic_oauth"
+      ],
+      "tokenGroupFormat": "Name"
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Grafana SSO with Casdoor: OpenID Connect Setup",
+      "headline": "Single sign-on for Grafana",
+      "summary": "Grafana's Generic OAuth works with any OpenID Connect provider. Point it at Casdoor and people sign in to Grafana with their Casdoor accounts, MFA and social logins included, with their Grafana role set from Casdoor groups.",
+      "groupExample": "`grafana-admins` and `grafana-editors`",
+      "steps": [
+        {
+          "title": "Configure Grafana",
+          "text": "Add this section to `grafana.ini`, or set the same keys as `GF_AUTH_GENERIC_OAUTH_*` environment variables. `root_url` must be the address people open in the browser, because Grafana builds the callback URL from it.",
+          "code": {
+            "lang": "ini",
+            "content": "[server]\nroot_url = {{appUrl}}/\n\n[auth.generic_oauth]\nenabled = true\nname = Casdoor\nclient_id = {{clientId}}\nclient_secret = {{clientSecret}}\nscopes = openid profile email\nauth_url = {{casdoorUrl}}/login/oauth/authorize\ntoken_url = {{casdoorUrl}}/api/login/oauth/access_token\napi_url = {{casdoorUrl}}/api/userinfo\nuse_pkce = true\nallow_sign_up = true\nlogin_attribute_path = preferred_username\nemail_attribute_path = email\ngroups_attribute_path = groups\nrole_attribute_path = contains(groups[*], 'grafana-admins') && 'Admin' || contains(groups[*], 'grafana-editors') && 'Editor' || 'Viewer'"
+          }
+        },
+        {
+          "title": "Sign in",
+          "text": "Restart Grafana. The login page now has a **Sign in with Casdoor** button. Members of `grafana-admins` become Admins, members of `grafana-editors` Editors, and everyone else a Viewer."
+        }
+      ],
+      "tips": [
+        "Grafana evaluates `role_attribute_path` against the ID token first, then the userinfo response. Casdoor's ID token also lists the user's roles as objects, so `contains(roles[*].name, 'admin')` works too if you prefer Casdoor roles to groups.",
+        "Grafana needs an email address for every user, so make sure your Casdoor users have one."
+      ],
+      "faqs": [
+        {
+          "question": "Can I use SAML instead?",
+          "answer": "Grafana's SAML sign-in is part of Grafana Enterprise and Grafana Cloud. On open-source Grafana, OpenID Connect through Generic OAuth, as shown here, is the way to connect Casdoor."
+        },
+        {
+          "question": "Do Casdoor groups become Grafana teams?",
+          "answer": "`groups_attribute_path` feeds Grafana's Team Sync, which is a Grafana Enterprise and Grafana Cloud feature. On open-source Grafana, use the groups to set roles as shown above."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Grafana Generic OAuth",
+          "href": "https://grafana.com/docs/grafana/latest/setup-grafana/configure-access/configure-authentication/generic-oauth/"
+        }
+      ],
+      "docsUrl": "https://casdoor.ai/docs/integration/go/grafana"
+    }
+  }
+}
