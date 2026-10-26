@@ -27,6 +27,10 @@
       "type": "string",
       "minLength": 1
     },
+    "region": {
+      "description": "cn lists the integration only in the Chinese Marketplace: the Chinese pages of the store, and Casdoor admins using Casdoor in Chinese. For integrations with platforms only used in China; their texts and guide are written in Chinese, under en.",
+      "enum": ["cn"]
+    },
     "name": { "$ref": "#/$defs/localizedText" },
     "description": {
       "description": "One or two sentences; used as the meta description and on catalog cards.",

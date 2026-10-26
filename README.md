@@ -83,7 +83,12 @@ The last two steps of every guide, adding the provider in Casdoor and putting it
 
 - Casdoor's sign-in page builds the authorization request from `customAuthUrl` even for OIDC, so list the endpoints rather than relying on discovery. Always set `customUserInfoUrl`: several providers (Authelia, authentik, ZITADEL) keep profile claims out of the ID token.
 - Casdoor sends the client secret with HTTP Basic first (Go's oauth2 auto-detection), so the other side can keep `client_secret_basic`.
+- For a `Custom` provider whose requests don't follow OAuth 2.0, such as `appid` and `secret` instead of `client_id` and `client_secret`, or a userinfo endpoint that takes the token's fields in its query, write the URLs with `{name}` placeholders (single braces, filled in at sign-in, unlike `{{variables}}`). `customAuthUrl` gets `clientId`, `redirectUri`, `scope`, `state` and `codeChallenge`; `customTokenUrl` gets `clientId`, `clientSecret`, `code`, `redirectUri`, `codeVerifier` and `state`, and its query is posted as the form body; `customUserInfoUrl` gets `clientId`, `state` and any field of the token response, and is requested without an `Authorization` header. See [chaoxing](integrations/provider/chaoxing/provider.json).
 - Casdoor links users of every OIDC-type provider in an organization through one user field (`oidc`), so an organization should have only one; a second one should be `Custom Flexible`, which links accounts per provider. The generated Casdoor step says so.
+
+## The Chinese Marketplace
+
+`"region": "cn"` in `integration.json` lists an integration only in Chinese: on the Chinese pages of the store, and in Casdoor for admins using it in Chinese. It is for platforms only used in China, such as Chaoxing; their name, description and guide are written in Chinese, under `en`. Everything else is listed in both.
 
 ## Themes
 

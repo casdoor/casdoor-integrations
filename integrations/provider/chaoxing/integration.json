@@ -1,0 +1,25 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "chaoxing",
+  "type": "provider",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.25.0",
+  "region": "cn",
+  "name": {
+    "en": "超星学习通"
+  },
+  "description": {
+    "en": "让师生用超星学习通账号登录 Casdoor：按超星微服务开放平台的 OAuth 接口填好了授权、换取 access_token 和获取用户信息的地址。"
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.png",
+  "homepage": "https://www.chaoxing.com",
+  "tags": [
+    "OAuth",
+    "Education"
+  ],
+  "categories": [
+    "Identity providers"
+  ]
+}

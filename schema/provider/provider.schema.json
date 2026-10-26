@@ -15,9 +15,24 @@
     },
     "displayName": { "description": "Shown on the sign-in button.", "type": "string", "minLength": 1 },
     "domain": { "description": "OIDC only: the issuer URL, exactly as the iss claim of the ID token.", "type": "string", "minLength": 1 },
-    "customAuthUrl": { "type": "string", "minLength": 1 },
-    "customTokenUrl": { "type": "string", "minLength": 1 },
-    "customUserInfoUrl": { "type": "string", "minLength": 1 },
+    "customAuthUrl": {
+      "description": "Custom only: with {name} placeholders, Casdoor fills in clientId, redirectUri, scope, state and codeChallenge instead of adding the OAuth 2.0 parameters, for providers that name them differently.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "customTokenUrl": {
+      "description": "Custom only: with {name} placeholders, Casdoor fills in clientId, clientSecret, code, redirectUri, codeVerifier and state and posts the query as the form body instead of following OAuth 2.0; the response needs an access_token.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "customUserInfoUrl": {
+      "description": "Custom only: with {name} placeholders, Casdoor fills in clientId, state and any field of the token response, e.g. {access_token} or {openid}, and sends no Authorization header.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
     "customLogoutUrl": { "type": "string", "minLength": 1 },
     "scopes": { "description": "Space-separated.", "type": "string", "minLength": 1 },
     "enablePkce": { "type": "boolean" },
