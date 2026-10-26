@@ -1,0 +1,90 @@
+{
+  "manifest": {
+    "id": "chaoxing",
+    "type": "provider",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.25.0",
+    "region": "cn",
+    "name": {
+      "en": "超星学习通"
+    },
+    "description": {
+      "en": "让师生用超星学习通账号登录 Casdoor：按超星微服务开放平台的 OAuth 接口填好了授权、换取 access_token 和获取用户信息的地址。"
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.png",
+    "homepage": "https://www.chaoxing.com",
+    "tags": [
+      "OAuth",
+      "Education"
+    ],
+    "categories": [
+      "Identity providers"
+    ]
+  },
+  "files": {
+    "provider.json": {
+      "category": "OAuth",
+      "type": "Custom",
+      "displayName": "超星学习通",
+      "customAuthUrl": "https://auth.chaoxing.com/connect/oauth2/authorize?appid={clientId}&redirect_uri={redirectUri}&response_type=code&scope={scope}&state={state}",
+      "customTokenUrl": "https://auth.chaoxing.com/sns/oauth2/access_token/v1.0?appid={clientId}&secret={clientSecret}&code={code}&grant_type=authorization_code",
+      "customUserInfoUrl": "https://v1.chaoxing.com/backSchool/user/getUserByTokenFormMooc?access_token={access_token}&openid={openid}&expires_time={expires_time}&state={state}",
+      "scopes": "snsapi_base",
+      "userMapping": {
+        "id": "userInfo.uid",
+        "displayName": "userInfo.displayName"
+      }
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "用超星学习通账号登录 Casdoor",
+      "headline": "用超星学习通账号登录 Casdoor",
+      "summary": "学校的老师和学生大多已经有学习通账号。把超星加成 Casdoor 的登录方式，大家用学习通账号就能登录你的 Casdoor 应用，账号、权限和其他登录方式仍由 Casdoor 管理。",
+      "steps": [
+        {
+          "title": "注册超星微服务开放平台账号",
+          "text": "在超星微服务开放平台 `open.chaoxing.com` 注册账号。个人账号只能调用 OAuth 认证接口，接登录已经够用；企业账号要等平台审核。"
+        },
+        {
+          "title": "创建应用",
+          "text": "在开放平台上传一个应用（全网可用的市场应用），或在学校的微服务单位里用应用链接地址建自建应用。服务地址填 Casdoor 的回调地址：",
+          "fields": [
+            {
+              "label": "服务地址",
+              "value": "{{casdoorUrl}}/callback"
+            }
+          ]
+        },
+        {
+          "title": "查看 APP ID 和 APP KEY",
+          "text": "应用建好后在开放平台查看它的 **APP ID** 和 **APP KEY**。在 Casdoor 里安装时，Client ID 填 APP ID，Client secret 填 APP KEY。"
+        }
+      ],
+      "tips": [
+        "超星要求授权时账号已经登录学习通，没登录会返回错误 10013，所以最适合从学习通、超星微服务平台里点进来的场景。",
+        "Casdoor 用学习通的用户 ID（`uid`）关联账号，显示名取姓名。学工号在不同学校可能重复，所以没有用作用户名。",
+        "这个集成是按超星公开的接口文档写的，还没有用真实应用走通过；遇到问题请到 GitHub 的 casdoor/casdoor 提 issue。"
+      ],
+      "sources": [
+        {
+          "label": "超星微服务开放平台：对接流程",
+          "href": "http://auth.open.chaoxing.com/open/doc/list/yluywps0/zpsakobd/u58aqj3r"
+        },
+        {
+          "label": "应用方获取认证 code 码",
+          "href": "http://auth.open.chaoxing.com/open/doc/list/yluywps0/zpsakobd/88c1cxll"
+        },
+        {
+          "label": "应用方获取授权 access_token",
+          "href": "http://auth.open.chaoxing.com/open/doc/list/yluywps0/zpsakobd/asptr23d"
+        },
+        {
+          "label": "获取用户信息接口",
+          "href": "http://auth.open.chaoxing.com/open/doc/list/yluywps0/zpsakobd/y4l4kl08"
+        }
+      ]
+    }
+  }
+}

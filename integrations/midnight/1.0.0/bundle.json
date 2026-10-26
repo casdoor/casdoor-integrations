@@ -1,0 +1,54 @@
+{
+  "manifest": {
+    "id": "midnight",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Midnight"
+    },
+    "description": {
+      "en": "A dark sign-in page with a soft glow in your accent color behind a frosted card. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Dark",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "Buttons, links and the glow behind the card."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#8b5cf6"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "dark",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 12,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  background: radial-gradient(1100px 560px at 50% -12%, color-mix(in srgb, {{accentColor}} 38%, transparent), transparent 70%), #09090f;\n}\n.login-panel {\n  background: rgba(22, 22, 34, 0.82);\n  border-color: rgba(255, 255, 255, 0.08);\n  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);\n  backdrop-filter: blur(12px);\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  background: radial-gradient(600px 360px at 50% -10%, color-mix(in srgb, {{accentColor}} 34%, transparent), transparent 70%), #09090f;\n}\n</style>"
+    }
+  }
+}

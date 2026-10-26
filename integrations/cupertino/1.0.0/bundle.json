@@ -1,0 +1,55 @@
+{
+  "manifest": {
+    "id": "cupertino",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Cupertino"
+    },
+    "description": {
+      "en": "An airy grey page with a soft white card, large rounded fields, a segmented control for the sign-in methods and a tall button, with the system font of the visitor's device. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Light",
+      "Minimal",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "Buttons, links and focused fields."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#0071e3"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "default",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 12,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 240 11% 96%;\n  --foreground: 240 3% 12%;\n  --card: 0 0% 100%;\n  --card-foreground: 240 3% 12%;\n  --muted: 240 6% 92%;\n  --muted-foreground: 240 2% 44%;\n  --accent: 240 6% 94%;\n  --accent-foreground: 240 3% 12%;\n  --border: 240 5% 84%;\n  --input: 240 5% 84%;\n  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n}\n.login-background {\n  background: #f5f5f7;\n}\n.login-content > div {\n  max-width: 420px;\n}\n.login-panel {\n  padding: 44px 40px 16px;\n  border: none;\n  border-radius: 22px;\n  background: #ffffff;\n  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);\n}\n.login-logo-box {\n  margin-bottom: 32px;\n}\n.login-logo-box img {\n  max-height: 64px;\n}\n.signin-methods > div {\n  height: 36px;\n  padding: 2px;\n  border-radius: 9px;\n  background: #e8e8ed;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  border-radius: 7px;\n  background: #ffffff !important;\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04) !important;\n}\n.login-form label {\n  color: #6e6e73;\n  font-size: 13px;\n  font-weight: 400;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 52px;\n  padding: 0 16px;\n  border: 1px solid #d2d2d7;\n  border-radius: 12px;\n  background: #ffffff;\n  font-size: 17px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 4px color-mix(in srgb, {{accentColor}} 22%, transparent);\n}\n.login-form [role='checkbox'] {\n  border-color: #86868b;\n  border-radius: 5px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 400;\n}\n.login-form .login-button {\n  height: 48px;\n  border-radius: 12px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-size: 17px;\n  font-weight: 400;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  opacity: 0.88;\n}\n#footer {\n  color: #86868b;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 240 11% 96%;\n  --foreground: 240 3% 12%;\n  --card: 0 0% 100%;\n  --card-foreground: 240 3% 12%;\n  --muted: 240 6% 92%;\n  --muted-foreground: 240 2% 44%;\n  --accent: 240 6% 94%;\n  --accent-foreground: 240 3% 12%;\n  --border: 240 5% 84%;\n  --input: 240 5% 84%;\n  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n}\n.login-background {\n  background: #ffffff;\n}\n.login-panel {\n  border: none;\n  background: #ffffff;\n  box-shadow: none;\n}\n.login-logo-box img {\n  max-height: 56px;\n}\n.signin-methods > div {\n  height: 36px;\n  padding: 2px;\n  border-radius: 9px;\n  background: #e8e8ed;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  border-radius: 7px;\n  background: #ffffff !important;\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12), 0 3px 1px rgba(0, 0, 0, 0.04) !important;\n}\n.login-form label {\n  color: #6e6e73;\n  font-size: 13px;\n  font-weight: 400;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 52px;\n  padding: 0 16px;\n  border: 1px solid #d2d2d7;\n  border-radius: 12px;\n  background: #ffffff;\n  font-size: 17px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 4px color-mix(in srgb, {{accentColor}} 22%, transparent);\n}\n.login-form [role='checkbox'] {\n  border-color: #86868b;\n  border-radius: 5px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 400;\n}\n.login-form .login-button {\n  height: 48px;\n  border-radius: 12px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-size: 17px;\n  font-weight: 400;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  opacity: 0.88;\n}\n#footer {\n  color: #86868b;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}
