@@ -16,6 +16,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # actions are Go packages compiled to WebAssembly; the same Go version gives the same module
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.27.1"
+          cache: false
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-artifact@v4

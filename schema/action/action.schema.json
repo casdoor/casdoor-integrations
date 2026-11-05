@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/casdoor/casdoor-integrations/schema/action/action.schema.json",
+  "title": "Casdoor action (action.json)",
+  "description": "An action is a WebAssembly module built from the Go main package next to action.json with the SDK in sdk/. The build compiles it, writes the module next to bundle.json and adds its sha256 here; Casdoor checks it on install. The module can only send https requests to the hosts in the manifest's permissions.hosts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "abi", "module"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "kind": {
+      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments.",
+      "enum": ["payment"]
+    },
+    "abi": {
+      "description": "Calling convention between Casdoor and the module, sdk.Abi.",
+      "const": 1
+    },
+    "module": {
+      "description": "File name of the compiled module.",
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.wasm$"
+    }
+  }
+}

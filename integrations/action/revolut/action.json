@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../schema/action/action.schema.json",
+  "kind": "payment",
+  "abi": 1,
+  "module": "revolut.wasm"
+}

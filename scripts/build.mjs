@@ -1,10 +1,12 @@
 // Validates every integration under integrations/ and writes dist/:
 //   dist/index.json                                  catalog of all integrations
 //   dist/integrations/<id>/<version>/bundle.json     manifest plus content files
-//   dist/integrations/<id>/<version>/<file>          logo and screenshots, if any
+//   dist/integrations/<id>/<version>/<file>          logo and screenshots, if any, and the module of an action
 // Paths in index.json are relative to index.json. Run with --check to validate without writing dist/.
+import {execFileSync} from "node:child_process";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
@@ -18,7 +20,7 @@ const contentFiles = {
   app: {"application.json": ["app/application.schema.json", true], "guide.json": ["guide.schema.json", true]},
   provider: {"provider.json": ["provider/provider.schema.json", true], "guide.json": ["guide.schema.json", true]},
   theme: {"theme.json": ["theme/theme.schema.json", true], "guide.json": ["guide.schema.json", false]},
-  action: {},
+  action: {"action.json": ["action/action.schema.json", true], "guide.json": ["guide.schema.json", false]},
 };
 const builtInVariables = ["casdoorUrl", "clientId", "clientSecret"];
 
@@ -112,6 +114,19 @@ function checkSchema(where, data, schema) {
   }
 }
 
+// Compiles the Go main package of an action into a WebAssembly module. -trimpath and an empty build ID make the
+// module depend only on the source and the Go version, so a reviewer can rebuild it and compare the sha256.
+function buildModule(dir, outFile) {
+  execFileSync("go", ["build", "-buildmode=c-shared", "-trimpath", "-ldflags=-s -w -buildid=", "-o", outFile, "."], {
+    cwd: dir,
+    env: {...process.env, GOOS: "wasip1", GOARCH: "wasm", CGO_ENABLED: "0"},
+    stdio: ["ignore", "inherit", "inherit"],
+  });
+}
+
+const moduleDir = fs.mkdtempSync(path.join(os.tmpdir(), "casdoor-actions-"));
+process.on("exit", () => fs.rmSync(moduleDir, {recursive: true, force: true}));
+
 function collectVariables(value, found) {
   if (typeof value === "string") {
     for (const m of value.matchAll(/\{\{\s*([^}]*?)\s*\}\}/g)) {
@@ -196,7 +211,24 @@ for (const type of fs.readdirSync(path.join(root, "integrations")).sort()) {
       }
     }
 
-    integrations.push({manifest, files, dir});
+    let module = null;
+    if (type === "action") {
+      if (!manifest.permissions?.hosts?.length) {
+        fail(where, "an action must list the hosts it calls in permissions.hosts");
+      }
+      if (!fs.existsSync(path.join(dir, "go.mod"))) {
+        fail(where, "missing go.mod of the action's Go main package");
+      } else if (files["action.json"]) {
+        module = path.join(moduleDir, `${id}.wasm`);
+        try {
+          buildModule(dir, module);
+        } catch {
+          fail(where, "the Go package does not build, see the output above");
+        }
+      }
+    }
+
+    integrations.push({manifest, files, dir, module});
   }
 }
 
@@ -215,10 +247,16 @@ fs.rmSync(dist, {recursive: true, force: true});
 const strip = ({$schema, ...rest}) => rest;
 const index = {schemaVersion: 1, generatedAt: new Date().toISOString(), integrations: [], revoked: []};
 
-for (const {manifest, files, dir} of integrations) {
+for (const {manifest, files, dir, module} of integrations) {
   const base = `integrations/${manifest.id}/${manifest.version}`;
   const out = path.join(dist, base);
   fs.mkdirSync(out, {recursive: true});
+
+  if (module) {
+    const data = fs.readFileSync(module);
+    fs.writeFileSync(path.join(out, files["action.json"].module), data);
+    files["action.json"].sha256 = crypto.createHash("sha256").update(data).digest("hex");
+  }
 
   const bundle = JSON.stringify({manifest: strip(manifest), files: Object.fromEntries(Object.entries(files).map(([f, d]) => [f, strip(d)]))}, null, 2) + "\n";
   fs.writeFileSync(path.join(out, "bundle.json"), bundle);

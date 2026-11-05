@@ -130,18 +130,30 @@ The installer should also set a provider's `customLogo` to the integration's log
 
 ## Actions
 
-Their content schema is not defined yet.
+Code that Casdoor runs, such as a payment provider: a Go `main` package compiled to WebAssembly, which Casdoor runs in a sandbox. The only way out is `sdk.Fetch`, to `https` URLs on the hosts in the manifest's `permissions.hosts`; the module sees nothing of Casdoor but what each call passes in.
+
+| File | Contents |
+|---|---|
+| `integration.json` | Name, description, logo and `permissions.hosts` (required) |
+| `action.json` | `kind` (`payment`), `abi` (`1`) and the file name of the compiled `module` ([schema](schema/action/action.schema.json)) |
+| `go.mod`, `*.go` | The Go `main` package, built with the SDK in [`sdk/`](sdk) |
+| `guide.json` | Optional: setup steps for the public page |
+
+- A payment action calls `sdk.RegisterPayment` from `init` with a type that has `Pay` and `Notify`. Installing it adds a payment provider of type **Plugin**; the provider's client ID, client secret, host and so on reach the action as `sdk.Config`. See [`integrations/action/revolut`](integrations/action/revolut).
+- `Notify` should ask the payment service for the state of the order rather than trust the request body.
+- Libraries built on `net/http`, such as a payment service's official Go SDK, work through [`sdk/nethttp`](sdk/nethttp), at the cost of a larger module.
+- The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.
 
 ## Build
 
 ```bash
-npm ci
+npm ci          # actions also need Go
 npm run check   # validate only
 npm run build   # validate and write dist/
 ```
 
-`dist/index.json` lists every integration; each version is in `dist/integrations/<id>/<version>/bundle.json` (manifest plus content files) with its logo and screenshots. Paths in `index.json` are relative to it.
+`dist/index.json` lists every integration; each version is in `dist/integrations/<id>/<version>/bundle.json` (manifest plus content files) with its logo, screenshots and, for an action, its module. Paths in `index.json` are relative to it.
 
 On every push to master, CI publishes `dist/` to the `dist` branch. Casdoor instances read it from `https://cdn.jsdelivr.net/gh/casdoor/casdoor-integrations@dist` by default (`marketplaceUrl` in Casdoor's `conf/app.conf` points them to a mirror), and [casdoor-marketplace](https://github.com/casdoor/casdoor-marketplace) builds the public pages from it.
 
-Logos are from [Simple Icons](https://simpleicons.org) (CC0); the names and marks belong to their owners.
+Logos are from [Simple Icons](https://simpleicons.org) (CC0) or the owners' own websites; the names and marks belong to their owners.

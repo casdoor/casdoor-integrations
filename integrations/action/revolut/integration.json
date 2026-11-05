@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "revolut",
+  "type": "action",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.26.0",
+  "name": {
+    "en": "Revolut"
+  },
+  "description": {
+    "en": "Take card, Apple Pay, Google Pay and Revolut Pay payments for Casdoor products and plans through the Revolut Merchant API, on Revolut's hosted checkout page."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://www.revolut.com/business/online-payments/",
+  "tags": [
+    "Payment",
+    "Hosted checkout",
+    "Sandbox"
+  ],
+  "categories": [
+    "Payments"
+  ],
+  "permissions": {
+    "hosts": [
+      "merchant.revolut.com",
+      "sandbox-merchant.revolut.com"
+    ]
+  }
+}

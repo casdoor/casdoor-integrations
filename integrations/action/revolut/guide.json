@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-11",
+  "title": "Revolut Payments for Casdoor Products and Plans",
+  "headline": "Accept payments with Revolut",
+  "summary": "Sell Casdoor products and subscription plans with Revolut Business: payers pay by card, Apple Pay, Google Pay or Revolut Pay on Revolut's hosted checkout page, and Casdoor marks the order as paid once Revolut has completed it.",
+  "steps": [
+    {
+      "title": "Get the secret API key",
+      "text": "Generate the Merchant API keys in your Revolut Business account, as Revolut's **Generate API keys** guide describes, and copy the **Secret key**; the public key is not needed. To try it out first, do the same in the Revolut Business sandbox and copy the sandbox secret key instead."
+    },
+    {
+      "title": "Install Revolut from the Marketplace",
+      "text": "On the **Marketplace** page of Casdoor, install Revolut and enter the secret key as the client secret. Casdoor adds a payment provider of type **Plugin** with the same name."
+    },
+    {
+      "title": "Use the sandbox, if you test",
+      "text": "On the provider's page, set **Host** to `sandbox-merchant.revolut.com` while you use the sandbox key, and clear it when you switch to the live key.",
+      "fields": [
+        {
+          "label": "Host",
+          "value": "sandbox-merchant.revolut.com"
+        }
+      ]
+    },
+    {
+      "title": "Add the provider to a product",
+      "text": "Edit a product, add the Revolut provider to its **Payment providers**, and buy it once to check that you land on Revolut's checkout page."
+    }
+  ],
+  "tips": [
+    "Prices go to Revolut in minor units of the product's currency, such as cents, so set the product currency to one your Revolut Business account accepts.",
+    "Revolut sends the payer back to Casdoor only after a successful payment, and refuses a return address on localhost or an IP address, so test on a Casdoor with a domain name."
+  ],
+  "faqs": [
+    {
+      "question": "Does Casdoor run code from the Marketplace for this?",
+      "answer": "Yes, a small WebAssembly module that runs inside Casdoor in a sandbox. It cannot read files or the database, and can only send requests to `merchant.revolut.com` and `sandbox-merchant.revolut.com`."
+    },
+    {
+      "question": "Does it support refunds or automatic renewal?",
+      "answer": "Not yet. Refund payments in the Revolut Business app; plans paid with Revolut are renewed by buying them again."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Revolut Merchant API reference",
+      "href": "https://developer.revolut.com/docs/api/merchant"
+    },
+    {
+      "label": "Revolut: Generate API keys",
+      "href": "https://developer.revolut.com/docs/guides/merchant/get-started#generate-api-keys"
+    }
+  ]
+}
