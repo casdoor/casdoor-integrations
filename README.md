@@ -142,7 +142,7 @@ Code that Casdoor runs, such as a payment provider: a Go `main` package compiled
 - A payment action calls `sdk.RegisterPayment` from `init` with a type that has `Pay` and `Notify`. Installing it adds a payment provider of type **Plugin**; the provider's client ID, client secret, host and so on reach the action as `sdk.Config`. See [`integrations/action/revolut`](integrations/action/revolut).
 - `Notify` should ask the payment service for the state of the order rather than trust the request body.
 - Libraries built on `net/http`, such as a payment service's official Go SDK, work through [`sdk/nethttp`](sdk/nethttp), at the cost of a larger module.
-- The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.
+- The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -buildvcs=false -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.
 
 ## Build
 

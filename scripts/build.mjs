@@ -114,10 +114,10 @@ function checkSchema(where, data, schema) {
   }
 }
 
-// Compiles the Go main package of an action into a WebAssembly module. -trimpath and an empty build ID make the
-// module depend only on the source and the Go version, so a reviewer can rebuild it and compare the sha256.
+// Compiles the Go main package of an action into a WebAssembly module. -trimpath, -buildvcs=false and an empty build
+// ID make the module depend only on the source and the Go version, so a reviewer can rebuild it and compare the sha256.
 function buildModule(dir, outFile) {
-  execFileSync("go", ["build", "-buildmode=c-shared", "-trimpath", "-ldflags=-s -w -buildid=", "-o", outFile, "."], {
+  execFileSync("go", ["build", "-buildmode=c-shared", "-trimpath", "-buildvcs=false", "-ldflags=-s -w -buildid=", "-o", outFile, "."], {
     cwd: dir,
     env: {...process.env, GOOS: "wasip1", GOARCH: "wasm", CGO_ENABLED: "0"},
     stdio: ["ignore", "inherit", "inherit"],
