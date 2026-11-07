@@ -130,16 +130,17 @@ The installer should also set a provider's `customLogo` to the integration's log
 
 ## Actions
 
-Code that Casdoor runs, such as a payment provider: a Go `main` package compiled to WebAssembly, which Casdoor runs in a sandbox. The only way out is `sdk.Fetch`, to `https` URLs on the hosts in the manifest's `permissions.hosts`; the module sees nothing of Casdoor but what each call passes in.
+Code that Casdoor runs, such as a payment or SMS provider: a Go `main` package compiled to WebAssembly, which Casdoor runs in a sandbox. The only way out is `sdk.Fetch`, to `https` URLs on the hosts in the manifest's `permissions.hosts`; the module sees nothing of Casdoor but what each call passes in.
 
 | File | Contents |
 |---|---|
 | `integration.json` | Name, description, logo and `permissions.hosts` (required) |
-| `action.json` | `kind` (`payment`), `abi` (`1`) and the file name of the compiled `module` ([schema](schema/action/action.schema.json)) |
+| `action.json` | `kind` (`payment` or `sms`), `abi` (`1`) and the file name of the compiled `module` ([schema](schema/action/action.schema.json)) |
 | `go.mod`, `*.go` | The Go `main` package, built with the SDK in [`sdk/`](sdk) |
 | `guide.json` | Optional: setup steps for the public page |
 
 - A payment action calls `sdk.RegisterPayment` from `init` with a type that has `Pay` and `Notify`. Installing it adds a payment provider of type **Plugin**; the provider's client ID, client secret, host and so on reach the action as `sdk.Config`. See [`integrations/action/revolut`](integrations/action/revolut).
+- An SMS action calls `sdk.RegisterSms` from `init` with a type that has `SendSms`. Installing it adds an SMS provider of type **Plugin**; the provider's sign name (the sender) and template code reach the action in `sdk.Config` too. See [`integrations/action/vonage`](integrations/action/vonage).
 - `Notify` should ask the payment service for the state of the order rather than trust the request body.
 - Libraries built on `net/http`, such as a payment service's official Go SDK, work through [`sdk/nethttp`](sdk/nethttp), at the cost of a larger module.
 - The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -buildvcs=false -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.

@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../schema/action/action.schema.json",
+  "kind": "sms",
+  "abi": 1,
+  "module": "vonage.wasm"
+}

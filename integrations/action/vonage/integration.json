@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "vonage",
+  "type": "action",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.27.0",
+  "name": {
+    "en": "Vonage"
+  },
+  "description": {
+    "en": "Send sign-up, sign-in and MFA verification codes by SMS through the Vonage SMS API, formerly Nexmo."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://www.vonage.com/communications-apis/sms/",
+  "tags": [
+    "SMS",
+    "Verification code",
+    "Global"
+  ],
+  "categories": [
+    "SMS"
+  ],
+  "permissions": {
+    "hosts": [
+      "rest.nexmo.com"
+    ]
+  }
+}

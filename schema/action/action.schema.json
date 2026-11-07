@@ -9,8 +9,8 @@
   "properties": {
     "$schema": { "type": "string" },
     "kind": {
-      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments.",
-      "enum": ["payment"]
+      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments. sms: Casdoor adds an SMS provider of type Plugin that calls the module to send verification codes.",
+      "enum": ["payment", "sms"]
     },
     "abi": {
       "description": "Calling convention between Casdoor and the module, sdk.Abi.",
