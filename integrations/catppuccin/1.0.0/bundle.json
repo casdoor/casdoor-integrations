@@ -1,0 +1,56 @@
+{
+  "manifest": {
+    "id": "catppuccin",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Catppuccin"
+    },
+    "description": {
+      "en": "The Catppuccin Mocha palette: soft pastel colors on a warm dark base, rounded and cozy, with a mauve accent by default. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Dark",
+      "Color scheme",
+      "Pastel",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "The button, links and focused fields. Mocha's accents include mauve #cba6f7, pink #f5c2e7, peach #fab387, green #a6e3a1, sky #89dceb and lavender #b4befe."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#cba6f7"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "dark",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 8,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: dark;\n  --background: 240 21% 15%;\n  --foreground: 226 64% 88%;\n  --card: 240 21% 12%;\n  --card-foreground: 226 64% 88%;\n  --popover: 240 21% 12%;\n  --popover-foreground: 226 64% 88%;\n  --muted: 237 16% 23%;\n  --muted-foreground: 228 24% 72%;\n  --accent: 237 16% 23%;\n  --accent-foreground: 226 64% 88%;\n  --border: 234 13% 31%;\n  --input: 234 13% 31%;\n  --ring: 226 64% 88%;\n  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  background: #1e1e2e;\n}\n.login-background > div:first-of-type,\n.login-content,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background::before {\n  content: '';\n  position: fixed;\n  inset: 0;\n  background: radial-gradient(circle at 15% 20%, rgba(245, 194, 231, 0.10) 0, transparent 30%), radial-gradient(circle at 85% 25%, rgba(137, 220, 235, 0.10) 0, transparent 30%), radial-gradient(circle at 75% 85%, rgba(166, 227, 161, 0.08) 0, transparent 30%), radial-gradient(circle at 20% 85%, rgba(250, 179, 135, 0.08) 0, transparent 30%);\n}\n.login-content > div {\n  max-width: 420px;\n}\n.login-panel {\n  border: 1px solid #45475a;\n  border-radius: 14px;\n  background: #181825;\n  box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.7);\n}\n.login-background > div:first-of-type button {\n  color: #a6adc8;\n}\n.signin-methods > div {\n  border: 1px solid #45475a;\n  background: #11111b;\n}\n.signin-methods [role='tab'] {\n  color: #a6adc8;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  background: #313244 !important;\n  color: {{accentColor}};\n  box-shadow: none !important;\n}\n.login-form label {\n  color: #bac2de;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 44px;\n  border: 1px solid #45475a;\n  border-radius: 8px;\n  background: #11111b;\n  color: #cdd6f4;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio'])::placeholder {\n  color: #a6adc8;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 3px color-mix(in srgb, {{accentColor}} 25%, transparent);\n}\n.login-password button {\n  color: #a6adc8;\n}\n.login-form [role='checkbox'] {\n  border-color: #a6adc8;\n  border-radius: 4px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #11111b;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-form .login-button {\n  height: 44px;\n  border-radius: 8px;\n  background: {{accentColor}};\n  color: #11111b;\n  font-weight: 600;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  filter: brightness(1.08);\n}\n.login-form .login-signup-link,\n.login-form .login-forget-password label {\n  color: #bac2de;\n}\n#footer {\n  color: #a6adc8;\n}\n\n.login-panel {\n  border-radius: 20px;\n}\n.login-form input:not([type='checkbox']):not([type='radio']),\n.login-form .login-button {\n  border-radius: 12px;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: dark;\n  --background: 240 21% 15%;\n  --foreground: 226 64% 88%;\n  --card: 240 21% 12%;\n  --card-foreground: 226 64% 88%;\n  --popover: 240 21% 12%;\n  --popover-foreground: 226 64% 88%;\n  --muted: 237 16% 23%;\n  --muted-foreground: 228 24% 72%;\n  --accent: 237 16% 23%;\n  --accent-foreground: 226 64% 88%;\n  --border: 234 13% 31%;\n  --input: 234 13% 31%;\n  --ring: 226 64% 88%;\n  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  background: #1e1e2e;\n}\n.login-background > div:first-of-type button {\n  color: #a6adc8;\n}\n.signin-methods > div {\n  border: 1px solid #45475a;\n  background: #11111b;\n}\n.signin-methods [role='tab'] {\n  color: #a6adc8;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  background: #313244 !important;\n  color: {{accentColor}};\n  box-shadow: none !important;\n}\n.login-form label {\n  color: #bac2de;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 44px;\n  border: 1px solid #45475a;\n  border-radius: 8px;\n  background: #11111b;\n  color: #cdd6f4;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio'])::placeholder {\n  color: #a6adc8;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: {{accentColor}};\n  box-shadow: 0 0 0 3px color-mix(in srgb, {{accentColor}} 25%, transparent);\n}\n.login-password button {\n  color: #a6adc8;\n}\n.login-form [role='checkbox'] {\n  border-color: #a6adc8;\n  border-radius: 4px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #11111b;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-form .login-button {\n  height: 44px;\n  border-radius: 8px;\n  background: {{accentColor}};\n  color: #11111b;\n  font-weight: 600;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  filter: brightness(1.08);\n}\n.login-form .login-signup-link,\n.login-form .login-forget-password label {\n  color: #bac2de;\n}\n#footer {\n  color: #a6adc8;\n}\n\n.login-panel {\n  border-radius: 20px;\n}\n.login-form input:not([type='checkbox']):not([type='radio']),\n.login-form .login-button {\n  border-radius: 12px;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}

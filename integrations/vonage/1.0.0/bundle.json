@@ -1,0 +1,98 @@
+{
+  "manifest": {
+    "id": "vonage",
+    "type": "action",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.27.0",
+    "name": {
+      "en": "Vonage"
+    },
+    "description": {
+      "en": "Send sign-up, sign-in and MFA verification codes by SMS through the Vonage SMS API, formerly Nexmo."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://www.vonage.com/communications-apis/sms/",
+    "tags": [
+      "SMS",
+      "Verification code",
+      "Global"
+    ],
+    "categories": [
+      "SMS"
+    ],
+    "permissions": {
+      "hosts": [
+        "rest.nexmo.com"
+      ]
+    }
+  },
+  "files": {
+    "action.json": {
+      "kind": "sms",
+      "abi": 1,
+      "module": "vonage.wasm",
+      "sha256": "0c4e954e22731f1533d3b1d60541ff5175ec739510711d72304e854611b615c1"
+    },
+    "guide.json": {
+      "checkedOn": "2026-11",
+      "title": "Vonage SMS for Casdoor Verification Codes",
+      "headline": "Send verification codes with Vonage",
+      "summary": "Use your Vonage account to text the verification codes Casdoor sends when users sign up, sign in with a code, reset a password or use SMS as a second factor. Casdoor sends each message through the Vonage SMS API and reports Vonage's error if a message is refused.",
+      "steps": [
+        {
+          "title": "Get the API key and secret",
+          "text": "Sign in to the Vonage API Dashboard and copy the **API key** and **API secret** shown at the top of the dashboard."
+        },
+        {
+          "title": "Install Vonage from the Marketplace",
+          "text": "On the **Marketplace** page of Casdoor, install Vonage and enter the API key as the client ID and the API secret as the client secret. Casdoor adds an SMS provider of type **Plugin** with the same name."
+        },
+        {
+          "title": "Set the sender and the text",
+          "text": "On the provider's page, set **Sign Name** to the sender: a number you rent from Vonage, or an alphanumeric sender ID of up to 11 letters and digits where the destination country allows one. **Template code** is the text of the message, with `%s` where the code goes; left empty, it is the default below.",
+          "fields": [
+            {
+              "label": "Sign Name",
+              "value": "Casdoor"
+            },
+            {
+              "label": "Template code",
+              "value": "Your verification code is %s."
+            }
+          ]
+        },
+        {
+          "title": "Send a test message",
+          "text": "Enter your own phone number next to **SMS Test** on the provider's page and send a test message, then add the provider to an application's **Providers** with the rules you need, such as sign-up, sign-in or MFA."
+        }
+      ],
+      "tips": [
+        "A trial Vonage account can only send to the test numbers you have added in the dashboard; add credit to send to any number.",
+        "Some countries, such as the United States and Canada, do not accept alphanumeric sender IDs, and some need the sender or the template registered first. Check Vonage's country-specific features before sending there.",
+        "A text with characters outside the GSM alphabet, such as Chinese or emoji, is sent as unicode, which fits fewer characters into one message."
+      ],
+      "faqs": [
+        {
+          "question": "Does Casdoor run code from the Marketplace for this?",
+          "answer": "Yes, a small WebAssembly module that runs inside Casdoor in a sandbox. It cannot read files or the database, and can only send requests to `rest.nexmo.com`."
+        },
+        {
+          "question": "Does it use Vonage Verify?",
+          "answer": "No. Casdoor creates and checks the code itself and only uses Vonage to deliver the text, so the code works the same way as with Casdoor's other SMS providers."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Vonage SMS API reference",
+          "href": "https://developer.vonage.com/en/api/sms"
+        },
+        {
+          "label": "Vonage SMS API overview",
+          "href": "https://developer.vonage.com/en/messaging/sms/overview"
+        }
+      ]
+    }
+  }
+}

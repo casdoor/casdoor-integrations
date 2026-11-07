@@ -1,0 +1,89 @@
+{
+  "manifest": {
+    "id": "gitea",
+    "type": "app",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Gitea"
+    },
+    "description": {
+      "en": "Add Casdoor to Gitea as an OpenID Connect authentication source: the add-oauth command, callback URL, and admins from a Casdoor group."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://about.gitea.com",
+    "tags": [
+      "OIDC",
+      "Admin by group"
+    ],
+    "categories": [
+      "DevOps & infrastructure"
+    ],
+    "variables": [
+      {
+        "name": "appUrl",
+        "label": {
+          "en": "Gitea URL"
+        },
+        "description": {
+          "en": "The address people open Gitea at, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://git.example.com"
+      }
+    ]
+  },
+  "files": {
+    "application.json": {
+      "redirectUris": [
+        "{{appUrl}}/user/oauth2/Casdoor/callback"
+      ],
+      "tokenGroupFormat": "Name"
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Gitea SSO with Casdoor: OpenID Connect Setup",
+      "headline": "Single sign-on for Gitea",
+      "summary": "Gitea signs users in through OAuth2 authentication sources, including OpenID Connect providers. Add Casdoor as one, and developers sign in to your Git server with their Casdoor account.",
+      "redirectNote": "`Casdoor` in the path is the authentication source name in the next step; the two must match, including case.",
+      "groupExample": "`gitea-admins`",
+      "steps": [
+        {
+          "title": "Add the authentication source",
+          "text": "Run this on the Gitea server (with Docker, prefix it with `docker exec -u git <container>`), or fill in the same values under **Site Administration → Authentication Sources** with **OAuth2** and the **OpenID Connect** provider.",
+          "code": {
+            "lang": "bash",
+            "content": "gitea admin auth add-oauth \\\n  --name Casdoor \\\n  --provider openidConnect \\\n  --key \"{{clientId}}\" \\\n  --secret \"{{clientSecret}}\" \\\n  --auto-discover-url {{casdoorUrl}}/.well-known/openid-configuration \\\n  --scopes \"profile email\" \\\n  --group-claim-name groups \\\n  --admin-group gitea-admins"
+          }
+        },
+        {
+          "title": "Sign in",
+          "text": "The Gitea sign-in page now has a **Sign in with Casdoor** button. On first sign-in, users register a new Gitea account or link an existing one. Members of `gitea-admins` become Gitea administrators."
+        }
+      ],
+      "tips": [
+        "To skip the registration form and create accounts straight away, set `ENABLE_AUTO_REGISTRATION = true` in the `[oauth2_client]` section of `app.ini`."
+      ],
+      "faqs": [
+        {
+          "question": "Does this work with Forgejo?",
+          "answer": "Forgejo keeps Gitea's OAuth2 authentication sources, so the same settings apply; check the Forgejo documentation for the exact command name."
+        },
+        {
+          "question": "Can I require Casdoor for everyone?",
+          "answer": "Yes. Once your users have linked Casdoor, turn off password sign-in in Gitea's `[service]` settings so the Casdoor button is the way in."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Gitea command line",
+          "href": "https://docs.gitea.com/administration/command-line"
+        }
+      ],
+      "docsUrl": "https://casdoor.ai/docs/integration/go/gitea"
+    }
+  }
+}

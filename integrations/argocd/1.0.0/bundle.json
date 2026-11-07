@@ -1,0 +1,108 @@
+{
+  "manifest": {
+    "id": "argocd",
+    "type": "app",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Argo CD"
+    },
+    "description": {
+      "en": "Connect Argo CD to Casdoor over OpenID Connect: oidc.config in argocd-cm, the client secret, PKCE, CLI login and RBAC from Casdoor groups."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://argo-cd.readthedocs.io",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "RBAC by group",
+      "CLI login"
+    ],
+    "categories": [
+      "DevOps & infrastructure"
+    ],
+    "variables": [
+      {
+        "name": "appUrl",
+        "label": {
+          "en": "Argo CD URL"
+        },
+        "description": {
+          "en": "The address people open Argo CD at, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://argocd.example.com"
+      }
+    ]
+  },
+  "files": {
+    "application.json": {
+      "redirectUris": [
+        "{{appUrl}}/auth/callback",
+        "http://localhost:8085/auth/callback"
+      ],
+      "tokenGroupFormat": "Name"
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Argo CD SSO with Casdoor: OIDC and RBAC Setup",
+      "headline": "Single sign-on for Argo CD",
+      "summary": "Argo CD can use an existing OpenID Connect provider directly, without its bundled Dex. With Casdoor, people sign in to the Argo CD UI and CLI with their Casdoor account, and Casdoor groups decide what they can do.",
+      "redirectNote": "The second URL is for `argocd login --sso` from the CLI.",
+      "groupExample": "`argocd-admins`",
+      "steps": [
+        {
+          "title": "Store the client secret",
+          "text": "Put the client secret in the `argocd-secret` Secret, where `oidc.config` can reference it.",
+          "code": {
+            "lang": "bash",
+            "content": "kubectl -n argocd patch secret argocd-secret \\\n  --patch='{\"stringData\": {\"oidc.casdoor.clientSecret\": \"{{clientSecret}}\"}}'"
+          }
+        },
+        {
+          "title": "Configure OIDC in argocd-cm",
+          "text": "Add Casdoor to the `argocd-cm` ConfigMap. Casdoor puts the user's groups in the ID token, which is where Argo CD reads them.",
+          "code": {
+            "lang": "yaml",
+            "content": "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: argocd-cm\n  namespace: argocd\ndata:\n  url: {{appUrl}}\n  oidc.config: |\n    name: Casdoor\n    issuer: {{casdoorUrl}}\n    clientID: {{clientId}}\n    clientSecret: $oidc.casdoor.clientSecret\n    requestedScopes: [\"openid\", \"profile\", \"email\"]\n    enablePKCEAuthentication: true"
+          }
+        },
+        {
+          "title": "Grant permissions by group",
+          "text": "Map Casdoor groups to Argo CD roles in `argocd-rbac-cm`. Here members of `argocd-admins` get full access and everyone else can only look.",
+          "code": {
+            "lang": "yaml",
+            "content": "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: argocd-rbac-cm\n  namespace: argocd\ndata:\n  policy.default: role:readonly\n  policy.csv: |\n    g, argocd-admins, role:admin\n  scopes: \"[groups]\""
+          }
+        },
+        {
+          "title": "Sign in",
+          "text": "The Argo CD login page now has a **Log in via Casdoor** button, and `argocd login argocd.example.com --sso` opens Casdoor in the browser."
+        }
+      ],
+      "tips": [
+        "Argo CD reads `oidc.config` changes without a restart, but users have to sign in again to pick up new group memberships."
+      ],
+      "faqs": [
+        {
+          "question": "Do I still need Dex?",
+          "answer": "No. With `oidc.config`, Argo CD talks to Casdoor directly, and you can leave Dex unconfigured."
+        },
+        {
+          "question": "Can the argocd CLI sign in through Casdoor?",
+          "answer": "Yes. `argocd login <server> --sso` opens the browser and receives the result on `http://localhost:8085/auth/callback`, which is why that URL is in the Casdoor application."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Argo CD user management",
+          "href": "https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/"
+        }
+      ],
+      "docsUrl": "https://casdoor.ai/docs/integration/go/argocd"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "manifest": {
+    "id": "zitadel",
+    "type": "provider",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "ZITADEL"
+    },
+    "description": {
+      "en": "Let people sign in to Casdoor with their ZITADEL accounts over OpenID Connect: the provider settings, and the web application to create in the ZITADEL Console."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "homepage": "https://zitadel.com",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "Cloud or self-hosted"
+    ],
+    "categories": [
+      "Identity providers"
+    ],
+    "variables": [
+      {
+        "name": "zitadelUrl",
+        "label": {
+          "en": "ZITADEL URL"
+        },
+        "description": {
+          "en": "The domain of your ZITADEL instance, such as https://acme.zitadel.cloud, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://zitadel.example.com"
+      }
+    ]
+  },
+  "files": {
+    "provider.json": {
+      "category": "OAuth",
+      "type": "OIDC",
+      "displayName": "ZITADEL",
+      "domain": "{{zitadelUrl}}",
+      "customAuthUrl": "{{zitadelUrl}}/oauth/v2/authorize",
+      "customTokenUrl": "{{zitadelUrl}}/oauth/v2/token",
+      "customUserInfoUrl": "{{zitadelUrl}}/oidc/v1/userinfo",
+      "customLogoutUrl": "{{zitadelUrl}}/oidc/v1/end_session",
+      "scopes": "openid profile email",
+      "enablePkce": true
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "ZITADEL as an OpenID Connect Provider for Casdoor",
+      "headline": "Sign in to Casdoor with ZITADEL",
+      "summary": "Add ZITADEL to Casdoor as an OpenID Connect provider, self-hosted or ZITADEL Cloud, and people sign in to your Casdoor applications with their ZITADEL accounts.",
+      "steps": [
+        {
+          "title": "Create a web application",
+          "text": "In the ZITADEL Console, open the project the application belongs to (or create one), click **New** under its applications and choose **Web**."
+        },
+        {
+          "title": "Choose Code and add the redirect URI",
+          "text": "Pick the **Code** authentication method: Casdoor sends the client secret with HTTP Basic authentication, which is what Code expects. Then add the redirect URI:",
+          "fields": [
+            {
+              "label": "Redirect URIs",
+              "value": "{{casdoorUrl}}/callback"
+            }
+          ]
+        },
+        {
+          "title": "Copy the credentials",
+          "text": "Create the application. ZITADEL shows the **Client ID** and **Client Secret** once, so copy both now."
+        }
+      ],
+      "tips": [
+        "ZITADEL's `preferred_username` is the login name, such as `alice@acme.zitadel.cloud`, and Casdoor uses it as the username of new users. Set a user mapping for `username` in Casdoor if you want something else.",
+        "ZITADEL only accepts plain-http redirect URIs in Development mode, so use https for Casdoor."
+      ],
+      "faqs": [
+        {
+          "question": "Do I need User Info inside ID Token?",
+          "answer": "No. Casdoor also calls ZITADEL's userinfo endpoint, which returns the name and email."
+        },
+        {
+          "question": "Can I use the PKCE authentication method instead?",
+          "answer": "That method issues no client secret, while Casdoor's provider is a confidential client. Use Code; Casdoor sends a PKCE challenge on top of the secret anyway."
+        }
+      ],
+      "sources": [
+        {
+          "label": "ZITADEL OIDC endpoints",
+          "href": "https://zitadel.com/docs/apis/openidoauth/endpoints"
+        },
+        {
+          "label": "ZITADEL claims",
+          "href": "https://zitadel.com/docs/apis/openidoauth/claims"
+        },
+        {
+          "label": "ZITADEL applications",
+          "href": "https://zitadel.com/docs/guides/manage/console/applications"
+        }
+      ]
+    }
+  }
+}
