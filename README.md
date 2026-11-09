@@ -90,6 +90,10 @@ The last two steps of every guide, adding the provider in Casdoor and putting it
 
 `"region": "cn"` in `integration.json` lists an integration only in Chinese: on the Chinese pages of the store, and in Casdoor for admins using it in Chinese. It is for platforms only used in China, such as Chaoxing; their name, description and guide are written in Chinese, under `en`. Everything else is listed in both.
 
+## Editions
+
+Everything in this repository is free. The paid integrations of the Marketplace, such as the templates of Chinese office systems, carry `"edition": "Commercial"` or `"Enterprise"` in `integration.json`, are kept elsewhere and are not on the CDN: the Marketplace server lists them in `paid-index.json` and gives their files only to a Casdoor that sends a license of that edition or a higher one, with the license written into the files. They build against `sdk/` here.
+
 ## Themes
 
 A look for the sign-in pages of a Casdoor application.

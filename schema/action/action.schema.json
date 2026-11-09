@@ -9,8 +9,12 @@
   "properties": {
     "$schema": { "type": "string" },
     "kind": {
-      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments. sms: Casdoor adds an SMS provider of type Plugin that calls the module to send verification codes.",
-      "enum": ["payment", "sms"]
+      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments. sms: Casdoor adds an SMS provider of type Plugin that calls the module to send verification codes. push: Casdoor adds a notification provider of type Plugin that sends the sign-in confirmations of the push MFA. syncer: a syncer of type Plugin imports users through the module. password-check: the organization's security settings run the module on every password being set or used to sign in. password-migration: the organization's security settings run the module on the first sign-in of a user imported without a password.",
+      "enum": ["payment", "sms", "push", "syncer", "password-check", "password-migration"]
+    },
+    "receiverField": {
+      "description": "push only: the user field that holds the receiver, filled in when the user sets up the push MFA.",
+      "enum": ["wecom", "dingtalk", "lark", "email", "phone"]
     },
     "abi": {
       "description": "Calling convention between Casdoor and the module, sdk.Abi.",

@@ -31,6 +31,16 @@
       "description": "cn lists the integration only in the Chinese Marketplace: the Chinese pages of the store, and Casdoor admins using Casdoor in Chinese. For integrations with platforms only used in China; their texts and guide are written in Chinese, under en.",
       "enum": ["cn"]
     },
+    "edition": {
+      "description": "The Casdoor edition an installation needs. Paid integrations aren't in this repository or on the CDN: the Marketplace server gives their files only to a Casdoor that sends a license of this edition or a higher one.",
+      "enum": ["Commercial", "Enterprise"]
+    },
+    "downloads": {
+      "description": "Files next to integration.json that an admin downloads from the Casdoor console to install elsewhere, such as the plugin of an API gateway.",
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$" },
+      "uniqueItems": true
+    },
     "name": { "$ref": "#/$defs/localizedText" },
     "description": {
       "description": "One or two sentences; used as the meta description and on catalog cards.",
