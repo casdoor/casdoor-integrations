@@ -9,8 +9,8 @@
   "properties": {
     "$schema": { "type": "string" },
     "kind": {
-      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments. sms: Casdoor adds an SMS provider of type Plugin that calls the module to send verification codes. push: Casdoor adds a notification provider of type Plugin that sends the sign-in confirmations of the push MFA. syncer: a syncer of type Plugin imports users through the module. password-check: the organization's security settings run the module on every password being set or used to sign in. password-migration: the organization's security settings run the module on the first sign-in of a user imported without a password.",
-      "enum": ["payment", "sms", "push", "syncer", "password-check", "password-migration"]
+      "description": "payment: Casdoor adds a payment provider of type Plugin that calls the module to create and check payments. sms: Casdoor adds an SMS provider of type Plugin that calls the module to send verification codes. push: Casdoor adds a notification provider of type Plugin that sends the sign-in confirmations of the push MFA. syncer: a syncer of type Plugin imports users through the module, and the department tree too when the module has syncer.listGroups. idp: Casdoor adds an identity provider of type Plugin, a third-party sign-in whose authorization page the admin writes into the Auth URL and whose code the module turns into the user. idv: Casdoor adds an ID verification provider of type Plugin that checks a user's ID card and real name, and phone if the check includes it. password-check: the organization's security settings run the module on every password being set or used to sign in. password-migration: the organization's security settings run the module on the first sign-in of a user imported without a password.",
+      "enum": ["payment", "sms", "push", "syncer", "idp", "idv", "password-check", "password-migration"]
     },
     "receiverField": {
       "description": "push only: the user field that holds the receiver, filled in when the user sets up the push MFA.",

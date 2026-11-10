@@ -139,12 +139,17 @@ Code that Casdoor runs, such as a payment or SMS provider: a Go `main` package c
 | File | Contents |
 |---|---|
 | `integration.json` | Name, description, logo and `permissions.hosts` (required) |
-| `action.json` | `kind` (`payment` or `sms`), `abi` (`1`) and the file name of the compiled `module` ([schema](schema/action/action.schema.json)) |
+| `action.json` | `kind` (`payment`, `sms`, `push`, `syncer`, `idp`, `idv`, `password-check` or `password-migration`), `abi` (`1`) and the file name of the compiled `module` ([schema](schema/action/action.schema.json)) |
 | `go.mod`, `*.go` | The Go `main` package, built with the SDK in [`sdk/`](sdk) |
 | `guide.json` | Optional: setup steps for the public page |
 
 - A payment action calls `sdk.RegisterPayment` from `init` with a type that has `Pay` and `Notify`. Installing it adds a payment provider of type **Plugin**; the provider's client ID, client secret, host and so on reach the action as `sdk.Config`. See [`integrations/action/revolut`](integrations/action/revolut).
 - An SMS action calls `sdk.RegisterSms` from `init` with a type that has `SendSms`. Installing it adds an SMS provider of type **Plugin**; the provider's sign name (the sender) and template code reach the action in `sdk.Config` too. See [`integrations/action/vonage`](integrations/action/vonage).
+- A push action calls `sdk.RegisterPush` with a type that has `SendPush`. Installing it adds a notification provider of type **Plugin** that sends the sign-in confirmations of the push MFA to the user field named by `receiverField` in `action.json`.
+- A syncer action calls `sdk.RegisterSyncer` with a type that has `ListUsers` and `TestConnection`; the syncer's host, user and password reach it as `Host`, `ClientId` and `ClientSecret`. If the type also has `ListGroups` (`sdk.GroupSyncer`), the action imports the department tree too (`syncer.listGroups`), and each user's `Groups` lists the IDs of its departments.
+- An idp action calls `sdk.RegisterIdp` with a type that has `GetToken` and `GetUserInfo`. Installing it adds an identity provider of type **Plugin** for a third-party sign-in with an authorization code: the admin writes the platform's authorization page into the provider's Auth URL, with the placeholders `{clientId}`, `{redirectUri}`, `{state}` and `{scope}`, and the action turns the code into the user. Its guide should give that template.
+- An idv action calls `sdk.RegisterIdv` with a type that has `Verify`. Installing it adds an ID verification provider of type **Plugin** that checks a user's ID card and real name (and phone, for checks that include it). A mismatch is a result with `Ok` false and a `Reason` for the user, not an error.
+- A password check calls `sdk.RegisterPasswordCheck`, a password migration `sdk.RegisterPasswordVerify`; the organization's security settings run them.
 - `Notify` should ask the payment service for the state of the order rather than trust the request body.
 - Libraries built on `net/http`, such as a payment service's official Go SDK, work through [`sdk/nethttp`](sdk/nethttp), at the cost of a larger module.
 - The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -buildvcs=false -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.

@@ -32,6 +32,17 @@ type SyncerUser struct {
 	IsForbidden   bool              `json:"isForbidden"`
 	CreatedTime   string            `json:"createdTime"`
 	Properties    map[string]string `json:"properties"`
+	// the Ids of the SyncerGroups the user belongs to
+	Groups []string `json:"groups"`
+}
+
+// SyncerGroup is a department of the external system. Id is its stable ID there, ParentId is empty for a top-level
+// department.
+type SyncerGroup struct {
+	Id          string `json:"id"`
+	Name        string `json:"name"`
+	DisplayName string `json:"displayName"`
+	ParentId    string `json:"parentId"`
 }
 
 // UserSyncer is an action of kind "syncer", which imports the users of another identity system. The syncer's
@@ -41,12 +52,22 @@ type UserSyncer interface {
 	TestConnection(config *Config) error
 }
 
-// RegisterSyncer makes the action a user syncer. Call it from init.
+// GroupSyncer is a UserSyncer that also imports the department tree, which the users' Groups refer to.
+type GroupSyncer interface {
+	ListGroups(config *Config) ([]*SyncerGroup, error)
+}
+
+// RegisterSyncer makes the action a user syncer, and a group syncer too when syncer has ListGroups. Call it from init.
 func RegisterSyncer(syncer UserSyncer) {
 	handlers["syncer.listUsers"] = func(config *Config, params json.RawMessage) (interface{}, error) {
 		return syncer.ListUsers(config)
 	}
 	handlers["syncer.test"] = func(config *Config, params json.RawMessage) (interface{}, error) {
 		return nil, syncer.TestConnection(config)
+	}
+	if groupSyncer, ok := syncer.(GroupSyncer); ok {
+		handlers["syncer.listGroups"] = func(config *Config, params json.RawMessage) (interface{}, error) {
+			return groupSyncer.ListGroups(config)
+		}
 	}
 }
