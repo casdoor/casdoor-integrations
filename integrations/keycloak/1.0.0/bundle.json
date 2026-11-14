@@ -1,0 +1,116 @@
+{
+  "manifest": {
+    "id": "keycloak",
+    "type": "provider",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Keycloak"
+    },
+    "description": {
+      "en": "Let people sign in to Casdoor with their Keycloak accounts over OpenID Connect: the provider settings for a Keycloak realm, and the client to create on the Keycloak side."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://www.keycloak.org",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "Self-hosted"
+    ],
+    "categories": [
+      "Identity providers"
+    ],
+    "variables": [
+      {
+        "name": "keycloakUrl",
+        "label": {
+          "en": "Keycloak URL"
+        },
+        "description": {
+          "en": "The address of your Keycloak server, without a trailing slash. Keycloak 16 and older need /auth at the end."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://keycloak.example.com"
+      },
+      {
+        "name": "realm",
+        "label": {
+          "en": "Realm"
+        },
+        "description": {
+          "en": "The realm your users are in."
+        },
+        "type": "string",
+        "required": true,
+        "example": "myrealm"
+      }
+    ]
+  },
+  "files": {
+    "provider.json": {
+      "category": "OAuth",
+      "type": "OIDC",
+      "displayName": "Keycloak",
+      "domain": "{{keycloakUrl}}/realms/{{realm}}",
+      "customAuthUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/auth",
+      "customTokenUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/token",
+      "customUserInfoUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/userinfo",
+      "customLogoutUrl": "{{keycloakUrl}}/realms/{{realm}}/protocol/openid-connect/logout",
+      "scopes": "openid profile email",
+      "enablePkce": true
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Keycloak as an OpenID Connect Provider for Casdoor",
+      "headline": "Sign in to Casdoor with Keycloak",
+      "summary": "Already run Keycloak? Add it to Casdoor as an OpenID Connect provider and people sign in to your Casdoor applications with their Keycloak accounts, while Casdoor handles the rest: other social logins, MFA, applications and permissions.",
+      "steps": [
+        {
+          "title": "Create a client in Keycloak",
+          "text": "In the Keycloak admin console, switch to the `{{realm}}` realm, open **Clients** and click **Create client**. Choose **OpenID Connect** as the client type, enter a client ID such as `casdoor`, and click **Next**."
+        },
+        {
+          "title": "Turn on client authentication",
+          "text": "Turn **Client authentication** on and keep **Standard flow** enabled, click **Next**, and fill in the login settings:",
+          "fields": [
+            {
+              "label": "Valid redirect URIs",
+              "value": "{{casdoorUrl}}/callback"
+            }
+          ]
+        },
+        {
+          "title": "Copy the client secret",
+          "text": "Save the client, open its **Credentials** tab and copy the **Client secret**. The client ID is the one you entered."
+        }
+      ],
+      "tips": [
+        "Keycloak matches redirect URIs exactly, so enter the Casdoor address people actually use, and avoid wildcards.",
+        "Casdoor links each account to the Keycloak user ID (`sub`), so renaming a user in Keycloak doesn't create a second Casdoor account."
+      ],
+      "faqs": [
+        {
+          "question": "My Keycloak URLs have /auth in them. Does this still work?",
+          "answer": "Yes. Keycloak 16 and older put `/auth` in front of every path; include it in the Keycloak URL, for example `https://keycloak.example.com/auth`."
+        },
+        {
+          "question": "Can I use SAML instead?",
+          "answer": "Casdoor also has a Keycloak SAML provider. OpenID Connect needs less setup on both sides, which is why this template uses it."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Keycloak OpenID Connect endpoints",
+          "href": "https://www.keycloak.org/securing-apps/oidc-layers"
+        },
+        {
+          "label": "Keycloak getting started",
+          "href": "https://www.keycloak.org/getting-started/getting-started-docker"
+        }
+      ]
+    }
+  }
+}

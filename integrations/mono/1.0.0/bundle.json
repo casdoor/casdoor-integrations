@@ -1,0 +1,41 @@
+{
+  "manifest": {
+    "id": "mono",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Mono"
+    },
+    "description": {
+      "en": "Pure black and white: a hairline-bordered card over a fading grid, with a white button and nothing else competing for attention. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Dark",
+      "Monochrome",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "dark",
+        "colorPrimary": "#ededed",
+        "borderRadius": 6,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: dark;\n  --background: 0 0% 0%;\n  --foreground: 0 0% 93%;\n  --card: 0 0% 4%;\n  --card-foreground: 0 0% 93%;\n  --popover: 0 0% 4%;\n  --popover-foreground: 0 0% 93%;\n  --muted: 0 0% 9%;\n  --muted-foreground: 0 0% 63%;\n  --accent: 0 0% 13%;\n  --accent-foreground: 0 0% 93%;\n  --border: 0 0% 16%;\n  --input: 0 0% 20%;\n  --ring: 0 0% 93%;\n  font-family: Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  background-color: #000000;\n}\n.login-background > div:first-child,\n.login-content,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-background::before {\n  content: '';\n  position: absolute;\n  inset: 0;\n  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);\n  background-size: 56px 56px;\n  -webkit-mask: radial-gradient(ellipse 70% 60% at 50% 40%, #000000 30%, transparent 75%);\n  mask: radial-gradient(ellipse 70% 60% at 50% 40%, #000000 30%, transparent 75%);\n}\n.login-content > div {\n  max-width: 400px;\n}\n.login-panel {\n  border: 1px solid #262626;\n  border-radius: 12px;\n  background: #0a0a0a;\n  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02), 0 30px 80px rgba(0, 0, 0, 0.7);\n}\n.signin-methods > div {\n  border: 1px solid #262626;\n  background: #0a0a0a;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  background: #262626 !important;\n  color: #ededed;\n  box-shadow: none !important;\n}\n.login-form label {\n  color: #a1a1a1;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 40px;\n  border: 1px solid #333333;\n  border-radius: 6px;\n  background: #0a0a0a;\n  color: #ededed;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: #ededed;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);\n}\n.login-form [role='checkbox'] {\n  border-color: #525252;\n  border-radius: 4px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: #ededed;\n  border-color: #ededed;\n  color: #0a0a0a;\n}\n.login-form a {\n  color: #ededed;\n  text-decoration: underline;\n  text-underline-offset: 3px;\n  text-decoration-color: #525252;\n}\n.login-form .login-button {\n  height: 40px;\n  border-radius: 6px;\n  background: #ededed;\n  color: #0a0a0a;\n  font-weight: 500;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: #cccccc;\n}\n#footer {\n  color: #737373;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: dark;\n  --background: 0 0% 0%;\n  --foreground: 0 0% 93%;\n  --card: 0 0% 4%;\n  --card-foreground: 0 0% 93%;\n  --popover: 0 0% 4%;\n  --popover-foreground: 0 0% 93%;\n  --muted: 0 0% 9%;\n  --muted-foreground: 0 0% 63%;\n  --accent: 0 0% 13%;\n  --accent-foreground: 0 0% 93%;\n  --border: 0 0% 16%;\n  --input: 0 0% 20%;\n  --ring: 0 0% 93%;\n  font-family: Geist, Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;\n  background-color: #000000;\n}\n.login-background > div:first-child,\n.login-content,\n#footer {\n  position: relative;\n  z-index: 1;\n}\n.login-panel {\n  border-color: #262626;\n  background: #000000;\n  box-shadow: none;\n}\n.signin-methods > div {\n  border: 1px solid #262626;\n  background: #0a0a0a;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  background: #262626 !important;\n  color: #ededed;\n  box-shadow: none !important;\n}\n.login-form label {\n  color: #a1a1a1;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 40px;\n  border: 1px solid #333333;\n  border-radius: 6px;\n  background: #0a0a0a;\n  color: #ededed;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  border-color: #ededed;\n  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);\n}\n.login-form [role='checkbox'] {\n  border-color: #525252;\n  border-radius: 4px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: #ededed;\n  border-color: #ededed;\n  color: #0a0a0a;\n}\n.login-form a {\n  color: #ededed;\n  text-decoration: underline;\n  text-underline-offset: 3px;\n  text-decoration-color: #525252;\n}\n.login-form .login-button {\n  height: 40px;\n  border-radius: 6px;\n  background: #ededed;\n  color: #0a0a0a;\n  font-weight: 500;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: #cccccc;\n}\n#footer {\n  color: #737373;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}
