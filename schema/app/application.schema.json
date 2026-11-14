@@ -23,6 +23,10 @@
     "tokenGroupFormat": {
       "description": "Name when the app matches group names, e.g. grafana-admins rather than <organization>/grafana-admins.",
       "enum": ["ID", "Path", "Name"]
+    },
+    "agent": {
+      "description": "Also create an AI agent of the same name whose OAuth client is the application, so the tokens of the application carry the agent.",
+      "type": "boolean"
     }
   }
 }
