@@ -14,6 +14,11 @@ import addFormats from "ajv-formats";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const checkOnly = process.argv.includes("--check");
+// --published <dir>: the dist of the last release (the dist branch). A version published there is never rebuilt: its
+// files are copied as they are, so a change to the shared sdk/ or to the Go toolchain cannot change a module that
+// Casdoor instances have already checked and installed. A change to it has to come with a new version.
+const publishedArg = process.argv.indexOf("--published");
+const publishedDir = publishedArg >= 0 ? path.resolve(process.argv[publishedArg + 1] ?? "") : null;
 
 // Content files of each type: the schema each one follows and whether it must be there.
 const contentFiles = {
@@ -245,26 +250,65 @@ if (checkOnly) {
 const dist = path.join(root, "dist");
 fs.rmSync(dist, {recursive: true, force: true});
 const strip = ({$schema, ...rest}) => rest;
+const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const index = {schemaVersion: 1, generatedAt: new Date().toISOString(), integrations: [], revoked: []};
+
+// the versions of the last release, by "<id>@<version>"
+const publishedVersions = new Map();
+if (publishedDir) {
+  const publishedIndex = path.join(publishedDir, "index.json");
+  if (fs.existsSync(publishedIndex)) {
+    for (const item of readJson(publishedIndex).integrations) {
+      for (const v of item.versions) {
+        publishedVersions.set(`${item.id}@${v.version}`, v);
+      }
+    }
+  } else {
+    console.log(`${publishedIndex} does not exist, building every version`);
+  }
+}
 
 for (const {manifest, files, dir, module} of integrations) {
   const base = `integrations/${manifest.id}/${manifest.version}`;
   const out = path.join(dist, base);
   fs.mkdirSync(out, {recursive: true});
 
+  let moduleData = null;
   if (module) {
-    const data = fs.readFileSync(module);
-    fs.writeFileSync(path.join(out, files["action.json"].module), data);
-    files["action.json"].sha256 = crypto.createHash("sha256").update(data).digest("hex");
+    moduleData = fs.readFileSync(module);
+    files["action.json"].sha256 = sha256(moduleData);
   }
-
   const bundle = JSON.stringify({manifest: strip(manifest), files: Object.fromEntries(Object.entries(files).map(([f, d]) => [f, strip(d)]))}, null, 2) + "\n";
-  fs.writeFileSync(path.join(out, "bundle.json"), bundle);
-  for (const file of [manifest.logo, ...(manifest.screenshots ?? [])].filter(Boolean)) {
-    fs.copyFileSync(path.join(dir, file), path.join(out, file));
+
+  let version = {
+    version: manifest.version,
+    casdoorVersion: manifest.casdoorVersion,
+    url: `${base}/bundle.json`,
+    sha256: sha256(bundle),
+    publishedAt: index.generatedAt,
+  };
+  const published = publishedVersions.get(`${manifest.id}@${manifest.version}`);
+  const publishedOut = publishedDir && path.join(publishedDir, base);
+  if (published && fs.existsSync(path.join(publishedOut, "bundle.json"))) {
+    fs.cpSync(publishedOut, out, {recursive: true});
+    version = published;
+    if (sha256(fs.readFileSync(path.join(out, "bundle.json"))) !== published.sha256) {
+      throw new Error(`the published files of ${manifest.id} ${manifest.version} do not match its checksum`);
+    }
+    if (sha256(bundle) !== published.sha256) {
+      console.warn(`warning: ${manifest.id} ${manifest.version} is already published and differs from the source, the published files are kept; bump the version to publish the change`);
+    }
+  } else {
+    if (moduleData) {
+      fs.writeFileSync(path.join(out, files["action.json"].module), moduleData);
+    }
+    fs.writeFileSync(path.join(out, "bundle.json"), bundle);
+    for (const file of [manifest.logo, ...(manifest.screenshots ?? [])].filter(Boolean)) {
+      fs.copyFileSync(path.join(dir, file), path.join(out, file));
+    }
   }
 
-  const {$schema, version, casdoorVersion, logo, screenshots, variables, permissions, ...listing} = manifest;
+  const {$schema, version: _version, casdoorVersion, logo, screenshots, variables, permissions, ...listing} = manifest;
   const requiresGlobalAdmin = globalAdminFields.some((f) => files["theme.json"]?.[f]);
   index.integrations.push({
     ...listing,
@@ -273,16 +317,8 @@ for (const {manifest, files, dir, module} of integrations) {
     ...(requiresGlobalAdmin ? {requiresGlobalAdmin} : {}),
     // Integrations in this repository are maintained by the Casdoor team.
     verified: true,
-    latest: version,
-    versions: [
-      {
-        version,
-        casdoorVersion,
-        url: `${base}/bundle.json`,
-        sha256: crypto.createHash("sha256").update(bundle).digest("hex"),
-        publishedAt: index.generatedAt,
-      },
-    ],
+    latest: manifest.version,
+    versions: [version],
   });
 }
 

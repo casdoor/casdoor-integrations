@@ -22,7 +22,13 @@ jobs:
           go-version: "1.27.1"
           cache: false
       - run: npm ci
-      - run: npm run build
+      # the last release, whose versions are copied instead of rebuilt
+      - name: Fetch the dist branch
+        run: |
+          if git fetch --depth=1 origin dist; then
+            git worktree add --detach published FETCH_HEAD
+          fi
+      - run: npm run build -- --published published
       - uses: actions/upload-artifact@v4
         with:
           name: dist
