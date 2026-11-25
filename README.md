@@ -153,12 +153,12 @@ Code that Casdoor runs, such as a payment or SMS provider: a Go `main` package c
 - A password check calls `sdk.RegisterPasswordCheck`, a password migration `sdk.RegisterPasswordVerify`; the organization's security settings run them.
 - `Notify` should ask the payment service for the state of the order rather than trust the request body.
 - Libraries built on `net/http`, such as a payment service's official Go SDK, work through [`sdk/nethttp`](sdk/nethttp), at the cost of a larger module.
-- The build runs `GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -trimpath -buildvcs=false -ldflags="-s -w -buildid="`, writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same Go version (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.
+- The build compiles the action with [TinyGo](https://tinygo.org): `tinygo build -target=wasip1 -buildmode=c-shared -no-debug -opt=z -scheduler=none`, or without `-scheduler=none` when the package starts goroutines (`crypto/x509` and `net/http` do). A module is about 0.5 MB, so Casdoor can store it under MySQL's default 4 MB packet; the Go toolchain made 4.5 MB. The build writes the module next to `bundle.json` and adds its `sha256` to `action.json`, which Casdoor checks on install. With the same TinyGo, Go and Binaryen versions (see `.github/workflows/build.yml`) the module comes out byte for byte the same, so a reviewer can rebuild it.
 
 ## Build
 
 ```bash
-npm ci          # actions also need Go
+npm ci          # actions also need Go, TinyGo and Binaryen's wasm-opt on the PATH
 npm run check   # validate only
 npm run build   # validate and write dist/
 ```

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // Package sdk is what a Casdoor action is written with. An action is a WebAssembly module built from a Go main
-// package with GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared. Casdoor runs it in a sandbox: the module
+// package with tinygo build -target=wasip1 -buildmode=c-shared. Casdoor runs it in a sandbox: the module
 // can only reach the hosts its manifest lists, through Fetch, and sees nothing of Casdoor but what each call passes in.
 package sdk
 

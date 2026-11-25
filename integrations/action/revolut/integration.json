@@ -2,7 +2,7 @@
   "$schema": "../../../schema/integration.schema.json",
   "id": "revolut",
   "type": "action",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "casdoorVersion": ">=4.26.0",
   "name": {
     "en": "Revolut"

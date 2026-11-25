@@ -3,7 +3,7 @@
 //   dist/integrations/<id>/<version>/bundle.json     manifest plus content files
 //   dist/integrations/<id>/<version>/<file>          logo and screenshots, if any, and the module of an action
 // Paths in index.json are relative to index.json. Run with --check to validate without writing dist/.
-import {execFileSync} from "node:child_process";
+import {spawnSync} from "node:child_process";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
@@ -119,14 +119,25 @@ function checkSchema(where, data, schema) {
   }
 }
 
-// Compiles the Go main package of an action into a WebAssembly module. -trimpath, -buildvcs=false and an empty build
-// ID make the module depend only on the source and the Go version, so a reviewer can rebuild it and compare the sha256.
+// Compiles the Go main package of an action into a WebAssembly module with TinyGo: about 0.5 MB instead of the 4.5 MB
+// of the Go toolchain, so that Casdoor can store it under the 4 MB packet that MySQL allows by default. The module
+// depends only on the source and the TinyGo, Go and Binaryen versions, so a reviewer can rebuild it and compare the
+// sha256. Without a scheduler it is half as large; a package that starts goroutines, such as crypto/x509 or net/http,
+// gets the default one.
 function buildModule(dir, outFile) {
-  execFileSync("go", ["build", "-buildmode=c-shared", "-trimpath", "-buildvcs=false", "-ldflags=-s -w -buildid=", "-o", outFile, "."], {
+  const build = (args) => spawnSync("tinygo", ["build", "-target=wasip1", "-buildmode=c-shared", "-no-debug", "-opt=z", ...args, "-o", outFile, "."], {
     cwd: dir,
-    env: {...process.env, GOOS: "wasip1", GOARCH: "wasm", CGO_ENABLED: "0"},
-    stdio: ["ignore", "inherit", "inherit"],
+    encoding: "utf8",
   });
+  let res = build(["-scheduler=none"]);
+  if (res.status !== 0 && res.stderr.includes("without a scheduler")) {
+    res = build([]);
+  }
+  if (res.error || res.status !== 0) {
+    process.stderr.write(res.stdout ?? "");
+    process.stderr.write(res.stderr ?? "");
+    throw new Error(`failed to build ${dir}: ${res.error?.message ?? `tinygo exited with ${res.status}`}`);
+  }
 }
 
 const moduleDir = fs.mkdtempSync(path.join(os.tmpdir(), "casdoor-actions-"));
