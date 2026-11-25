@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-11",
+  "title": "Migrate from Okta to Casdoor",
+  "headline": "Move an Okta org to Casdoor",
+  "summary": "Casdoor reads the org through the Okta API with an API token and previews what would be added before applying it. Users keep their Okta user IDs, which are the sub of their tokens, and their profiles; groups keep their members; OpenID Connect applications keep their client IDs and secrets. Okta never exports password hashes, so on each user's first sign-in Casdoor checks the password with Okta and then stores it: keep Okta running until your users have signed in.",
+  "steps": [
+    {
+      "title": "Create an API token",
+      "text": "In the Okta Admin Console, go to **Security > API > Tokens** and click **Create token**. Create it as a super admin, or as an admin who can read users, groups and applications: only a super admin's token returns the client secrets of the applications. Copy the token."
+    },
+    {
+      "title": "Install Okta Migration",
+      "text": "On the **Marketplace** page of Casdoor, install Okta Migration into the organization the Okta org goes to."
+    },
+    {
+      "title": "Create the migration",
+      "text": "Under **Admin > Migrations**, add a migration in that organization, choose Okta Migration as the action, set the host to the domain of the Okta org and the client secret to the API token. Leave the client ID empty.",
+      "fields": [
+        {
+          "label": "Host",
+          "value": "your-org.okta.com"
+        }
+      ]
+    },
+    {
+      "title": "Preview and apply",
+      "text": "Click **Test connection** and **Preview** to see what would be added and what can't be imported, then **Apply**. Applying again later only adds what is new, and **Undo** deletes everything the migration added."
+    },
+    {
+      "title": "Switch the applications",
+      "text": "Point the applications' issuer, or the discovery URL, at Casdoor, keeping their client IDs and secrets. Keep the Okta org and the migration until the users have signed in to Casdoor once, because their passwords are checked with Okta until then."
+    }
+  ],
+  "tips": [
+    "Users are named after their Okta login, which is often their email, and sign in with it as before.",
+    "Users who sign in to Okta through Active Directory or LDAP keep their passwords too, as long as Okta can still reach the directory.",
+    "Okta doesn't export its signing keys or MFA factors: users sign in again after the switch, and those with MFA enroll again."
+  ],
+  "faqs": [
+    {
+      "question": "Which hosts does the action send requests to?",
+      "answer": "Only the Okta org set as the host: the Okta API with the API token, and the authentication API when it checks a password on a user's first sign-in."
+    },
+    {
+      "question": "What happens to users who don't sign in before Okta is shut down?",
+      "answer": "Their passwords can't be checked anymore, so they reset their passwords in Casdoor."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Okta API: users",
+      "href": "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/"
+    },
+    {
+      "label": "Okta: create an API token",
+      "href": "https://developer.okta.com/docs/guides/create-an-api-token/main/"
+    }
+  ]
+}

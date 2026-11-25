@@ -58,6 +58,9 @@ type VerifyImportedPasswordReq struct {
 	Password string `json:"password"`
 	Hash     string `json:"hash"`
 	Salt     string `json:"salt"`
+	// the migration's host, client ID, client secret and metadata, for an action that checks the password with the
+	// other system
+	Config *Config `json:"-"`
 }
 
 // Importer is an action of kind "import", which reads another identity system for a migration. The migration's host,
@@ -105,6 +108,7 @@ func RegisterImport(importer Importer) {
 			if err != nil {
 				return nil, err
 			}
+			req.Config = config
 			valid, err := verifier.VerifyImportedPassword(req)
 			return map[string]bool{"valid": valid}, err
 		}

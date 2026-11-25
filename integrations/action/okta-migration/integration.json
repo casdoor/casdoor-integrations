@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "okta-migration",
+  "type": "action",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.31.0",
+  "name": {
+    "en": "Okta Migration"
+  },
+  "description": {
+    "en": "Move an Okta org to Casdoor through the Okta API: users with their Okta user IDs and profiles, groups with their members, and OpenID Connect applications with their client IDs and secrets. Okta never exports password hashes, so Casdoor checks each user's password with Okta on their first sign-in and then stores it."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://www.okta.com",
+  "tags": [
+    "Okta",
+    "Migration",
+    "Import"
+  ],
+  "categories": [
+    "Migration"
+  ],
+  "permissions": {
+    "hosts": [
+      "{host}"
+    ]
+  }
+}
