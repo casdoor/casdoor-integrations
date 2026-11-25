@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "keycloak-migration",
+  "type": "action",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.31.0",
+  "name": {
+    "en": "Keycloak Migration"
+  },
+  "description": {
+    "en": "Move a Keycloak realm to Casdoor from its realm export: users with their IDs, password hashes, authenticator apps and social links, groups, OpenID Connect clients with their client IDs and secrets, realm and client roles, and the signing keys, so that applications keep working without changes."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://www.keycloak.org",
+  "tags": [
+    "Keycloak",
+    "Migration",
+    "Import"
+  ],
+  "categories": [
+    "Migration"
+  ],
+  "permissions": {
+    "hosts": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schema/integration.schema.json",
+  "id": "auth0-migration",
+  "type": "action",
+  "version": "1.0.0",
+  "casdoorVersion": ">=4.31.0",
+  "name": {
+    "en": "Auth0 Migration"
+  },
+  "description": {
+    "en": "Move an Auth0 tenant to Casdoor through the Auth0 Management API: users with their user IDs and social links, password hashes from the Auth0 export, applications with their client IDs and secrets, organizations as groups and roles with their users."
+  },
+  "author": "casdoor",
+  "license": "Apache-2.0",
+  "logo": "logo.svg",
+  "homepage": "https://auth0.com",
+  "tags": [
+    "Auth0",
+    "Migration",
+    "Import"
+  ],
+  "categories": [
+    "Migration"
+  ],
+  "permissions": {
+    "hosts": [
+      "{host}"
+    ]
+  }
+}

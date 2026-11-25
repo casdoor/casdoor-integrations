@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../schema/guide.schema.json",
+  "checkedOn": "2026-11",
+  "title": "Migrate from Keycloak to Casdoor",
+  "headline": "Move a Keycloak realm to Casdoor",
+  "summary": "Export the realm with kc.sh, upload the files to a Casdoor migration and preview what would be added before applying it. Users keep their IDs, which are the sub of their tokens, and sign in with their Keycloak passwords; the clients keep their client IDs and secrets; and the realm's signing key comes along with its key ID, so tokens and the applications that check them keep working.",
+  "steps": [
+    {
+      "title": "Export the realm",
+      "text": "On the Keycloak server, run `kc.sh export --dir /tmp/export --realm <realm> --users realm_file`. For a realm with many users, `--users different_files --users-per-file 5000` writes them into several files, which can all be uploaded together. The partial export of the admin console has no users and hides the client secrets, so use kc.sh."
+    },
+    {
+      "title": "Install Keycloak Migration",
+      "text": "On the **Marketplace** page of Casdoor, install Keycloak Migration into the organization the realm goes to."
+    },
+    {
+      "title": "Create the migration",
+      "text": "Under **Admin > Migrations**, add a migration in that organization, choose Keycloak Migration as the action and upload the export files. If the files have several realms, set the metadata to the realm to import.",
+      "fields": [
+        {
+          "label": "Metadata",
+          "value": "{\"realm\": \"myrealm\"}"
+        }
+      ]
+    },
+    {
+      "title": "Preview and apply",
+      "text": "Click **Preview** to see how many certs, groups, applications, users and roles would be added, which exist already and which can't be imported and why, then **Apply**. Applying again later only adds what is new, and **Undo** deletes everything the migration added."
+    },
+    {
+      "title": "Switch the applications",
+      "text": "Point the applications' issuer, or the discovery URL, at Casdoor. The imported applications sign tokens with the realm's key under its Keycloak key ID and use the standard JWT format, and the identity providers listed in the report have to be added to Casdoor as providers of the applications."
+    }
+  ],
+  "tips": [
+    "Users whose Keycloak password uses PBKDF2 or Argon2 sign in with it as before, and Casdoor rehashes it its own way on their first sign-in.",
+    "Authenticator apps registered in Keycloak keep working, the users don't need to scan a new QR code.",
+    "Users from an LDAP user federation have no password in the export: add the LDAP server to Casdoor instead."
+  ],
+  "faqs": [
+    {
+      "question": "Does the migration connect to Keycloak?",
+      "answer": "No. The action only reads the uploaded files, inside Casdoor's sandbox, and sends no requests."
+    },
+    {
+      "question": "What is not imported?",
+      "answer": "SAML clients, Keycloak organizations, authorization services, required actions and passkeys. The report lists what was left out."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Keycloak: importing and exporting realms",
+      "href": "https://www.keycloak.org/server/importExport"
+    },
+    {
+      "label": "Keycloak: password hashing",
+      "href": "https://www.keycloak.org/docs/latest/server_admin/#password-policy-types"
+    }
+  ]
+}

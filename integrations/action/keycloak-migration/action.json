@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../schema/action/action.schema.json",
+  "kind": "import",
+  "abi": 1,
+  "module": "keycloak-migration.wasm"
+}

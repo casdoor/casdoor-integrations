@@ -229,7 +229,8 @@ for (const type of fs.readdirSync(path.join(root, "integrations")).sort()) {
 
     let module = null;
     if (type === "action") {
-      if (!manifest.permissions?.hosts?.length) {
+      // an action that reads only what Casdoor passes in, such as uploaded files, lists no hosts
+      if (!Array.isArray(manifest.permissions?.hosts)) {
         fail(where, "an action must list the hosts it calls in permissions.hosts");
       }
       if (!fs.existsSync(path.join(dir, "go.mod"))) {
