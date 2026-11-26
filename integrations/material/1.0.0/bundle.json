@@ -1,0 +1,55 @@
+{
+  "manifest": {
+    "id": "material",
+    "type": "theme",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Material"
+    },
+    "description": {
+      "en": "A big rounded white sheet on a soft grey page, outlined 56px fields and a pill-shaped button on the right, in the spirit of Material Design. CSS only, so organization admins can install it."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "tags": [
+      "Light",
+      "Material",
+      "CSS only"
+    ],
+    "categories": [
+      "Sign-in themes"
+    ],
+    "screenshots": [
+      "screenshot.png"
+    ],
+    "variables": [
+      {
+        "name": "accentColor",
+        "label": {
+          "en": "Accent color"
+        },
+        "description": {
+          "en": "Buttons, links, the selected tab and focused fields."
+        },
+        "type": "color",
+        "required": true,
+        "example": "#0b57d0"
+      }
+    ]
+  },
+  "files": {
+    "theme.json": {
+      "themeData": {
+        "themeType": "default",
+        "colorPrimary": "{{accentColor}}",
+        "borderRadius": 4,
+        "isCompact": false,
+        "isEnabled": true
+      },
+      "formOffset": 2,
+      "formCss": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 214 45% 96%;\n  --foreground: 0 0% 12%;\n  --card: 0 0% 100%;\n  --card-foreground: 0 0% 12%;\n  --muted: 214 45% 96%;\n  --muted-foreground: 160 1% 27%;\n  --accent: 214 45% 94%;\n  --accent-foreground: 0 0% 12%;\n  --border: 150 2% 77%;\n  --input: 160 2% 46%;\n  font-family: Roboto, 'Segoe UI', Arial, sans-serif;\n}\n.login-background {\n  background: #f0f4f9;\n}\n.login-content > div {\n  max-width: 452px;\n}\n.login-panel {\n  padding: 36px 40px 8px;\n  border: none;\n  border-radius: 28px;\n  background: #ffffff;\n  box-shadow: none;\n}\n.login-logo-box {\n  justify-content: flex-start;\n  margin-bottom: 28px;\n}\n.login-logo-box img {\n  max-height: 48px;\n}\n.signin-methods > div {\n  background: transparent;\n  border-bottom: 1px solid #c4c7c5;\n  border-radius: 0;\n  padding: 0;\n}\n.signin-methods [role='tab'] {\n  border-radius: 0;\n  background: transparent !important;\n  box-shadow: none !important;\n  color: #444746;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: {{accentColor}};\n  box-shadow: inset 0 -3px 0 {{accentColor}} !important;\n}\n.login-form label {\n  color: #444746;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 56px;\n  padding: 0 15px;\n  border: 1px solid #747775;\n  border-radius: 4px;\n  font-size: 16px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  padding: 0 14px;\n  border: 2px solid {{accentColor}};\n  box-shadow: none;\n}\n.login-form [role='checkbox'] {\n  border-color: #444746;\n  border-radius: 2px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-button-box {\n  display: flex;\n  justify-content: flex-end;\n}\n.login-form .login-button {\n  width: auto;\n  min-width: 96px;\n  height: 40px;\n  padding: 0 24px;\n  border-radius: 100px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-weight: 500;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);\n}\n.login-form .login-signup-link {\n  justify-content: flex-start;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>",
+      "formCssMobile": "<style>\n.login-background {\n  color-scheme: light;\n  --background: 214 45% 96%;\n  --foreground: 0 0% 12%;\n  --card: 0 0% 100%;\n  --card-foreground: 0 0% 12%;\n  --muted: 214 45% 96%;\n  --muted-foreground: 160 1% 27%;\n  --accent: 214 45% 94%;\n  --accent-foreground: 0 0% 12%;\n  --border: 150 2% 77%;\n  --input: 160 2% 46%;\n  font-family: Roboto, 'Segoe UI', Arial, sans-serif;\n}\n.login-background {\n  background: #ffffff;\n}\n.login-panel {\n  border: none;\n  background: #ffffff;\n  box-shadow: none;\n}\n.login-logo-box {\n  justify-content: flex-start;\n}\n.login-logo-box img {\n  max-height: 40px;\n}\n.signin-methods > div {\n  background: transparent;\n  border-bottom: 1px solid #c4c7c5;\n  border-radius: 0;\n  padding: 0;\n}\n.signin-methods [role='tab'] {\n  border-radius: 0;\n  background: transparent !important;\n  box-shadow: none !important;\n  color: #444746;\n}\n.signin-methods [role='tab'][data-state='active'] {\n  color: {{accentColor}};\n  box-shadow: inset 0 -3px 0 {{accentColor}} !important;\n}\n.login-form label {\n  color: #444746;\n  font-weight: 500;\n}\n.login-form input:not([type='checkbox']):not([type='radio']) {\n  height: 56px;\n  padding: 0 15px;\n  border: 1px solid #747775;\n  border-radius: 4px;\n  font-size: 16px;\n  box-shadow: none;\n}\n.login-form input:not([type='checkbox']):not([type='radio']):focus {\n  padding: 0 14px;\n  border: 2px solid {{accentColor}};\n  box-shadow: none;\n}\n.login-form [role='checkbox'] {\n  border-color: #444746;\n  border-radius: 2px;\n}\n.login-form [role='checkbox'][data-state='checked'] {\n  background: {{accentColor}};\n  border-color: {{accentColor}};\n  color: #ffffff;\n}\n.login-form a {\n  color: {{accentColor}};\n  font-weight: 500;\n}\n.login-button-box {\n  display: flex;\n  justify-content: flex-end;\n}\n.login-form .login-button {\n  width: auto;\n  min-width: 96px;\n  height: 40px;\n  padding: 0 24px;\n  border-radius: 100px;\n  background: {{accentColor}};\n  color: #ffffff;\n  font-weight: 500;\n  box-shadow: none;\n}\n.login-form .login-button:hover {\n  background: {{accentColor}};\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);\n}\n.login-form .login-signup-link {\n  justify-content: flex-start;\n}\n.login-form .login-forget-password {\n  width: 100%;\n}\n</style>"
+    }
+  }
+}

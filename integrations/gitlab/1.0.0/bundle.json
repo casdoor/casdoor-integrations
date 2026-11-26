@@ -1,0 +1,96 @@
+{
+  "manifest": {
+    "id": "gitlab",
+    "type": "app",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "GitLab"
+    },
+    "description": {
+      "en": "Configure self-managed GitLab to sign users in with Casdoor over OpenID Connect: gitlab.rb provider settings, account creation and group-based admins."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://about.gitlab.com",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "Group mapping"
+    ],
+    "categories": [
+      "DevOps & infrastructure"
+    ],
+    "variables": [
+      {
+        "name": "appUrl",
+        "label": {
+          "en": "GitLab URL"
+        },
+        "description": {
+          "en": "The address people open GitLab at, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://gitlab.example.com"
+      }
+    ]
+  },
+  "files": {
+    "application.json": {
+      "redirectUris": [
+        "{{appUrl}}/users/auth/openid_connect/callback"
+      ]
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "GitLab SSO with Casdoor: OpenID Connect Setup",
+      "headline": "Single sign-on for self-managed GitLab",
+      "summary": "Self-managed GitLab signs users in through OmniAuth providers, including any OpenID Connect provider. With Casdoor as the provider, developers use one account for GitLab and the rest of your tools.",
+      "steps": [
+        {
+          "title": "Add Casdoor to gitlab.rb",
+          "text": "GitLab only talks to OpenID providers over HTTPS, so serve Casdoor over HTTPS. Add this to `/etc/gitlab/gitlab.rb` and run `sudo gitlab-ctl reconfigure`.",
+          "code": {
+            "lang": "ruby",
+            "content": "gitlab_rails['omniauth_allow_single_sign_on'] = ['openid_connect']\ngitlab_rails['omniauth_block_auto_created_users'] = false\ngitlab_rails['omniauth_providers'] = [\n  {\n    name: \"openid_connect\",\n    label: \"Casdoor\",\n    args: {\n      name: \"openid_connect\",\n      scope: [\"openid\", \"profile\", \"email\"],\n      response_type: \"code\",\n      issuer: \"{{casdoorUrl}}\",\n      discovery: true,\n      client_auth_method: \"query\",\n      uid_field: \"sub\",\n      pkce: true,\n      client_options: {\n        identifier: \"{{clientId}}\",\n        secret: \"{{clientSecret}}\",\n        redirect_uri: \"{{appUrl}}/users/auth/openid_connect/callback\"\n      }\n    }\n  }\n]"
+          }
+        },
+        {
+          "title": "Map Casdoor groups (GitLab Premium and Ultimate)",
+          "text": "To make members of a Casdoor group GitLab administrators, or to mark contractors as external users, add a `gitlab` block inside `client_options`. Set the Casdoor application's **Token group format** to **Name** so the values match.",
+          "code": {
+            "lang": "ruby",
+            "content": "gitlab: {\n  groups_attribute: \"groups\",\n  admin_groups: [\"gitlab-admins\"],\n  external_groups: [\"contractors\"]\n}"
+          }
+        },
+        {
+          "title": "Sign in",
+          "text": "The sign-in page now has a **Casdoor** button. People who already have a GitLab account can connect Casdoor under **User settings → Account → Service sign-in**."
+        }
+      ],
+      "tips": [
+        "`omniauth_allow_single_sign_on` lets GitLab create an account on first sign-in, and `omniauth_block_auto_created_users = false` lets new users in without waiting for an administrator to approve them.",
+        "`uid_field: \"sub\"` ties each GitLab identity to the Casdoor user ID, which doesn't change when a user is renamed."
+      ],
+      "faqs": [
+        {
+          "question": "Do I need GitLab Premium?",
+          "answer": "Not for single sign-on: any self-managed GitLab can use Casdoor as its OpenID Connect provider. Rules based on OIDC group membership (required, external and admin groups) need GitLab Premium or Ultimate."
+        },
+        {
+          "question": "I compiled GitLab from source. Where do the settings go?",
+          "answer": "Put the same provider settings under `omniauth` in `config/gitlab.yml`; GitLab's OpenID Connect documentation shows that format next to the gitlab.rb one."
+        }
+      ],
+      "sources": [
+        {
+          "label": "GitLab OpenID Connect",
+          "href": "https://docs.gitlab.com/administration/auth/oidc/"
+        }
+      ],
+      "docsUrl": "https://casdoor.ai/docs/integration/ruby/gitlab"
+    }
+  }
+}

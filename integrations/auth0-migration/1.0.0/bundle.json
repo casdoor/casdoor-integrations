@@ -1,0 +1,104 @@
+{
+  "manifest": {
+    "id": "auth0-migration",
+    "type": "action",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.31.0",
+    "name": {
+      "en": "Auth0 Migration"
+    },
+    "description": {
+      "en": "Move an Auth0 tenant to Casdoor through the Auth0 Management API: users with their user IDs and social links, password hashes from the Auth0 export, applications with their client IDs and secrets, organizations as groups and roles with their users."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://auth0.com",
+    "tags": [
+      "Auth0",
+      "Migration",
+      "Import"
+    ],
+    "categories": [
+      "Migration"
+    ],
+    "permissions": {
+      "hosts": [
+        "{host}"
+      ]
+    }
+  },
+  "files": {
+    "action.json": {
+      "kind": "import",
+      "abi": 1,
+      "module": "auth0-migration.wasm",
+      "sha256": "75fcd2ec7aa08be3509898492c176ad5e3317b7e8275d2fa1874d952dd9c0b6b"
+    },
+    "guide.json": {
+      "checkedOn": "2026-11",
+      "title": "Migrate from Auth0 to Casdoor",
+      "headline": "Move an Auth0 tenant to Casdoor",
+      "summary": "Casdoor reads the tenant through the Auth0 Management API and previews what would be added before applying it. Users keep their Auth0 user IDs, which are the sub of their tokens, and their links to Google, GitHub and the other social providers; applications keep their client IDs and secrets; organizations become groups. Auth0 only gives password hashes through a support request, so upload that file with the migration to let users keep their passwords.",
+      "steps": [
+        {
+          "title": "Create a machine to machine application",
+          "text": "In the Auth0 dashboard, create a Machine to Machine application authorized for the **Auth0 Management API** with the scopes below. Copy its client ID and client secret.",
+          "fields": [
+            {
+              "label": "Scopes",
+              "value": "read:users read:clients read:client_keys read:roles read:organizations read:organization_members"
+            }
+          ]
+        },
+        {
+          "title": "Install Auth0 Migration",
+          "text": "On the **Marketplace** page of Casdoor, install Auth0 Migration into the organization the tenant goes to."
+        },
+        {
+          "title": "Create the migration",
+          "text": "Under **Admin > Migrations**, add a migration in that organization, choose Auth0 Migration as the action, and set the host to the domain of the tenant (not a custom domain) with the client ID and secret of the application.",
+          "fields": [
+            {
+              "label": "Host",
+              "value": "your-tenant.us.auth0.com"
+            }
+          ]
+        },
+        {
+          "title": "Upload the password hashes",
+          "text": "Auth0 exports the password hashes of database users only through a support ticket, on paid plans. Upload the file you get with the migration; without it, users of database connections set a new password the first time they sign in to Casdoor."
+        },
+        {
+          "title": "Preview and apply",
+          "text": "Click **Test connection** and **Preview** to see what would be added and what can't be imported, then **Apply**. Applying again later only adds what is new, and **Undo** deletes everything the migration added."
+        }
+      ],
+      "tips": [
+        "Users are named after their Auth0 user ID, such as 64b1f... for a database user, and sign in with their email as before.",
+        "Auth0 doesn't export its signing keys or MFA factors: users sign in again after the switch, and those with MFA enroll again.",
+        "The report lists the social connections the users signed in with; add the same providers to the Casdoor applications so the links keep working."
+      ],
+      "faqs": [
+        {
+          "question": "Which hosts does the action send requests to?",
+          "answer": "Only the Auth0 tenant set as the host, for the Management API and the token of the machine to machine application."
+        },
+        {
+          "question": "Can it import more than 1000 users?",
+          "answer": "Yes. The Management API returns at most 1000 users of one search, so the action searches by creation time and moves on from the last user of each search."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Auth0 Management API",
+          "href": "https://auth0.com/docs/api/management/v2"
+        },
+        {
+          "label": "Auth0: export password hashes",
+          "href": "https://auth0.com/docs/troubleshoot/customer-support/manage-subscriptions/export-data"
+        }
+      ]
+    }
+  }
+}

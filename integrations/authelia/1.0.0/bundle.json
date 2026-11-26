@@ -1,0 +1,106 @@
+{
+  "manifest": {
+    "id": "authelia",
+    "type": "provider",
+    "version": "1.0.0",
+    "casdoorVersion": ">=4.18.0",
+    "name": {
+      "en": "Authelia"
+    },
+    "description": {
+      "en": "Let people sign in to Casdoor through Authelia over OpenID Connect: the provider settings, and the client to add to Authelia's configuration."
+    },
+    "author": "casdoor",
+    "license": "Apache-2.0",
+    "logo": "logo.svg",
+    "homepage": "https://www.authelia.com",
+    "tags": [
+      "OIDC",
+      "PKCE",
+      "Self-hosted"
+    ],
+    "categories": [
+      "Identity providers"
+    ],
+    "variables": [
+      {
+        "name": "autheliaUrl",
+        "label": {
+          "en": "Authelia URL"
+        },
+        "description": {
+          "en": "The address of your Authelia portal, without a trailing slash."
+        },
+        "type": "url",
+        "required": true,
+        "example": "https://authelia.example.com"
+      }
+    ]
+  },
+  "files": {
+    "provider.json": {
+      "category": "OAuth",
+      "type": "OIDC",
+      "displayName": "Authelia",
+      "domain": "{{autheliaUrl}}",
+      "customAuthUrl": "{{autheliaUrl}}/api/oidc/authorization",
+      "customTokenUrl": "{{autheliaUrl}}/api/oidc/token",
+      "customUserInfoUrl": "{{autheliaUrl}}/api/oidc/userinfo",
+      "scopes": "openid profile email",
+      "enablePkce": true
+    },
+    "guide.json": {
+      "checkedOn": "2026-10",
+      "title": "Authelia as an OpenID Connect Provider for Casdoor",
+      "headline": "Sign in to Casdoor with Authelia",
+      "summary": "Authelia's OpenID Connect provider lets other apps sign people in with their Authelia accounts and second factor. Add it to Casdoor, and your Casdoor applications get the same sign-in.",
+      "steps": [
+        {
+          "title": "Generate a client secret",
+          "text": "Authelia stores client secrets hashed. This prints a random secret and its digest: Casdoor gets the secret, Authelia's configuration the digest.",
+          "code": {
+            "lang": "bash",
+            "content": "authelia crypto hash generate pbkdf2 --variant sha512 --random --random.length 72 --random.charset rfc3986"
+          }
+        },
+        {
+          "title": "Register Casdoor as a client",
+          "text": "Add a client to Authelia's configuration, choosing any client ID, and restart Authelia.",
+          "code": {
+            "lang": "yaml",
+            "content": "identity_providers:\n  oidc:\n    clients:\n      - client_id: '{{clientId}}'\n        client_name: 'Casdoor'\n        client_secret: '<digest from the previous step>'\n        public: false\n        authorization_policy: 'two_factor'\n        redirect_uris:\n          - '{{casdoorUrl}}/callback'\n        scopes: ['openid', 'profile', 'email']\n        response_types: ['code']\n        grant_types: ['authorization_code']\n        token_endpoint_auth_method: 'client_secret_basic'"
+          }
+        }
+      ],
+      "tips": [
+        "Authelia doesn't support RP-initiated logout, so signing out of Casdoor leaves the Authelia session alone.",
+        "Authelia keeps the ID token minimal and returns the profile and email claims from its userinfo endpoint, which Casdoor reads, so no `claims_policy` is needed.",
+        "If the discovery document shows wrong URLs, check the `X-Forwarded-Proto` and `Host` headers your reverse proxy sends to Authelia."
+      ],
+      "faqs": [
+        {
+          "question": "Which authorization policy should I use?",
+          "answer": "`two_factor` makes people complete Authelia's second factor before they reach Casdoor. Use `one_factor` if a password is enough, for example because Casdoor applications ask for MFA themselves."
+        },
+        {
+          "question": "Why client_secret_basic?",
+          "answer": "It is Authelia's default and the method Casdoor tries first."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Authelia OpenID Connect",
+          "href": "https://www.authelia.com/integration/openid-connect/introduction/"
+        },
+        {
+          "label": "Authelia OIDC clients",
+          "href": "https://www.authelia.com/configuration/identity-providers/openid-connect/clients/"
+        },
+        {
+          "label": "Authelia OIDC claims",
+          "href": "https://www.authelia.com/integration/openid-connect/openid-connect-1.0-claims/"
+        }
+      ]
+    }
+  }
+}
