@@ -16,6 +16,11 @@
       "description": "push only: the user field that holds the receiver, filled in when the user sets up the push MFA.",
       "enum": ["wecom", "dingtalk", "lark", "email", "phone"]
     },
+    "script": {
+      "description": "idp only: a JavaScript module next to action.json that the sign-in page loads when the user clicks the provider, for a sign-in on the page itself, such as with a crypto wallet, instead of on an authorization page. Its default export gets the casdoor object of sdk.ChallengeIdentityProvider. The build adds its sha256 as scriptSha256; Casdoor checks it on install.",
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.js$"
+    },
     "abi": {
       "description": "Calling convention between Casdoor and the module, sdk.Abi.",
       "const": 1

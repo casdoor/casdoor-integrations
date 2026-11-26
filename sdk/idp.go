@@ -47,18 +47,64 @@ type IdentityProvider interface {
 	GetUserInfo(config *Config, token *IdpToken) (*IdpUser, error)
 }
 
+// IdpChallengeRequest asks a ChallengeIdentityProvider for a challenge. Origin is the sign-in page, such as
+// https://door.casdoor.com, Application the name of the application shown on it and Input what the sign-in script
+// sent with getChallenge.
+type IdpChallengeRequest struct {
+	Origin      string            `json:"origin"`
+	Application string            `json:"application"`
+	Input       map[string]string `json:"input"`
+}
+
+// ChallengeIdentityProvider is an identity provider that signs in on the sign-in page itself, such as a crypto wallet,
+// instead of on an authorization page. The action ships a sign-in script (the "script" of action.json, a JavaScript
+// module whose default export is called with the casdoor object below) that asks Casdoor for a challenge, has the user
+// answer it and finishes with the answer as the code:
+//
+//	export default async function signIn(casdoor) {
+//	  // casdoor.application, casdoor.provider, casdoor.method ("signin", "signup" or "link"), casdoor.language
+//	  const challenge = await casdoor.getChallenge({address: "..."}); // GetChallenge with this input
+//	  casdoor.finish(answer);                                         // GetTokenWithChallenge with this code
+//	}
+//
+// Casdoor keeps the challenge in the session of the browser for 5 minutes and passes it back once.
+type ChallengeIdentityProvider interface {
+	IdentityProvider
+	GetChallenge(config *Config, req *IdpChallengeRequest) (string, error)
+	// GetTokenWithChallenge checks that code answers challenge, "" when the browser has no challenge or it expired
+	GetTokenWithChallenge(config *Config, code string, challenge string) (*IdpToken, error)
+}
+
 // RegisterIdp makes the action an identity provider. Call it from init.
 func RegisterIdp(p IdentityProvider) {
 	handlers["idp.getToken"] = func(config *Config, params json.RawMessage) (interface{}, error) {
 		req := struct {
 			Code        string `json:"code"`
 			RedirectUri string `json:"redirectUri"`
+			Challenge   string `json:"challenge"`
 		}{}
 		err := json.Unmarshal(params, &req)
 		if err != nil {
 			return nil, err
 		}
+		if cp, ok := p.(ChallengeIdentityProvider); ok {
+			return cp.GetTokenWithChallenge(config, req.Code, req.Challenge)
+		}
 		return p.GetToken(config, req.Code, req.RedirectUri)
+	}
+	if cp, ok := p.(ChallengeIdentityProvider); ok {
+		handlers["idp.getChallenge"] = func(config *Config, params json.RawMessage) (interface{}, error) {
+			req := &IdpChallengeRequest{}
+			err := json.Unmarshal(params, req)
+			if err != nil {
+				return nil, err
+			}
+			challenge, err := cp.GetChallenge(config, req)
+			if err != nil {
+				return nil, err
+			}
+			return map[string]string{"challenge": challenge}, nil
+		}
 	}
 	handlers["idp.getUserInfo"] = func(config *Config, params json.RawMessage) (interface{}, error) {
 		req := struct {

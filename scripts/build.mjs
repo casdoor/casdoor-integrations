@@ -290,6 +290,11 @@ for (const {manifest, files, dir, module} of integrations) {
     moduleData = fs.readFileSync(module);
     files["action.json"].sha256 = sha256(moduleData);
   }
+  // the sign-in script of an idp action
+  const script = files["action.json"]?.script;
+  if (script) {
+    files["action.json"].scriptSha256 = sha256(fs.readFileSync(path.join(dir, script)));
+  }
   const bundle = JSON.stringify({manifest: strip(manifest), files: Object.fromEntries(Object.entries(files).map(([f, d]) => [f, strip(d)]))}, null, 2) + "\n";
 
   let version = {
@@ -315,7 +320,7 @@ for (const {manifest, files, dir, module} of integrations) {
       fs.writeFileSync(path.join(out, files["action.json"].module), moduleData);
     }
     fs.writeFileSync(path.join(out, "bundle.json"), bundle);
-    for (const file of [manifest.logo, ...(manifest.screenshots ?? [])].filter(Boolean)) {
+    for (const file of [manifest.logo, ...(manifest.screenshots ?? []), script].filter(Boolean)) {
       fs.copyFileSync(path.join(dir, file), path.join(out, file));
     }
   }
